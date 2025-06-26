@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trevor & Sara's 4th of July Visit!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #e63946;
+      --blue: #457b9d;
+      --white: #f1faee;
+      --dark: #1d3557;
+      --gray: #f8f9fa;
+      --nav-bg: #fff;
+      --nav-active: #e63946;
+      --nav-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    html, body {
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--gray);
+      color: var(--dark);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: linear-gradient(90deg, var(--red), var(--blue));
+      color: var(--white);
+      padding: 2rem 1rem 1rem 1rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background: var(--nav-bg);
+      box-shadow: var(--nav-shadow);
+      padding: 0.7rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 3px solid var(--blue);
+    }
+    nav a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 1.18rem;
+      padding: 0.3rem 1rem;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+      position: relative;
+    }
+    nav a.active, nav a:focus {
+      background: var(--nav-active);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(230,57,70,0.10);
+      position: relative;
+    }
+    nav a:hover {
+      background: var(--blue);
+      color: var(--white);
+    }
+    section {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      padding: 2rem 1.5rem;
+    }
+    h2 {
+      color: var(--blue);
+      margin-top: 0;
+      font-size: 2rem;
+      border-bottom: 2px solid var(--red);
+      display: inline-block;
+      padding-bottom: 0.2rem;
+    }
+    /* Itinerary */
+    .itinerary {
+      list-style: none;
+      padding: 0;
+    }
+    .itinerary li {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-left: 4px solid var(--blue);
+      background: var(--gray);
+      border-radius: 6px;
+    }
+    .itinerary strong {
+      color: var(--red);
+    }
+    /* Food & Drink */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      position: sticky;
+      top: 56px; /* Height of nav bar, adjust if needed */
+      background: var(--white);
+      z-index: 15;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .filter-btn {
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      border-radius: 20px;
+      padding: 0.5rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--red);
+    }
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+    .food-card {
+      background: var(--gray);
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 120px;
+      font-size: 1.1rem;
+    }
+    .food-card .emoji {
+      font-size: 1.7rem;
+      margin-right: 0.5rem;
+    }
+    .food-card .name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+    .food-card .desc {
+      font-size: 0.98rem;
+      color: #444;
+    }
+    /* Activities */
+    .activity-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .activity-card {
+      background: var(--gray);
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .activity-card .emoji {
+      font-size: 1.7rem;
+      margin-right: 0.5rem;
+    }
+    .activity-card .name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+    .activity-card .desc {
+      font-size: 0.98rem;
+      color: #444;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      section {
+        padding: 1rem 0.5rem;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.3rem;
+      }
+      .food-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.7rem;
+      }
+      .activity-list {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.7rem;
+      }
+      nav, .filters {
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+      }
+    }
+    #food {
+      padding-bottom: 120px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🇺🇸 Trevor & Sara's 4th of July Visit 🇺🇸</h1>
+    <p>Welcome to your State College adventure! Here's everything you need for an unforgettable Fourth of July weekend.</p>
+  </header>
+  <nav>
+    <a href="#itinerary" id="nav-itinerary">Itinerary</a>
+    <a href="#flights" id="nav-flights">Flights</a>
+    <a href="#activities" id="nav-activities">Activities</a>
+    <a href="#food" id="nav-food">Food</a>
+  </nav>
+
+  <section id="itinerary">
+    <h2>🗓️ Itinerary</h2>
+    <ul class="itinerary">
+      <li>
+        <strong>July 4th (Arrival Day):</strong><br>
+        - Arrive in State College<br>
+        - Settle in, relax, maybe brunch or coffee ☕<br>
+        - <b>Evening:</b> <span style="color:var(--blue)">🎉 The Infamous Diddy White Party at the Silvs' Pond</span><br>
+        &nbsp;&nbsp;Dress code: All white | Food, drinks, music, and fun by the pond | Celebrate the 4th in style!
+      </li>
+      <li>
+        <strong>July 5th (Open Day):</strong><br>
+        - Choose your adventure!<br>
+        - Hike Mount Nittany 🥾<br>
+        - Penn State Arboretum 🌳<br>
+        - Downtown shopping (Connections Clothing 👗, etc.)<br>
+        - Try local food spots 🍽️<br>
+        - Mini golf ⛳️<br>
+        - Palmer Museum of Art 🖼️<br>
+        - Brewery/cider tour 🍻<br>
+        - Ice cream at Meyer Dairy or Creamery 🍦
+      </li>
+      <li>
+        <strong>July 6th (Open until Departure):</strong><br>
+        - Brunch at a local favorite 🥞<br>
+        - Last-minute shopping or sightseeing<br>
+        - Relax at a coffee shop ☕<br>
+        - Farewell meal before heading to the airport
+      </li>
+    </ul>
+  </section>
+
+  <section id="flights">
+    <h2>✈️ Flights</h2>
+    <ul class="itinerary">
+      <li>
+        <strong>Arrival:</strong><br>
+        Denver to Washington (UA 1924): July 3, 11:59 PM – July 4, 5:24 AM<br>
+        Washington to State College (UA 4319): July 4, 8:35 AM – 9:37 AM
+      </li>
+      <li>
+        <strong>Departure:</strong><br>
+        State College to Washington (UA 4938): July 7, 3:10 PM – 4:07 PM<br>
+        Washington to Denver (UA 454): July 7, 8:06 PM – 9:57 PM
+      </li>
+      <li>
+        <strong>Passenger:</strong> Trevor & Sara Taylor<br>
+        <strong>Confirmation Number:</strong> NNP9R9
+      </li>
+    </ul>
+  </section>
+
+  <section id="activities">
+    <h2>🎆 Activities</h2>
+    <div class="activity-list">
+      <div class="activity-card">
+        <span class="emoji">🥾🌄</span>
+        <span class="name">Hike Mount Nittany</span>
+        <span class="desc">A classic, must-do hike for Penn Staters and visitors! The trailhead is in Lemont, PA, and the hike offers stunning views of Penn State campus and the valley from several overlooks, especially the Mike Lynch Overlook. Moderate to strenuous climb, well-marked paths. <a href="https://nittany.org/hike/" target="_blank">More info</a></span>
+      </div>
+      <div class="activity-card">
+        <span class="emoji">🌳🌸</span>
+        <span class="name">Penn State Arboretum</span>
+        <span class="desc">A beautiful, 370-acre garden and natural area open daily from dawn to dusk. Features the H.O. Smith Botanic Gardens, children's garden, pollinator and bird garden, walking trails, and seasonal events. <a href="https://arboretum.psu.edu/" target="_blank">Official site</a></span>
+      </div>
+      <div class="activity-card">
+        <span class="emoji">⛳️</span>
+        <span class="name">Happy Valley Mini Golf</span>
+        <span class="desc">18-hole course just 3 miles from Penn State. Fun for all ages! Group discounts available. <a href="http://www.happyvalleyminigolf.com/" target="_blank">More info</a></span>
+      </div>
+      <div class="activity-card">
+        <span class="emoji">🖼️</span>
+        <span class="name">Palmer Museum of Art</span>
+        <span class="desc">The largest art museum collection between Pittsburgh and Philadelphia, with world-class exhibitions and a diverse permanent collection. Free admission. <a href="https://palmermuseum.psu.edu/" target="_blank">More info</a></span>
+      </div>
+      <div class="activity-card">
+        <span class="emoji">👗</span>
+        <span class="name">Connections Clothing</span>
+        <span class="desc">A women's boutique in downtown State College, open since 1996. Handpicked, trendy pieces from brands like Free People, Just Black Denim, and Boys Lie. <a href="https://www.connectionsclothing.com/" target="_blank">More info</a></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="food">
+    <h2>🍔 Food</h2>
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterFood('all')">All</button>
+      <button class="filter-btn" onclick="filterFood('breakfast')">🥯 Breakfast</button>
+      <button class="filter-btn" onclick="filterFood('coffee')">☕ Coffee</button>
+      <button class="filter-btn" onclick="filterFood('dessert')">🍦 Dessert</button>
+      <button class="filter-btn" onclick="filterFood('drinks')">🍸 Drinks</button>
+      <button class="filter-btn" onclick="filterFood('restaurant')">🍽️ Restaurants</button>
+    </div>
+    <div class="food-grid" id="foodGrid">
+      <!-- Food cards will be injected here by JS -->
+    </div>
+  </section>
+
+  <script>
+    // Food & Drink Data
+    const foodData = [
+      { name: 'Bagel Love Cafe', emoji: '🥯', desc: 'Fresh bagels, breakfast sandwiches, and coffee in a cozy spot.', cat: 'breakfast', yelp: 'https://www.yelp.com/biz/bagel-love-cafe-state-college' },
+      { name: 'Wegmans', emoji: '🍽️', desc: 'Gourmet grocery store with a great prepared foods section.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/wegmans-state-college' },
+      { name: 'Barrel 21', emoji: '🍸', desc: 'Distillery and restaurant with creative cocktails and local fare.', cat: 'drinks', yelp: 'https://www.yelp.com/biz/barrel-21-distillery-and-dining-state-college' },
+      { name: 'Tavern', emoji: '🍽️', desc: 'Classic American restaurant, a State College staple.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/the-tavern-restaurant-state-college' },
+      { name: 'Champs', emoji: '🍔', desc: 'Sports bar with wings, burgers, and a lively atmosphere.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/champs-sports-grill-state-college' },
+      { name: 'Penn State Creamery', emoji: '🍦', desc: 'Legendary ice cream made on campus. Try the Peachy Paterno!', cat: 'dessert', yelp: 'https://www.yelp.com/biz/berkey-creamery-university-park' },
+      { name: 'Meyer Dairy', emoji: '🍨', desc: 'Family-run dairy with unique ice cream flavors and fresh milk.', cat: 'dessert', yelp: 'https://www.yelp.com/biz/meyer-dairy-state-college' },
+      { name: 'Sweet Frog', emoji: '🍧', desc: 'Self-serve frozen yogurt with tons of toppings.', cat: 'dessert', yelp: 'https://www.yelp.com/biz/sweet-frog-premium-frozen-yogurt-state-college' },
+      { name: 'Yallah Hot Chicken', emoji: '🍗', desc: 'Spicy fried chicken sandwiches and loaded fries.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/yallah-tacos-state-college' },
+      { name: 'Tadashi', emoji: '🍣', desc: 'Japanese ramen and sushi bar.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/tadashi-state-college' },
+      { name: 'Lupitas', emoji: '🌮', desc: 'Authentic Mexican food, tacos, and more.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/lupitas-authentic-mexican-food-state-college' },
+      { name: 'Duck Donuts', emoji: '🍩', desc: 'Warm, made-to-order donuts with custom toppings.', cat: 'dessert', yelp: 'https://www.yelp.com/biz/duck-donuts-state-college' },
+      { name: 'Local Whiskey', emoji: '🥃', desc: 'Bar with a huge whiskey selection and upscale pub food.', cat: 'drinks', yelp: 'https://www.yelp.com/biz/local-whiskey-state-college' },
+      { name: 'Central Reservation', emoji: '🍸', desc: 'Trendy spot for cocktails and small plates.', cat: 'drinks', yelp: 'https://www.yelp.com/biz/central-reservation-state-college' },
+      { name: 'Allen Street Grill', emoji: '🍽️', desc: 'Upscale American dining with a view of downtown.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/allen-street-grill-state-college' },
+      { name: 'Corner Room', emoji: '🍽️', desc: 'Historic eatery serving classic American comfort food.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/the-corner-room-state-college' },
+      { name: 'Doggies', emoji: '🌭', desc: 'Hot dogs, fries, and late-night eats.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/doggies-state-college' },
+      { name: 'Waffle Shop', emoji: '🥞', desc: 'Beloved breakfast spot for pancakes, waffles, and eggs.', cat: 'breakfast', yelp: 'https://www.yelp.com/biz/the-waffle-shop-state-college-2' },
+      { name: 'Breakfast on Boal', emoji: '🍳', desc: 'Charming breakfast and brunch cafe.', cat: 'breakfast', yelp: 'https://www.yelp.com/biz/breakfast-on-boal-boalsburg' },
+      { name: 'Pump Station', emoji: '🍺', desc: 'Brewpub with craft beers and hearty food.', cat: 'drinks', yelp: 'https://www.yelp.com/biz/pump-station-cafe-boalsburg' },
+      { name: 'Rothrock Coffee', emoji: '☕', desc: 'Specialty coffee shop with pastries and a chill vibe.', cat: 'coffee', yelp: 'https://www.yelp.com/biz/rothrock-coffee-state-college' },
+      { name: 'Happy Valley Brewing', emoji: '🍺', desc: 'Local brewery with creative beers and pub food.', cat: 'drinks', yelp: 'https://www.yelp.com/biz/happy-valley-brewing-company-state-college' },
+      { name: '814 Cider', emoji: '🍏', desc: 'Cider house with a variety of local ciders.', cat: 'drinks', yelp: 'https://www.yelp.com/biz/814-cider-works-state-college' },
+      { name: 'Naked Egg', emoji: '🍳', desc: 'Popular breakfast and brunch spot.', cat: 'breakfast', yelp: 'https://www.yelp.com/biz/the-naked-egg-cafe-boalsburg' }
+    ];
+    function filterFood(cat) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      const idx = ['all','breakfast','coffee','dessert','drinks','restaurant'].indexOf(cat);
+      document.querySelectorAll('.filter-btn')[idx].classList.add('active');
+      const grid = document.getElementById('foodGrid');
+      grid.innerHTML = '';
+      foodData.filter(f => cat === 'all' || f.cat === cat).forEach(f => {
+        grid.innerHTML += `<div class=\"food-card\"><span class=\"emoji\">${f.emoji}</span> <span class=\"name\">${f.name}</span><div class=\"desc\">${f.desc}</div><div><a href='${f.yelp}' target='_blank' title='More Info' style='margin-top:4px;display:inline-block;font-size:0.98rem;color:var(--blue);text-decoration:underline;'>More Info</a></div></div>`;
+      });
+    }
+    // Initial render
+    filterFood('all');
+
+    // Scrollspy functionality
+    const sections = [
+      {id: 'itinerary', nav: 'nav-itinerary'},
+      {id: 'flights', nav: 'nav-flights'},
+      {id: 'activities', nav: 'nav-activities'},
+      {id: 'food', nav: 'nav-food'}
+    ];
+    function onScrollSpy() {
+      let scrollPos = window.scrollY || window.pageYOffset;
+      let offset = 120; // adjust for nav height
+      let found = false;
+      for (let i = 0; i < sections.length; i++) {
+        let sec = document.getElementById(sections[i].id);
+        if (sec) {
+          let top = sec.offsetTop - offset;
+          let nextTop = (i < sections.length - 1) ? document.getElementById(sections[i+1].id).offsetTop - offset : Infinity;
+          if (scrollPos >= top && scrollPos < nextTop) {
+            document.getElementById(sections[i].nav).classList.add('active');
+            found = true;
+          } else {
+            document.getElementById(sections[i].nav).classList.remove('active');
+          }
+        }
+      }
+      // If at the bottom, highlight last
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
+        sections.forEach((s, idx) => document.getElementById(s.nav).classList.remove('active'));
+        document.getElementById(sections[sections.length-1].nav).classList.add('active');
+      }
+    }
+    window.addEventListener('scroll', onScrollSpy);
+    window.addEventListener('resize', onScrollSpy);
+    document.addEventListener('DOMContentLoaded', onScrollSpy);
+  </script>
+</body>
+</html> 
