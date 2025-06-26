@@ -212,7 +212,19 @@
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 0.7rem;
       }
-      nav, .filters {
+      nav {
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 0.5rem;
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+      }
+      nav a {
+        font-size: 0.98rem;
+        padding: 0.3rem 0.5rem;
+        display: inline-block;
+      }
+      .filters {
         padding-left: 0.2rem;
         padding-right: 0.2rem;
       }
@@ -228,10 +240,10 @@
     <p>Welcome to your State College adventure! Here's everything you need for an unforgettable Fourth of July weekend.</p>
   </header>
   <nav>
-    <a href="#itinerary" id="nav-itinerary">Itinerary</a>
-    <a href="#flights" id="nav-flights">Flights</a>
-    <a href="#activities" id="nav-activities">Activities</a>
-    <a href="#food" id="nav-food">Food</a>
+    <a href="#itinerary" id="nav-itinerary">🗓️</a>
+    <a href="#flights" id="nav-flights">✈️</a>
+    <a href="#activities" id="nav-activities">🎆</a>
+    <a href="#food" id="nav-food">🍔</a>
   </nav>
 
   <section id="itinerary">
