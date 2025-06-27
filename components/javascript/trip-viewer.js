@@ -1,6 +1,5 @@
 // Show loading message
 document.getElementById('itineraryList').innerHTML = '<li>Loading itinerary...</li>';
-document.getElementById('flightsList').innerHTML = '<li>Loading flights...</li>';
 document.getElementById('exploreGrid').innerHTML = '<div>Loading explore data...</div>';
 
 // Use the JSON file specified by the HTML page
@@ -51,7 +50,6 @@ fetch(jsonPath)
     // Scrollspy functionality
     const sections = [
       {id: 'itinerary', nav: 'nav-itinerary'},
-      {id: 'flights', nav: 'nav-flights'},
       {id: 'explore', nav: 'nav-explore'}
     ];
     function onScrollSpy() {
@@ -103,10 +101,8 @@ fetch(jsonPath)
       });
     }
     renderItinerary(tripData.itinerary, 'itineraryList');
-    renderItinerary(tripData.flights, 'flightsList');
   })
   .catch(err => {
     document.getElementById('itineraryList').innerHTML = '<li>Error loading itinerary.</li>';
-    document.getElementById('flightsList').innerHTML = '<li>Error loading flights.</li>';
     document.getElementById('exploreGrid').innerHTML = '<div>Error loading explore data.</div>';
   }); 
