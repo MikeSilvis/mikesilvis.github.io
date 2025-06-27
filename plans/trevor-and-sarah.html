@@ -107,6 +107,54 @@
     .itinerary strong {
       color: var(--red);
     }
+    .itinerary-row {
+      display: flex;
+      align-items: stretch;
+      margin-bottom: 0.7em;
+    }
+    .itinerary-label {
+      min-width: 110px;
+      max-width: 110px;
+      font-weight: bold;
+      color: var(--red);
+      text-align: center;
+      flex-shrink: 0;
+      line-height: 1.5;
+      font-style: italic;
+      background: #ffe5b4;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: auto;
+      padding: 0.3em 1.2em;
+      margin-right: 1em;
+      align-self: stretch;
+    }
+    .itinerary-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3em;
+      justify-content: center;
+    }
+    .itinerary-event {
+      text-align: left;
+      color: var(--dark);
+      font-size: 1rem;
+      margin-bottom: 0.1em;
+    }
+    .itinerary-list-header {
+      margin-bottom: 1.1em;
+      display: block;
+    }
+    /* Remove old grid/flex styles for itinerary blocks */
+    .itinerary-timeblock-row,
+    .itinerary-time-badge,
+    .itinerary-block-activities {
+      all: unset;
+      display: revert;
+    }
     /* Food & Drink */
     .filters {
       display: flex;
@@ -252,58 +300,9 @@
       color: #b26a00;
       font-style: italic;
     }
-    .itinerary-event {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 0.7em;
-      gap: 0.7em;
-      min-height: 2em;
-      white-space: nowrap;
-    }
-    .itinerary-event .itinerary-desc {
-      white-space: normal;
-      word-break: break-word;
-    }
     .itinerary-time-badge.invisible {
       opacity: 0;
       pointer-events: none;
-    }
-    .itinerary-list-header {
-      margin-bottom: 1.1em;
-      display: block;
-    }
-    .itinerary-timeblock-row {
-      display: grid;
-      grid-template-columns: 120px 1fr; /* badge column, then activities */
-      align-items: center; /* vertical centering */
-      margin-top: 0.7em;
-      margin-bottom: 0.7em;
-      gap: 0.5em; /* reduce gap between badge and activities */
-    }
-    .itinerary-time-badge.general {
-      display: flex;
-      align-items: center;
-      justify-content: center; /* horizontal centering */
-      margin-right: 0;
-      min-width: unset;
-      text-align: center;
-      padding-left: 0.7em;
-      padding-right: 0.7em;
-      height: 100%; /* make badge fill the cell for vertical centering */
-    }
-    .itinerary-block-activities {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start; /* left align */
-      margin: 0;
-      width: 100%;
-    }
-    .itinerary-block-activities .itinerary-event {
-      margin-left: 0;
-      width: 100%;
-      justify-content: flex-start;
-      text-align: left;
-      margin-bottom: 0.3em;
     }
   </style>
 </head>
@@ -530,13 +529,12 @@
         const li = document.createElement('li');
         li.innerHTML = `<span class='itinerary-list-header'><strong>${day.label}:</strong></span>`;
         if (day.timeBlocks) {
-          // July 5th & 6th - grouped by time blocks
           li.innerHTML += day.timeBlocks.map(block => {
-            return `<div class='itinerary-timeblock-row'>` +
-              `<span class='itinerary-time-badge general'>${block.time}</span>` +
-              `<div class='itinerary-block-activities'>` +
+            return `<div class='itinerary-row'>` +
+              `<div class='itinerary-label'>${block.time}</div>` +
+              `<div class='itinerary-content'>` +
                 block.options.map(opt => {
-                  return `<div class='itinerary-event'><span class='itinerary-time-badge invisible'>--</span><span class='itinerary-desc'>${opt.desc}</span></div>`;
+                  return `<div class='itinerary-event'>${opt.desc}</div>`;
                 }).join('') +
               `</div>` +
             `</div>`;
