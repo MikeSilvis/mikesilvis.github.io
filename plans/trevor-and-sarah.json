@@ -8,7 +8,7 @@
         {
           "time": "Arrival 9:37 AM",
           "options": [
-            { "desc": "Arrive in State College (UA 4319" },
+            { "desc": "Arrive in State College (UA 4319)" },
             { "desc": "Settle in, relax, maybe brunch or coffee" }
           ]
         },
@@ -68,7 +68,7 @@
         {
           "time": "Departure 3:10 PM",
           "options": [
-            { "desc": "State College to Washington (UA 4938)3:10 PM" }
+            { "desc": "State College to Washington (UA 4938)" }
           ]
         }
       ]
