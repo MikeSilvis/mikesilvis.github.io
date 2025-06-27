@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trip Viewer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../components/css/trip-viewer.css">
+</head>
+<body>
+  <header>
+    <h1 id="tripTitle"></h1>
+    <p id="tripSubtitle"></p>
+  </header>
+  <nav>
+    <a href="#itinerary" id="nav-itinerary">🗓️</a>
+    <a href="#flights" id="nav-flights">✈️</a>
+    <a href="#explore" id="nav-explore">🧭</a>
+  </nav>
+
+  <section id="itinerary">
+    <h2>🗓️ Itinerary</h2>
+    <ul class="itinerary" id="itineraryList"></ul>
+  </section>
+
+  <section id="flights">
+    <h2>✈️ Flights</h2>
+    <ul class="itinerary" id="flightsList"></ul>
+  </section>
+
+  <section id="explore">
+    <h2>🧭 Explore</h2>
+    <div class="emoji-filters" id="emojiFilters" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;"></div>
+    <div class="explore-grid" id="exploreGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;"></div>
+  </section>
+
+  <script>
+    window.TRIP_JSON = 'trevor-and-sarah-trip.json';
+  </script>
+  <script type="module" src="../components/javascript/trip-viewer.js"></script>
+</body>
+</html> 

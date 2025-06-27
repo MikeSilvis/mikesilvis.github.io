@@ -1,0 +1,298 @@
+:root {
+  --red: #e63946;
+  --blue: #457b9d;
+  --white: #f1faee;
+  --dark: #1d3557;
+  --gray: #f8f9fa;
+  --nav-bg: #fff;
+  --nav-active: #e63946;
+  --nav-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+html, body {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: var(--gray);
+  color: var(--dark);
+  margin: 0;
+  padding: 0;
+}
+header {
+  background: linear-gradient(90deg, var(--red), var(--blue));
+  color: var(--white);
+  padding: 2rem 1rem 1rem 1rem;
+  text-align: center;
+}
+header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+}
+header p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background: var(--nav-bg);
+  box-shadow: var(--nav-shadow);
+  padding: 0.7rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 3px solid var(--blue);
+}
+nav a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 1.18rem;
+  padding: 0.3rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+  position: relative;
+}
+nav a.active, nav a:focus {
+  background: var(--nav-active);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(230,57,70,0.10);
+  position: relative;
+}
+nav a:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+section {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  padding: 2rem 1.5rem;
+}
+h2 {
+  color: var(--blue);
+  margin-top: 0;
+  font-size: 2rem;
+  border-bottom: 2px solid var(--red);
+  display: inline-block;
+  padding-bottom: 0.2rem;
+}
+/* Itinerary */
+.itinerary {
+  list-style: none;
+  padding: 0;
+}
+.itinerary li {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-left: 4px solid var(--blue);
+  background: var(--gray);
+  border-radius: 6px;
+}
+.itinerary strong {
+  color: var(--red);
+}
+.itinerary-row {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 0.7em;
+}
+.itinerary-label {
+  min-width: 110px;
+  max-width: 110px;
+  font-weight: bold;
+  color: var(--red);
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1.5;
+  font-style: italic;
+  background: #ffe5b4;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  padding: 0.3em 1.2em;
+  margin-right: 1em;
+  align-self: stretch;
+}
+.itinerary-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  justify-content: center;
+}
+.itinerary-event {
+  text-align: left;
+  color: var(--dark);
+  font-size: 1rem;
+  margin-bottom: 0.1em;
+}
+.itinerary-list-header {
+  margin-bottom: 1.1em;
+  display: block;
+}
+/* Remove old grid/flex styles for itinerary blocks */
+.itinerary-timeblock-row,
+.itinerary-time-badge,
+.itinerary-block-activities {
+  all: unset;
+  display: revert;
+}
+/* Food & Drink */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  position: sticky;
+  top: 56px; /* Height of nav bar, adjust if needed */
+  background: var(--white);
+  z-index: 15;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.filter-btn {
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--red);
+}
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+.food-card {
+  background: var(--gray);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 120px;
+  font-size: 1.1rem;
+}
+.food-card .emoji {
+  font-size: 1.7rem;
+  margin-right: 0.5rem;
+}
+.food-card .name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+.food-card .desc {
+  font-size: 0.98rem;
+  color: #444;
+}
+/* Activities */
+.activity-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.2rem;
+}
+.activity-card {
+  background: var(--gray);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.activity-card .emoji {
+  font-size: 1.7rem;
+  margin-right: 0.5rem;
+}
+.activity-card .name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+.activity-card .desc {
+  font-size: 0.98rem;
+  color: #444;
+}
+/* Responsive */
+@media (max-width: 600px) {
+  section {
+    padding: 1rem 0.5rem;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
+  .food-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.7rem;
+  }
+  .activity-list {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.7rem;
+  }
+  nav {
+    gap: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  nav a {
+    font-size: 1.4rem;
+    padding: 0.3rem 0.2rem;
+    flex: 1 1 0;
+    text-align: center;
+  }
+  .filters {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+  }
+}
+#food {
+  padding-bottom: 120px;
+}
+.itinerary-time-badge {
+  display: inline-block;
+  width: 110px;
+  min-width: 110px;
+  max-width: 110px;
+  text-align: center;
+  font-size: 0.98rem;
+  font-weight: 700;
+  border-radius: 16px;
+  margin-right: 0.7em;
+  padding: 0.18em 0.7em;
+  vertical-align: middle;
+  background: #e9ecef;
+  color: #1d3557;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.itinerary-time-badge.general {
+  background: #ffe5b4;
+  color: #b26a00;
+  font-style: italic;
+}
+.itinerary-time-badge.invisible {
+  opacity: 0;
+  pointer-events: none;
+} 

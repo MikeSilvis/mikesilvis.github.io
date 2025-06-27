@@ -1,0 +1,135 @@
+{
+  "title": "🇺🇸 Trevor & Sara's 4th of July Visit 🇺🇸",
+  "subtitle": "Welcome to your State College adventure! Here's everything you need for an unforgettable Fourth of July weekend.",
+  "itinerary": [
+    {
+      "label": "July 4th (Arrival Day)",
+      "timeBlocks": [
+        {
+          "time": "Arrival 9:37 AM",
+          "options": [
+            { "desc": "Arrive in State College" },
+            { "desc": "Settle in, relax, maybe brunch or coffee" }
+          ]
+        },
+        {
+          "time": "Evening",
+          "options": [
+            { "desc": "<span style=\"color:var(--blue)\">🎉 The Infamous Diddy White Party at the Silvs' Pond</span><br>&nbsp;&nbsp;Dress code: All white | Food, drinks, music, and fun by the pond | Celebrate the 4th in style!" }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "July 5th (Open Day)",
+      "timeBlocks": [
+        {
+          "time": "Morning",
+          "options": [
+            { "desc": "Hike Mount Nittany 🥾" },
+            { "desc": "Penn State Arboretum 🌳" }
+          ]
+        },
+        {
+          "time": "Afternoon",
+          "options": [
+            { "desc": "Downtown shopping (Connections Clothing 👗, etc.)" },
+            { "desc": "Try local food spots 🍽️" },
+            { "desc": "Mini golf ⛳️" },
+            { "desc": "Palmer Museum of Art 🖼️" }
+          ]
+        },
+        {
+          "time": "Evening",
+          "options": [
+            { "desc": "Brewery/cider tour 🍻" },
+            { "desc": "Ice cream at Meyer Dairy or Creamery 🍦" }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "July 6th (Open until Departure)",
+      "timeBlocks": [
+        {
+          "time": "Morning",
+          "options": [
+            { "desc": "Brunch at a local favorite 🥞" }
+          ]
+        },
+        {
+          "time": "Afternoon",
+          "options": [
+            { "desc": "Last-minute shopping or sightseeing" },
+            { "desc": "Relax at a coffee shop ☕" }
+          ]
+        },
+        {
+          "time": "Before Departure",
+          "options": [
+            { "desc": "Farewell meal before heading to the airport" }
+          ]
+        }
+      ]
+    }
+  ],
+  "flights": [
+    {
+      "label": "Flights",
+      "timeBlocks": [
+        {
+          "time": "Arrival",
+          "options": [
+            { "desc": "Denver to Washington (UA 1924): July 3, 11:59 PM – July 4, 5:24 AM" },
+            { "desc": "Washington to State College (UA 4319): July 4, 8:35 AM – 9:37 AM" }
+          ]
+        },
+        {
+          "time": "Departure",
+          "options": [
+            { "desc": "State College to Washington (UA 4938): July 7, 3:10 PM – 4:07 PM" },
+            { "desc": "Washington to Denver (UA 454): July 7, 8:06 PM – 9:57 PM" }
+          ]
+        },
+        {
+          "time": "Passenger",
+          "options": [
+            { "desc": "Trevor & Sara Taylor" },
+            { "desc": "Confirmation Number: NNP9R9" }
+          ]
+        }
+      ]
+    }
+  ],
+  "explore": [
+    { "name": "Hike Mount Nittany", "emojis": ["🥾", "🌄"], "desc": "A classic, must-do hike for Penn Staters and visitors! The trailhead is in Lemont, PA, and the hike offers stunning views of Penn State campus and the valley from several overlooks, especially the Mike Lynch Overlook. Moderate to strenuous climb, well-marked paths.", "link": "https://nittany.org/hike/", "linkText": "More info" },
+    { "name": "Penn State Arboretum", "emojis": ["🌳", "🌸"], "desc": "A beautiful, 370-acre garden and natural area open daily from dawn to dusk. Features the H.O. Smith Botanic Gardens, children's garden, pollinator and bird garden, walking trails, and seasonal events.", "link": "https://arboretum.psu.edu/", "linkText": "Official site" },
+    { "name": "Happy Valley Mini Golf", "emojis": ["⛳️"], "desc": "18-hole course just 3 miles from Penn State. Fun for all ages! Group discounts available.", "link": "http://www.happyvalleyminigolf.com/", "linkText": "More info" },
+    { "name": "Palmer Museum of Art", "emojis": ["🖼️"], "desc": "The largest art museum collection between Pittsburgh and Philadelphia, with world-class exhibitions and a diverse permanent collection. Free admission.", "link": "https://palmermuseum.psu.edu/", "linkText": "More info" },
+    { "name": "Connections Clothing", "emojis": ["👗"], "desc": "A women's boutique in downtown State College, open since 1996. Handpicked, trendy pieces from brands like Free People, Just Black Denim, and Boys Lie.", "link": "https://www.connectionsclothing.com/", "linkText": "More info" },
+    { "name": "Bagel Love Cafe", "emojis": ["🥞"], "desc": "Fresh bagels, breakfast sandwiches, and coffee in a cozy spot.", "link": "https://www.yelp.com/biz/bagel-love-cafe-state-college", "linkText": "More Info" },
+    { "name": "Wegmans", "emojis": ["🍽️"], "desc": "Gourmet grocery store with a great prepared foods section.", "link": "https://www.yelp.com/biz/wegmans-state-college", "linkText": "More Info" },
+    { "name": "Barrel 21", "emojis": ["🍽️"], "desc": "Distillery and restaurant with creative cocktails and local fare.", "link": "https://www.yelp.com/biz/barrel-21-distillery-and-dining-state-college", "linkText": "More Info" },
+    { "name": "Tavern", "emojis": ["🍽️"], "desc": "Classic American restaurant, a State College staple.", "link": "https://www.yelp.com/biz/the-tavern-restaurant-state-college", "linkText": "More Info" },
+    { "name": "Champs", "emojis": ["🍔"], "desc": "Sports bar with wings, burgers, and a lively atmosphere.", "link": "https://www.yelp.com/biz/champs-sports-grill-state-college", "linkText": "More Info" },
+    { "name": "Penn State Creamery", "emojis": ["🍦"], "desc": "Legendary ice cream made on campus. Try the Peachy Paterno!", "link": "https://www.yelp.com/biz/berkey-creamery-university-park", "linkText": "More Info" },
+    { "name": "Meyer Dairy", "emojis": ["🍦"], "desc": "Family-run dairy with unique ice cream flavors and fresh milk.", "link": "https://www.yelp.com/biz/meyer-dairy-state-college", "linkText": "More Info" },
+    { "name": "Sweet Frog", "emojis": ["🍦"], "desc": "Self-serve frozen yogurt with tons of toppings.", "link": "https://www.yelp.com/biz/sweet-frog-premium-frozen-yogurt-state-college", "linkText": "More Info" },
+    { "name": "Yallah Hot Chicken", "emojis": ["🍔"], "desc": "Spicy fried chicken sandwiches and loaded fries.", "link": "https://www.yelp.com/biz/yallah-tacos-state-college", "linkText": "More Info" },
+    { "name": "Tadashi", "emojis": ["🍽️"], "desc": "Japanese ramen and sushi bar.", "link": "https://www.yelp.com/biz/tadashi-state-college", "linkText": "More Info" },
+    { "name": "Lupitas", "emojis": ["🍔"], "desc": "Authentic Mexican food, tacos, and more.", "link": "https://www.yelp.com/biz/lupitas-authentic-mexican-food-state-college", "linkText": "More Info" },
+    { "name": "Duck Donuts", "emojis": ["🍦"], "desc": "Warm, made-to-order donuts with custom toppings.", "link": "https://www.yelp.com/biz/duck-donuts-state-college", "linkText": "More Info" },
+    { "name": "Local Whiskey", "emojis": ["🍽️"], "desc": "Bar with a huge whiskey selection and upscale pub food.", "link": "https://www.yelp.com/biz/local-whiskey-state-college", "linkText": "More Info" },
+    { "name": "Central Reservation", "emojis": ["🍽️"], "desc": "Trendy spot for cocktails and small plates.", "link": "https://www.yelp.com/biz/central-reservation-state-college", "linkText": "More Info" },
+    { "name": "Allen Street Grill", "emojis": ["🍽️"], "desc": "Upscale American dining with a view of downtown.", "link": "https://www.yelp.com/biz/allen-street-grill-state-college", "linkText": "More Info" },
+    { "name": "Corner Room", "emojis": ["🍽️"], "desc": "Historic eatery serving classic American comfort food.", "link": "https://www.yelp.com/biz/the-corner-room-state-college", "linkText": "More Info" },
+    { "name": "Doggies", "emojis": ["🍔"], "desc": "Hot dogs, fries, and late-night eats.", "link": "https://www.yelp.com/biz/doggies-state-college", "linkText": "More Info" },
+    { "name": "Waffle Shop", "emojis": ["🥞"], "desc": "Beloved breakfast spot for pancakes, waffles, and eggs.", "link": "https://www.yelp.com/biz/the-waffle-shop-state-college-2", "linkText": "More Info" },
+    { "name": "Breakfast on Boal", "emojis": ["🥞"], "desc": "Charming breakfast and brunch cafe.", "link": "https://www.yelp.com/biz/breakfast-on-boal-boalsburg", "linkText": "More Info" },
+    { "name": "Pump Station", "emojis": ["🍽️"], "desc": "Brewpub with craft beers and hearty food.", "link": "https://www.yelp.com/biz/pump-station-cafe-boalsburg", "linkText": "More Info" },
+    { "name": "Rothrock Coffee", "emojis": ["🥞"], "desc": "Specialty coffee shop with pastries and a chill vibe.", "link": "https://www.yelp.com/biz/rothrock-coffee-state-college", "linkText": "More Info" },
+    { "name": "Happy Valley Brewing", "emojis": ["🍽️"], "desc": "Local brewery with creative beers and pub food.", "link": "https://www.yelp.com/biz/happy-valley-brewing-company-state-college", "linkText": "More Info" },
+    { "name": "814 Cider", "emojis": ["🍽️"], "desc": "Cider house with a variety of local ciders.", "link": "https://www.yelp.com/biz/814-cider-works-state-college", "linkText": "More Info" },
+    { "name": "Naked Egg", "emojis": ["🥞"], "desc": "Popular breakfast and brunch spot.", "link": "https://www.yelp.com/biz/the-naked-egg-cafe-boalsburg", "linkText": "More Info" }
+  ]
+} 
