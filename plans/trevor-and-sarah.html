@@ -230,6 +230,81 @@
     #food {
       padding-bottom: 120px;
     }
+    .itinerary-time-badge {
+      display: inline-block;
+      width: 110px;
+      min-width: 110px;
+      max-width: 110px;
+      text-align: center;
+      font-size: 0.98rem;
+      font-weight: 700;
+      border-radius: 16px;
+      margin-right: 0.7em;
+      padding: 0.18em 0.7em;
+      vertical-align: middle;
+      background: #e9ecef;
+      color: #1d3557;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+    .itinerary-time-badge.general {
+      background: #ffe5b4;
+      color: #b26a00;
+      font-style: italic;
+    }
+    .itinerary-event {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 0.7em;
+      gap: 0.7em;
+      min-height: 2em;
+      white-space: nowrap;
+    }
+    .itinerary-event .itinerary-desc {
+      white-space: normal;
+      word-break: break-word;
+    }
+    .itinerary-time-badge.invisible {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .itinerary-list-header {
+      margin-bottom: 1.1em;
+      display: block;
+    }
+    .itinerary-timeblock-row {
+      display: grid;
+      grid-template-columns: 120px 1fr; /* badge column, then activities */
+      align-items: center; /* vertical centering */
+      margin-top: 0.7em;
+      margin-bottom: 0.7em;
+      gap: 0.5em; /* reduce gap between badge and activities */
+    }
+    .itinerary-time-badge.general {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* horizontal centering */
+      margin-right: 0;
+      min-width: unset;
+      text-align: center;
+      padding-left: 0.7em;
+      padding-right: 0.7em;
+      height: 100%; /* make badge fill the cell for vertical centering */
+    }
+    .itinerary-block-activities {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* left align */
+      margin: 0;
+      width: 100%;
+    }
+    .itinerary-block-activities .itinerary-event {
+      margin-left: 0;
+      width: 100%;
+      justify-content: flex-start;
+      text-align: left;
+      margin-bottom: 0.3em;
+    }
   </style>
 </head>
 <body>
@@ -240,40 +315,12 @@
   <nav>
     <a href="#itinerary" id="nav-itinerary">🗓️</a>
     <a href="#flights" id="nav-flights">✈️</a>
-    <a href="#activities" id="nav-activities">🎆</a>
-    <a href="#food" id="nav-food">🍔</a>
+    <a href="#explore" id="nav-explore">🧭</a>
   </nav>
 
   <section id="itinerary">
     <h2>🗓️ Itinerary</h2>
-    <ul class="itinerary">
-      <li>
-        <strong>July 4th (Arrival Day):</strong><br>
-        - Arrive in State College<br>
-        - Settle in, relax, maybe brunch or coffee ☕<br>
-        - <b>Evening:</b> <span style="color:var(--blue)">🎉 The Infamous Diddy White Party at the Silvs' Pond</span><br>
-        &nbsp;&nbsp;Dress code: All white | Food, drinks, music, and fun by the pond | Celebrate the 4th in style!
-      </li>
-      <li>
-        <strong>July 5th (Open Day):</strong><br>
-        - Choose your adventure!<br>
-        - Hike Mount Nittany 🥾<br>
-        - Penn State Arboretum 🌳<br>
-        - Downtown shopping (Connections Clothing 👗, etc.)<br>
-        - Try local food spots 🍽️<br>
-        - Mini golf ⛳️<br>
-        - Palmer Museum of Art 🖼️<br>
-        - Brewery/cider tour 🍻<br>
-        - Ice cream at Meyer Dairy or Creamery 🍦
-      </li>
-      <li>
-        <strong>July 6th (Open until Departure):</strong><br>
-        - Brunch at a local favorite 🥞<br>
-        - Last-minute shopping or sightseeing<br>
-        - Relax at a coffee shop ☕<br>
-        - Farewell meal before heading to the airport
-      </li>
-    </ul>
+    <ul class="itinerary" id="itineraryList"></ul>
   </section>
 
   <section id="flights">
@@ -296,99 +343,84 @@
     </ul>
   </section>
 
-  <section id="activities">
-    <h2>🎆 Activities</h2>
-    <div class="activity-list">
-      <div class="activity-card">
-        <span class="emoji">🥾🌄</span>
-        <span class="name">Hike Mount Nittany</span>
-        <span class="desc">A classic, must-do hike for Penn Staters and visitors! The trailhead is in Lemont, PA, and the hike offers stunning views of Penn State campus and the valley from several overlooks, especially the Mike Lynch Overlook. Moderate to strenuous climb, well-marked paths. <a href="https://nittany.org/hike/" target="_blank">More info</a></span>
-      </div>
-      <div class="activity-card">
-        <span class="emoji">🌳🌸</span>
-        <span class="name">Penn State Arboretum</span>
-        <span class="desc">A beautiful, 370-acre garden and natural area open daily from dawn to dusk. Features the H.O. Smith Botanic Gardens, children's garden, pollinator and bird garden, walking trails, and seasonal events. <a href="https://arboretum.psu.edu/" target="_blank">Official site</a></span>
-      </div>
-      <div class="activity-card">
-        <span class="emoji">⛳️</span>
-        <span class="name">Happy Valley Mini Golf</span>
-        <span class="desc">18-hole course just 3 miles from Penn State. Fun for all ages! Group discounts available. <a href="http://www.happyvalleyminigolf.com/" target="_blank">More info</a></span>
-      </div>
-      <div class="activity-card">
-        <span class="emoji">🖼️</span>
-        <span class="name">Palmer Museum of Art</span>
-        <span class="desc">The largest art museum collection between Pittsburgh and Philadelphia, with world-class exhibitions and a diverse permanent collection. Free admission. <a href="https://palmermuseum.psu.edu/" target="_blank">More info</a></span>
-      </div>
-      <div class="activity-card">
-        <span class="emoji">👗</span>
-        <span class="name">Connections Clothing</span>
-        <span class="desc">A women's boutique in downtown State College, open since 1996. Handpicked, trendy pieces from brands like Free People, Just Black Denim, and Boys Lie. <a href="https://www.connectionsclothing.com/" target="_blank">More info</a></span>
-      </div>
-    </div>
-  </section>
-
-  <section id="food">
-    <h2>🍔 Food</h2>
-    <div class="filters">
-      <button class="filter-btn active" onclick="filterFood('all')">All</button>
-      <button class="filter-btn" onclick="filterFood('breakfast')">🥯 Breakfast</button>
-      <button class="filter-btn" onclick="filterFood('coffee')">☕ Coffee</button>
-      <button class="filter-btn" onclick="filterFood('dessert')">🍦 Dessert</button>
-      <button class="filter-btn" onclick="filterFood('drinks')">🍸 Drinks</button>
-      <button class="filter-btn" onclick="filterFood('restaurant')">🍽️ Restaurants</button>
-    </div>
-    <div class="food-grid" id="foodGrid">
-      <!-- Food cards will be injected here by JS -->
-    </div>
+  <section id="explore">
+    <h2>🧭 Explore</h2>
+    <div class="emoji-filters" id="emojiFilters" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;"></div>
+    <div class="explore-grid" id="exploreGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;"></div>
   </section>
 
   <script>
-    // Food & Drink Data
-    const foodData = [
-      { name: 'Bagel Love Cafe', emoji: '🥯', desc: 'Fresh bagels, breakfast sandwiches, and coffee in a cozy spot.', cat: 'breakfast', yelp: 'https://www.yelp.com/biz/bagel-love-cafe-state-college' },
-      { name: 'Wegmans', emoji: '🍽️', desc: 'Gourmet grocery store with a great prepared foods section.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/wegmans-state-college' },
-      { name: 'Barrel 21', emoji: '🍸', desc: 'Distillery and restaurant with creative cocktails and local fare.', cat: 'drinks', yelp: 'https://www.yelp.com/biz/barrel-21-distillery-and-dining-state-college' },
-      { name: 'Tavern', emoji: '🍽️', desc: 'Classic American restaurant, a State College staple.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/the-tavern-restaurant-state-college' },
-      { name: 'Champs', emoji: '🍔', desc: 'Sports bar with wings, burgers, and a lively atmosphere.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/champs-sports-grill-state-college' },
-      { name: 'Penn State Creamery', emoji: '🍦', desc: 'Legendary ice cream made on campus. Try the Peachy Paterno!', cat: 'dessert', yelp: 'https://www.yelp.com/biz/berkey-creamery-university-park' },
-      { name: 'Meyer Dairy', emoji: '🍨', desc: 'Family-run dairy with unique ice cream flavors and fresh milk.', cat: 'dessert', yelp: 'https://www.yelp.com/biz/meyer-dairy-state-college' },
-      { name: 'Sweet Frog', emoji: '🍧', desc: 'Self-serve frozen yogurt with tons of toppings.', cat: 'dessert', yelp: 'https://www.yelp.com/biz/sweet-frog-premium-frozen-yogurt-state-college' },
-      { name: 'Yallah Hot Chicken', emoji: '🍗', desc: 'Spicy fried chicken sandwiches and loaded fries.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/yallah-tacos-state-college' },
-      { name: 'Tadashi', emoji: '🍣', desc: 'Japanese ramen and sushi bar.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/tadashi-state-college' },
-      { name: 'Lupitas', emoji: '🌮', desc: 'Authentic Mexican food, tacos, and more.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/lupitas-authentic-mexican-food-state-college' },
-      { name: 'Duck Donuts', emoji: '🍩', desc: 'Warm, made-to-order donuts with custom toppings.', cat: 'dessert', yelp: 'https://www.yelp.com/biz/duck-donuts-state-college' },
-      { name: 'Local Whiskey', emoji: '🥃', desc: 'Bar with a huge whiskey selection and upscale pub food.', cat: 'drinks', yelp: 'https://www.yelp.com/biz/local-whiskey-state-college' },
-      { name: 'Central Reservation', emoji: '🍸', desc: 'Trendy spot for cocktails and small plates.', cat: 'drinks', yelp: 'https://www.yelp.com/biz/central-reservation-state-college' },
-      { name: 'Allen Street Grill', emoji: '🍽️', desc: 'Upscale American dining with a view of downtown.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/allen-street-grill-state-college' },
-      { name: 'Corner Room', emoji: '🍽️', desc: 'Historic eatery serving classic American comfort food.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/the-corner-room-state-college' },
-      { name: 'Doggies', emoji: '🌭', desc: 'Hot dogs, fries, and late-night eats.', cat: 'restaurant', yelp: 'https://www.yelp.com/biz/doggies-state-college' },
-      { name: 'Waffle Shop', emoji: '🥞', desc: 'Beloved breakfast spot for pancakes, waffles, and eggs.', cat: 'breakfast', yelp: 'https://www.yelp.com/biz/the-waffle-shop-state-college-2' },
-      { name: 'Breakfast on Boal', emoji: '🍳', desc: 'Charming breakfast and brunch cafe.', cat: 'breakfast', yelp: 'https://www.yelp.com/biz/breakfast-on-boal-boalsburg' },
-      { name: 'Pump Station', emoji: '🍺', desc: 'Brewpub with craft beers and hearty food.', cat: 'drinks', yelp: 'https://www.yelp.com/biz/pump-station-cafe-boalsburg' },
-      { name: 'Rothrock Coffee', emoji: '☕', desc: 'Specialty coffee shop with pastries and a chill vibe.', cat: 'coffee', yelp: 'https://www.yelp.com/biz/rothrock-coffee-state-college' },
-      { name: 'Happy Valley Brewing', emoji: '🍺', desc: 'Local brewery with creative beers and pub food.', cat: 'drinks', yelp: 'https://www.yelp.com/biz/happy-valley-brewing-company-state-college' },
-      { name: '814 Cider', emoji: '🍏', desc: 'Cider house with a variety of local ciders.', cat: 'drinks', yelp: 'https://www.yelp.com/biz/814-cider-works-state-college' },
-      { name: 'Naked Egg', emoji: '🍳', desc: 'Popular breakfast and brunch spot.', cat: 'breakfast', yelp: 'https://www.yelp.com/biz/the-naked-egg-cafe-boalsburg' }
+    // Unified Explore Data (activities + food)
+    const exploreData = [
+      // Activities
+      { name: 'Hike Mount Nittany', emojis: ['🥾', '🌄'], desc: 'A classic, must-do hike for Penn Staters and visitors! The trailhead is in Lemont, PA, and the hike offers stunning views of Penn State campus and the valley from several overlooks, especially the Mike Lynch Overlook. Moderate to strenuous climb, well-marked paths.', link: 'https://nittany.org/hike/', linkText: 'More info' },
+      { name: 'Penn State Arboretum', emojis: ['🌳', '🌸'], desc: 'A beautiful, 370-acre garden and natural area open daily from dawn to dusk. Features the H.O. Smith Botanic Gardens, children\'s garden, pollinator and bird garden, walking trails, and seasonal events.', link: 'https://arboretum.psu.edu/', linkText: 'Official site' },
+      { name: 'Happy Valley Mini Golf', emojis: ['⛳️'], desc: '18-hole course just 3 miles from Penn State. Fun for all ages! Group discounts available.', link: 'http://www.happyvalleyminigolf.com/', linkText: 'More info' },
+      { name: 'Palmer Museum of Art', emojis: ['🖼️'], desc: 'The largest art museum collection between Pittsburgh and Philadelphia, with world-class exhibitions and a diverse permanent collection. Free admission.', link: 'https://palmermuseum.psu.edu/', linkText: 'More info' },
+      { name: 'Connections Clothing', emojis: ['👗'], desc: 'A women\'s boutique in downtown State College, open since 1996. Handpicked, trendy pieces from brands like Free People, Just Black Denim, and Boys Lie.', link: 'https://www.connectionsclothing.com/', linkText: 'More info' },
+      // Food (consolidated)
+      { name: 'Bagel Love Cafe', emojis: ['🥞'], desc: 'Fresh bagels, breakfast sandwiches, and coffee in a cozy spot.', link: 'https://www.yelp.com/biz/bagel-love-cafe-state-college', linkText: 'More Info' },
+      { name: 'Wegmans', emojis: ['🍽️'], desc: 'Gourmet grocery store with a great prepared foods section.', link: 'https://www.yelp.com/biz/wegmans-state-college', linkText: 'More Info' },
+      { name: 'Barrel 21', emojis: ['🍽️'], desc: 'Distillery and restaurant with creative cocktails and local fare.', link: 'https://www.yelp.com/biz/barrel-21-distillery-and-dining-state-college', linkText: 'More Info' },
+      { name: 'Tavern', emojis: ['🍽️'], desc: 'Classic American restaurant, a State College staple.', link: 'https://www.yelp.com/biz/the-tavern-restaurant-state-college', linkText: 'More Info' },
+      { name: 'Champs', emojis: ['🍔'], desc: 'Sports bar with wings, burgers, and a lively atmosphere.', link: 'https://www.yelp.com/biz/champs-sports-grill-state-college', linkText: 'More Info' },
+      { name: 'Penn State Creamery', emojis: ['🍦'], desc: 'Legendary ice cream made on campus. Try the Peachy Paterno!', link: 'https://www.yelp.com/biz/berkey-creamery-university-park', linkText: 'More Info' },
+      { name: 'Meyer Dairy', emojis: ['🍦'], desc: 'Family-run dairy with unique ice cream flavors and fresh milk.', link: 'https://www.yelp.com/biz/meyer-dairy-state-college', linkText: 'More Info' },
+      { name: 'Sweet Frog', emojis: ['🍦'], desc: 'Self-serve frozen yogurt with tons of toppings.', link: 'https://www.yelp.com/biz/sweet-frog-premium-frozen-yogurt-state-college', linkText: 'More Info' },
+      { name: 'Yallah Hot Chicken', emojis: ['🍔'], desc: 'Spicy fried chicken sandwiches and loaded fries.', link: 'https://www.yelp.com/biz/yallah-tacos-state-college', linkText: 'More Info' },
+      { name: 'Tadashi', emojis: ['🍽️'], desc: 'Japanese ramen and sushi bar.', link: 'https://www.yelp.com/biz/tadashi-state-college', linkText: 'More Info' },
+      { name: 'Lupitas', emojis: ['🍔'], desc: 'Authentic Mexican food, tacos, and more.', link: 'https://www.yelp.com/biz/lupitas-authentic-mexican-food-state-college', linkText: 'More Info' },
+      { name: 'Duck Donuts', emojis: ['🍦'], desc: 'Warm, made-to-order donuts with custom toppings.', link: 'https://www.yelp.com/biz/duck-donuts-state-college', linkText: 'More Info' },
+      { name: 'Local Whiskey', emojis: ['🍽️'], desc: 'Bar with a huge whiskey selection and upscale pub food.', link: 'https://www.yelp.com/biz/local-whiskey-state-college', linkText: 'More Info' },
+      { name: 'Central Reservation', emojis: ['🍽️'], desc: 'Trendy spot for cocktails and small plates.', link: 'https://www.yelp.com/biz/central-reservation-state-college', linkText: 'More Info' },
+      { name: 'Allen Street Grill', emojis: ['🍽️'], desc: 'Upscale American dining with a view of downtown.', link: 'https://www.yelp.com/biz/allen-street-grill-state-college', linkText: 'More Info' },
+      { name: 'Corner Room', emojis: ['🍽️'], desc: 'Historic eatery serving classic American comfort food.', link: 'https://www.yelp.com/biz/the-corner-room-state-college', linkText: 'More Info' },
+      { name: 'Doggies', emojis: ['🍔'], desc: 'Hot dogs, fries, and late-night eats.', link: 'https://www.yelp.com/biz/doggies-state-college', linkText: 'More Info' },
+      { name: 'Waffle Shop', emojis: ['🥞'], desc: 'Beloved breakfast spot for pancakes, waffles, and eggs.', link: 'https://www.yelp.com/biz/the-waffle-shop-state-college-2', linkText: 'More Info' },
+      { name: 'Breakfast on Boal', emojis: ['🥞'], desc: 'Charming breakfast and brunch cafe.', link: 'https://www.yelp.com/biz/breakfast-on-boal-boalsburg', linkText: 'More Info' },
+      { name: 'Pump Station', emojis: ['🍽️'], desc: 'Brewpub with craft beers and hearty food.', link: 'https://www.yelp.com/biz/pump-station-cafe-boalsburg', linkText: 'More Info' },
+      { name: 'Rothrock Coffee', emojis: ['🥞'], desc: 'Specialty coffee shop with pastries and a chill vibe.', link: 'https://www.yelp.com/biz/rothrock-coffee-state-college', linkText: 'More Info' },
+      { name: 'Happy Valley Brewing', emojis: ['🍽️'], desc: 'Local brewery with creative beers and pub food.', link: 'https://www.yelp.com/biz/happy-valley-brewing-company-state-college', linkText: 'More Info' },
+      { name: '814 Cider', emojis: ['🍽️'], desc: 'Cider house with a variety of local ciders.', link: 'https://www.yelp.com/biz/814-cider-works-state-college', linkText: 'More Info' },
+      { name: 'Naked Egg', emojis: ['🥞'], desc: 'Popular breakfast and brunch spot.', link: 'https://www.yelp.com/biz/the-naked-egg-cafe-boalsburg', linkText: 'More Info' }
     ];
-    function filterFood(cat) {
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      const idx = ['all','breakfast','coffee','dessert','drinks','restaurant'].indexOf(cat);
-      document.querySelectorAll('.filter-btn')[idx].classList.add('active');
-      const grid = document.getElementById('foodGrid');
+
+    // Get unique emojis for filters
+    const uniqueEmojis = Array.from(new Set(exploreData.flatMap(f => f.emojis)));
+
+    function renderEmojiFilters(selected) {
+      const filters = document.getElementById('emojiFilters');
+      filters.innerHTML = '';
+      const allBtn = document.createElement('button');
+      allBtn.className = 'filter-btn' + (selected === 'all' ? ' active' : '');
+      allBtn.textContent = 'All';
+      allBtn.onclick = () => filterExplore('all');
+      filters.appendChild(allBtn);
+      uniqueEmojis.forEach(emoji => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (selected === emoji ? ' active' : '');
+        btn.textContent = emoji;
+        btn.onclick = () => filterExplore(emoji);
+        filters.appendChild(btn);
+      });
+    }
+
+    function filterExplore(emoji) {
+      renderEmojiFilters(emoji);
+      const grid = document.getElementById('exploreGrid');
       grid.innerHTML = '';
-      foodData.filter(f => cat === 'all' || f.cat === cat).forEach(f => {
-        grid.innerHTML += `<div class=\"food-card\"><span class=\"emoji\">${f.emoji}</span> <span class=\"name\">${f.name}</span><div class=\"desc\">${f.desc}</div><div><a href='${f.yelp}' target='_blank' title='More Info' style='margin-top:4px;display:inline-block;font-size:0.98rem;color:var(--blue);text-decoration:underline;'>More Info</a></div></div>`;
+      exploreData.filter(f => emoji === 'all' || f.emojis.includes(emoji)).forEach(f => {
+        grid.innerHTML += `<div class="food-card"><span class="emoji">${f.emojis.join(' ')}</span> <span class="name">${f.name}</span><div class="desc">${f.desc}</div><div><a href='${f.link}' target='_blank' title='${f.linkText}' style='margin-top:4px;display:inline-block;font-size:0.98rem;color:var(--blue);text-decoration:underline;'>${f.linkText}</a></div></div>`;
       });
     }
     // Initial render
-    filterFood('all');
+    filterExplore('all');
 
     // Scrollspy functionality
     const sections = [
       {id: 'itinerary', nav: 'nav-itinerary'},
       {id: 'flights', nav: 'nav-flights'},
-      {id: 'activities', nav: 'nav-activities'},
-      {id: 'food', nav: 'nav-food'}
+      {id: 'explore', nav: 'nav-explore'}
     ];
     function onScrollSpy() {
       let scrollPos = window.scrollY || window.pageYOffset;
@@ -416,6 +448,104 @@
     window.addEventListener('scroll', onScrollSpy);
     window.addEventListener('resize', onScrollSpy);
     document.addEventListener('DOMContentLoaded', onScrollSpy);
+
+    // Itinerary Data (with timeType)
+    const itineraryData = [
+      {
+        label: "July 4th (Arrival Day)",
+        timeBlocks: [
+          {
+            time: "Morning",
+            options: [
+              { desc: "Arrive in State College <span style=\"font-weight:400;color:#888;font-size:0.98em\">(9:37 AM)</span>" },
+              { desc: "Settle in, relax, maybe brunch or coffee ☕ <span style=\"font-weight:400;color:#888;font-size:0.98em\">(10:30 AM)</span>" }
+            ]
+          },
+          {
+            time: "Evening",
+            options: [
+              { desc: "<span style=\"color:var(--blue)\">🎉 The Infamous Diddy White Party at the Silvs' Pond</span><br>&nbsp;&nbsp;Dress code: All white | Food, drinks, music, and fun by the pond | Celebrate the 4th in style!" }
+            ]
+          }
+        ]
+      },
+      {
+        label: "July 5th (Open Day)",
+        timeBlocks: [
+          {
+            time: "Morning",
+            options: [
+              { desc: "Hike Mount Nittany 🥾" },
+              { desc: "Penn State Arboretum 🌳" }
+            ]
+          },
+          {
+            time: "Afternoon",
+            options: [
+              { desc: "Downtown shopping (Connections Clothing 👗, etc.)" },
+              { desc: "Try local food spots 🍽️" },
+              { desc: "Mini golf ⛳️" },
+              { desc: "Palmer Museum of Art 🖼️" }
+            ]
+          },
+          {
+            time: "Evening",
+            options: [
+              { desc: "Brewery/cider tour 🍻" },
+              { desc: "Ice cream at Meyer Dairy or Creamery 🍦" }
+            ]
+          }
+        ]
+      },
+      {
+        label: "July 6th (Open until Departure)",
+        timeBlocks: [
+          {
+            time: "Morning",
+            options: [
+              { desc: "Brunch at a local favorite 🥞" }
+            ]
+          },
+          {
+            time: "Afternoon",
+            options: [
+              { desc: "Last-minute shopping or sightseeing" },
+              { desc: "Relax at a coffee shop ☕" }
+            ]
+          },
+          {
+            time: "Before Departure",
+            options: [
+              { desc: "Farewell meal before heading to the airport" }
+            ]
+          }
+        ]
+      }
+    ];
+
+    function renderItinerary() {
+      const list = document.getElementById('itineraryList');
+      list.innerHTML = '';
+      itineraryData.forEach(day => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span class='itinerary-list-header'><strong>${day.label}:</strong></span>`;
+        if (day.timeBlocks) {
+          // July 5th & 6th - grouped by time blocks
+          li.innerHTML += day.timeBlocks.map(block => {
+            return `<div class='itinerary-timeblock-row'>` +
+              `<span class='itinerary-time-badge general'>${block.time}</span>` +
+              `<div class='itinerary-block-activities'>` +
+                block.options.map(opt => {
+                  return `<div class='itinerary-event'><span class='itinerary-time-badge invisible'>--</span><span class='itinerary-desc'>${opt.desc}</span></div>`;
+                }).join('') +
+              `</div>` +
+            `</div>`;
+          }).join('');
+        }
+        list.appendChild(li);
+      });
+    }
+    renderItinerary();
   </script>
 </body>
 </html> 
