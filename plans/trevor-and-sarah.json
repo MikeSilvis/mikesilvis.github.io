@@ -3,13 +3,18 @@
   "subtitle": "Welcome to your State College adventure! Here's everything you need for an unforgettable Fourth of July weekend.",
   "itinerary": [
     {
-      "label": "July 4th (Arrival Day)",
+      "label": "Friday - July 4th (Arrival Day)",
       "timeBlocks": [
         {
           "time": "Arrival 9:37 AM",
           "options": [
-            { "desc": "Arrive in State College (UA 4319)" },
-            { "desc": "Settle in, relax, maybe brunch or coffee" }
+            { "desc": "Arrive in State College (UA 4319)" }
+          ]
+        },
+        {
+          "time": "Late Morning",
+          "options": [
+            { "desc": "Brunch on the Blackstone at 217 Siltop" }
           ]
         },
         {
@@ -21,7 +26,7 @@
       ]
     },
     {
-      "label": "July 5th (Open Day)",
+      "label": "Saturday - July 5th (Open Day)",
       "timeBlocks": [
         {
           "time": "Morning",
@@ -31,40 +36,51 @@
           ]
         },
         {
-          "time": "Afternoon",
+          "time": "2:30 PM",
           "options": [
-            { "desc": "Downtown shopping (Connections Clothing 👗, etc.)" },
-            { "desc": "Try local food spots 🍽️" },
-            { "desc": "Mini golf ⛳️" },
-            { "desc": "Palmer Museum of Art 🖼️" }
-          ]
-        },
-        {
-          "time": "Evening",
-          "options": [
-            { "desc": "Brewery/cider tour 🍻" },
-            { "desc": "Ice cream at Meyer Dairy or Creamery 🍦" }
+            { "desc": "<span style=\"color:var(--blue)\">💒 Lindsay Houtz Wedding - 2:30 PM</span><br>&nbsp;&nbsp;Celebrate with Lindsay and her special day!" }
           ]
         }
       ]
     },
     {
-      "label": "July 6th (Open until Departure)",
+      "label": "Sunday - July 6th (Open Day)",
+      "timeBlocks": [
+        {
+          "time": "9:00 AM",
+          "options": [
+            { "desc": "<span style=\"color:var(--blue)\">🥞 Send-off Breakfast - 9:00 AM</span><br>&nbsp;&nbsp;Special farewell breakfast before departure day!" }
+          ]
+        },
+
+        {
+          "time": "Afternoon",
+          "options": [
+            { "desc": "Downtown shopping (Connections Clothing 👗, etc.)" },
+            { "desc": "Try local food spots 🍽️" },
+            { "desc": "Mini golf ⛳️" },
+            { "desc": "Palmer Museum of Art 🖼️" },
+            { "desc": "Last-minute shopping or sightseeing" },
+          ]
+        },
+        {
+          "time": "Evening",
+          "options": [
+            { "desc": "<span style=\"color:var(--blue)\">🍽️ Date Night with Dom & Karly</span><br>&nbsp;&nbsp;Sara's choice of restaurant! A perfect evening out with friends." }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Monday - July 7th (Departure Day)",
       "timeBlocks": [
         {
           "time": "Morning",
           "options": [
-            { "desc": "Brunch at a local favorite 🥞" }
+            { "desc": "Final packing and checkout" },
+            { "desc": "Last coffee in State College ☕" }
           ]
         },
-        {
-          "time": "Afternoon",
-          "options": [
-            { "desc": "Last-minute shopping or sightseeing" },
-            { "desc": "Relax at a coffee shop ☕" }
-          ]
-        },
-
         {
           "time": "Departure 3:10 PM",
           "options": [
