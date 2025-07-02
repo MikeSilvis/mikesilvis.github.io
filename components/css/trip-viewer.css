@@ -114,14 +114,14 @@ h2 {
   line-height: 1.5;
   font-style: italic;
   background: #ffe5b4;
-  border-radius: 40px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   height: auto;
   padding: 0.7em 1.2em;
   margin-right: 1em;
-  align-self: center;
+  align-self: stretch;
   min-height: 2.5em;
 }
 .itinerary-content {

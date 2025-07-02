@@ -20,13 +20,13 @@
         {
           "time": "Evening",
           "options": [
-            { "desc": "<span style=\"color:var(--blue)\">🎉 The Infamous Diddy White Party at the Silvs' Pond</span><br>&nbsp;&nbsp;Dress code: All white | Food, drinks, music, and fun by the pond | Celebrate the 4th in style!" }
+            { "desc": "<span style=\"color:var(--blue)\">The Infamous Diddy White Party at the Silvs' Pond</span><br>&nbsp;&nbsp;Dress code: All white | Food, drinks, music, and fun by the pond | Celebrate the 4th in style!" }
           ]
         }
       ]
     },
     {
-      "label": "Saturday - July 5th (Open Day)",
+      "label": "Saturday - July 5th",
       "timeBlocks": [
         {
           "time": "Morning",
@@ -38,35 +38,27 @@
         {
           "time": "2:30 PM",
           "options": [
-            { "desc": "<span style=\"color:var(--blue)\">💒 Lindsay Houtz Wedding - 2:30 PM</span><br>&nbsp;&nbsp;Celebrate with Lindsay and her special day!" }
+            { "desc": "<span style=\"color:var(--blue)\">Lindsay Houtz Wedding - 2:30 PM</span><br>&nbsp;&nbsp;Celebrate with Lindsay and her special day!" }
           ]
         }
       ]
     },
     {
-      "label": "Sunday - July 6th (Open Day)",
+      "label": "Sunday - July 6th",
       "timeBlocks": [
-        {
-          "time": "9:00 AM",
-          "options": [
-            { "desc": "<span style=\"color:var(--blue)\">🥞 Send-off Breakfast - 9:00 AM</span><br>&nbsp;&nbsp;Special farewell breakfast before departure day!" }
-          ]
-        },
-
         {
           "time": "Afternoon",
           "options": [
             { "desc": "Downtown shopping (Connections Clothing 👗, etc.)" },
-            { "desc": "Try local food spots 🍽️" },
             { "desc": "Mini golf ⛳️" },
             { "desc": "Palmer Museum of Art 🖼️" },
-            { "desc": "Last-minute shopping or sightseeing" }
+            { "desc": "Hike Mount Nittany" }
           ]
         },
         {
           "time": "Evening",
           "options": [
-            { "desc": "<span style=\"color:var(--blue)\">🍽️ Date Night with Dom & Karly</span><br>&nbsp;&nbsp;Sara's choice of restaurant! A perfect evening out with friends." }
+            { "desc": "<span style=\"color:var(--blue)\">️ Date Night with Dom & Karly</span><br>&nbsp;&nbsp;Sara's choice of restaurant! A perfect evening out with friends." }
           ]
         }
       ]
