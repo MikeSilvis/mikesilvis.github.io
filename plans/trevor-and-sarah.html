@@ -3,34 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trip Viewer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../components/css/trip-viewer.css">
+  <title>Redirecting...</title>
+  <meta http-equiv="refresh" content="0; url=trevor-and-sara.html">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .redirect-message {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 1rem auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    a {
+      color: #ffeb3b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1 id="tripTitle"></h1>
-    <p id="tripSubtitle"></p>
-  </header>
-  <nav>
-    <a href="#itinerary" id="nav-itinerary">🗓️ Itinerary</a>
-    <a href="#explore" id="nav-explore">🧭 Explore</a>
-  </nav>
-
-  <section id="itinerary">
-    <h2>🗓️ Itinerary</h2>
-    <ul class="itinerary" id="itineraryList"></ul>
-  </section>
-
-  <section id="explore">
-    <h2>🧭 Explore</h2>
-    <div class="emoji-filters" id="emojiFilters" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;"></div>
-    <div class="explore-grid" id="exploreGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;"></div>
-  </section>
+  <div class="redirect-message">
+    <h1>🔄 Redirecting...</h1>
+    <div class="spinner"></div>
+    <p>You're being redirected to the updated page with the correct spelling.</p>
+    <p>If you're not redirected automatically, <a href="trevor-and-sara.html">click here</a>.</p>
+  </div>
 
   <script>
-    window.TRIP_JSON = 'trevor-and-sarah.json';
+    // JavaScript redirect as backup
+    setTimeout(function() {
+      window.location.href = 'trevor-and-sara.html';
+    }, 100);
   </script>
-  <script type="module" src="../components/javascript/trip-viewer.js"></script>
 </body>
 </html> 
