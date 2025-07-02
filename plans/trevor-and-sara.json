@@ -20,7 +20,7 @@
         {
           "time": "Evening",
           "options": [
-            { "desc": "<span style=\"color:var(--blue)\">The Infamous Diddy White Party at the Silvs' Pond</span><br>&nbsp;&nbsp;Dress code: All white | Food, drinks, music, and fun by the pond | Celebrate the 4th in style!" }
+            { "desc": "<span style=\"color:var(--blue)\">The Infamous Diddy White Party at the Silvs' Pond</span><br>Dress code: All white | Food, drinks, music, and fun by the pond | Celebrate the 4th in style!" }
           ]
         }
       ]
@@ -31,14 +31,13 @@
         {
           "time": "Morning",
           "options": [
-            { "desc": "Hike Mount Nittany 🥾" },
             { "desc": "Penn State Arboretum 🌳" }
           ]
         },
         {
           "time": "2:30 PM",
           "options": [
-            { "desc": "<span style=\"color:var(--blue)\">Lindsay Houtz Wedding - 2:30 PM</span><br>&nbsp;&nbsp;Celebrate with Lindsay and her special day!" }
+            { "desc": "<span style=\"color:var(--blue)\">Lindsay Houtz Wedding - 2:30 PM</span><br>Celebrate with Lindsay and her special day!" }
           ]
         }
       ]
@@ -49,16 +48,13 @@
         {
           "time": "Afternoon",
           "options": [
-            { "desc": "Downtown shopping (Connections Clothing 👗, etc.)" },
-            { "desc": "Mini golf ⛳️" },
-            { "desc": "Palmer Museum of Art 🖼️" },
-            { "desc": "Hike Mount Nittany" }
+            { "desc": "Explore State College or possibly hike" }
           ]
         },
         {
           "time": "Evening",
           "options": [
-            { "desc": "<span style=\"color:var(--blue)\">️ Date Night with Dom & Karly</span><br>&nbsp;&nbsp;Sara's choice of restaurant! A perfect evening out with friends." }
+            { "desc": "<span style=\"color:var(--blue)\">️ Date Night with Dom & Karly</span><br>Sara's choice of restaurant! A perfect evening out with friends." }
           ]
         }
       ]
@@ -69,8 +65,7 @@
         {
           "time": "Morning",
           "options": [
-            { "desc": "Final packing and checkout" },
-            { "desc": "Last coffee in State College ☕" }
+            { "desc": "Breakfast out at Naked Egg or Breakfast on Boal" }
           ]
         },
         {
