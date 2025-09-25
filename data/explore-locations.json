@@ -3,252 +3,252 @@
     "name": "Hike Mount Nittany",
     "emojis": ["🥾", "🌄"],
     "desc": "A classic, must-do hike for Penn Staters and visitors! The trailhead is in Lemont, PA, and the hike offers stunning views of Penn State campus and the valley from several overlooks, especially the Mike Lynch Overlook. Moderate to strenuous climb, well-marked paths.",
-    "link": "https://nittany.org/hike/",
+    "link": "https://www.google.com/maps/search/?api=1&query=Mount+Nittany+trailhead+Lemont+PA",
     "linkText": "More info"
   },
   "penn-state-arboretum": {
     "name": "Penn State Arboretum",
     "emojis": ["🌳", "🌸"],
     "desc": "A beautiful, 370-acre garden and natural area open daily from dawn to dusk. Features the H.O. Smith Botanic Gardens, children's garden, pollinator and bird garden, walking trails, and seasonal events.",
-    "link": "https://arboretum.psu.edu/",
+    "link": "https://www.google.com/maps/search/?api=1&query=Penn+State+Arboretum+University+Park+PA",
     "linkText": "Official site"
   },
   "happy-valley-mini-golf": {
     "name": "Happy Valley Mini Golf",
     "emojis": ["⛳️"],
     "desc": "18-hole course just 3 miles from Penn State. Fun for all ages! Group discounts available.",
-    "link": "http://www.happyvalleyminigolf.com/",
+    "link": "https://www.google.com/maps/search/?api=1&query=Happy+Valley+Mini+Golf+State+College+PA",
     "linkText": "More info"
   },
   "palmer-museum-of-art": {
     "name": "Palmer Museum of Art",
     "emojis": ["🖼️"],
     "desc": "The largest art museum collection between Pittsburgh and Philadelphia, with world-class exhibitions and a diverse permanent collection. Free admission.",
-    "link": "https://palmermuseum.psu.edu/",
+    "link": "https://www.google.com/maps/search/?api=1&query=Palmer+Museum+of+Art+Penn+State+University+Park+PA",
     "linkText": "More info"
   },
   "connections-clothing": {
     "name": "Connections Clothing",
     "emojis": ["👗"],
     "desc": "A women's boutique in downtown State College, open since 1996. Handpicked, trendy pieces from brands like Free People, Just Black Denim, and Boys Lie.",
-    "link": "https://www.connectionsclothing.com/",
+    "link": "https://www.google.com/maps/search/?api=1&query=Connections+Clothing+State+College+PA",
     "linkText": "More info"
   },
   "bagel-love-cafe": {
     "name": "Bagel Love Cafe",
     "emojis": ["🥞"],
     "desc": "Fresh bagels, breakfast sandwiches, and coffee in a cozy spot.",
-    "link": "https://www.yelp.com/biz/bagel-love-cafe-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Bagel+Love+Cafe+State+College+PA",
     "linkText": "More Info"
   },
   "wegmans": {
     "name": "Wegmans",
     "emojis": ["🍽️"],
     "desc": "Gourmet grocery store with a great prepared foods section.",
-    "link": "https://www.yelp.com/biz/wegmans-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Wegmans+State+College+PA",
     "linkText": "More Info"
   },
   "barrel-21": {
     "name": "Barrel 21",
     "emojis": ["🍽️"],
     "desc": "Distillery and restaurant with creative cocktails and local fare.",
-    "link": "https://www.yelp.com/biz/barrel-21-distillery-and-dining-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Barrel+21+State+College+PA",
     "linkText": "More Info"
   },
   "tavern": {
     "name": "Tavern",
     "emojis": ["🍽️"],
     "desc": "Classic American restaurant, a State College staple.",
-    "link": "https://www.yelp.com/biz/the-tavern-restaurant-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=The+Tavern+Restaurant+State+College+PA",
     "linkText": "More Info"
   },
   "champs-north-atherton": {
     "name": "Champs (North Atherton)",
     "emojis": ["🍔"],
     "desc": "Sports bar with wings, burgers, and a lively atmosphere. Located on North Atherton Street.",
-    "link": "https://www.yelp.com/biz/champs-sports-grill-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Champs+Sports+Grill+North+Atherton+State+College+PA",
     "linkText": "More Info"
   },
   "champs-downtown": {
     "name": "Champs (Downtown)",
     "emojis": ["🍺"],
     "desc": "More of a bar atmosphere with wings, burgers, and drinks. Located in downtown State College.",
-    "link": "https://www.yelp.com/biz/champs-sports-grill-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Champs+Sports+Grill+Downtown+State+College+PA",
     "linkText": "More Info"
   },
   "penn-state-creamery": {
     "name": "Penn State Creamery",
     "emojis": ["🍦"],
     "desc": "Legendary ice cream made on campus. Try the Peachy Paterno!",
-    "link": "https://www.yelp.com/biz/berkey-creamery-university-park",
+    "link": "https://www.google.com/maps/search/?api=1&query=Penn+State+Creamery+University+Park+PA",
     "linkText": "More Info"
   },
   "meyer-dairy": {
     "name": "Meyer Dairy",
     "emojis": ["🍦"],
     "desc": "Family-run dairy with unique ice cream flavors and fresh milk.",
-    "link": "https://www.yelp.com/biz/meyer-dairy-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Meyer+Dairy+State+College+PA",
     "linkText": "More Info"
   },
   "sweet-frog": {
     "name": "Sweet Frog",
     "emojis": ["🍦"],
     "desc": "Self-serve frozen yogurt with tons of toppings.",
-    "link": "https://www.yelp.com/biz/sweet-frog-premium-frozen-yogurt-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Sweet+Frog+State+College+PA",
     "linkText": "More Info"
   },
   "yallah-hot-chicken": {
     "name": "Yallah Hot Chicken",
     "emojis": ["🍔"],
     "desc": "Spicy fried chicken sandwiches and loaded fries.",
-    "link": "https://www.yelp.com/biz/yallah-tacos-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Yallah+Hot+Chicken+State+College+PA",
     "linkText": "More Info"
   },
   "tadashi": {
     "name": "Tadashi",
     "emojis": ["🍽️"],
     "desc": "Japanese ramen and sushi bar.",
-    "link": "https://www.yelp.com/biz/tadashi-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Tadashi+State+College+PA",
     "linkText": "More Info"
   },
   "lupitas": {
     "name": "Lupitas",
     "emojis": ["🍔"],
     "desc": "Authentic Mexican food, tacos, and more.",
-    "link": "https://www.yelp.com/biz/lupitas-authentic-mexican-food-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Lupitas+State+College+PA",
     "linkText": "More Info"
   },
   "duck-donuts": {
     "name": "Duck Donuts",
     "emojis": ["🍦"],
     "desc": "Warm, made-to-order donuts with custom toppings.",
-    "link": "https://www.yelp.com/biz/duck-donuts-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Duck+Donuts+State+College+PA",
     "linkText": "More Info"
   },
   "local-whiskey": {
     "name": "Local Whiskey",
     "emojis": ["🍺"],
     "desc": "Bar with a huge whiskey selection and upscale pub food.",
-    "link": "https://www.yelp.com/biz/local-whiskey-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Local+Whiskey+State+College+PA",
     "linkText": "More Info"
   },
   "central-reservation": {
     "name": "Central Reservation",
     "emojis": ["🍽️"],
     "desc": "Trendy spot for cocktails and small plates.",
-    "link": "https://www.yelp.com/biz/central-reservation-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Central+Reservation+State+College+PA",
     "linkText": "More Info"
   },
   "allen-street-grill": {
     "name": "Allen Street Grill",
     "emojis": ["🍽️"],
     "desc": "Upscale American dining with a view of downtown.",
-    "link": "https://www.yelp.com/biz/allen-street-grill-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Allen+Street+Grill+State+College+PA",
     "linkText": "More Info"
   },
   "corner-room": {
     "name": "Corner Room",
     "emojis": ["🍽️"],
     "desc": "Historic eatery serving classic American comfort food.",
-    "link": "https://www.yelp.com/biz/the-corner-room-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Corner+Room+State+College+PA",
     "linkText": "More Info"
   },
   "doggies": {
     "name": "Doggies",
     "emojis": ["🍺"],
     "desc": "Bar with hot dogs, fries, and late-night eats.",
-    "link": "https://www.yelp.com/biz/doggies-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Doggies+State+College+PA",
     "linkText": "More Info"
   },
   "waffle-shop": {
     "name": "The Waffle Shop",
     "emojis": ["🧇"],
     "desc": "Family-owned diner known for homemade breakfast favorites like Strawberry Waffles and Chocolate Chip Pancakes, plus a classic lunch menu. Open 7 AM - 2 PM daily.",
-    "link": "https://thewaffleshops.com/",
+    "link": "https://www.google.com/maps/search/?api=1&query=The+Waffle+Shop+State+College+PA",
     "linkText": "More Info"
   },
   "breakfast-on-boal": {
     "name": "Breakfast on Boal",
     "emojis": ["🥞"],
     "desc": "Charming breakfast and brunch cafe.",
-    "link": "https://www.yelp.com/biz/breakfast-on-boal-boalsburg",
+    "link": "https://www.google.com/maps/search/?api=1&query=Breakfast+on+Boal+Boalsburg+PA",
     "linkText": "More Info"
   },
   "pump-station": {
     "name": "Pump Station",
     "emojis": ["🍽️"],
     "desc": "Brewpub with craft beers and hearty food.",
-    "link": "https://www.yelp.com/biz/pump-station-cafe-boalsburg",
+    "link": "https://www.google.com/maps/search/?api=1&query=Pump+Station+Cafe+Boalsburg+PA",
     "linkText": "More Info"
   },
   "rothrock-coffee": {
     "name": "Rothrock Coffee",
     "emojis": ["🥞"],
     "desc": "Specialty coffee shop with pastries and a chill vibe.",
-    "link": "https://www.yelp.com/biz/rothrock-coffee-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Rothrock+Coffee+State+College+PA",
     "linkText": "More Info"
   },
   "happy-valley-brewing": {
     "name": "Happy Valley Brewing",
     "emojis": ["🍽️"],
     "desc": "Local brewery with creative beers and pub food.",
-    "link": "https://www.yelp.com/biz/happy-valley-brewing-company-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=Happy+Valley+Brewing+Company+State+College+PA",
     "linkText": "More Info"
   },
   "814-cider": {
     "name": "814 Cider",
     "emojis": ["🍺"],
     "desc": "Cider bar with a variety of local ciders.",
-    "link": "https://www.yelp.com/biz/814-cider-works-state-college",
+    "link": "https://www.google.com/maps/search/?api=1&query=814+Cider+Works+State+College+PA",
     "linkText": "More Info"
   },
   "naked-egg": {
     "name": "Naked Egg",
     "emojis": ["🥞"],
     "desc": "Popular breakfast and brunch spot.",
-    "link": "https://www.yelp.com/biz/the-naked-egg-cafe-boalsburg",
+    "link": "https://www.google.com/maps/search/?api=1&query=The+Naked+Egg+Cafe+Boalsburg+PA",
     "linkText": "More Info"
   },
   "pickles": {
     "name": "Bill Pickle's Tap Room",
     "emojis": ["🍺"],
     "desc": "Lively bar offering BBQ, craft cocktails, and a wide selection of whiskey, bourbon, and scotch. Known for Country Night on Tuesdays.",
-    "link": "https://www.billpicklestaproom.com/",
+    "link": "https://www.google.com/maps/search/?api=1&query=Bill+Pickles+Tap+Room+State+College+PA",
     "linkText": "More Info"
   },
   "buffalo-wild-wings": {
     "name": "Buffalo Wild Wings",
     "emojis": ["🍗"],
     "desc": "Sports bar chain known for Buffalo-style chicken wings, burgers, and a variety of beers. Features numerous TVs for sports viewing.",
-    "link": "https://www.buffalowildwings.com/",
+    "link": "https://www.google.com/maps/search/?api=1&query=Buffalo+Wild+Wings+State+College+PA",
     "linkText": "More Info"
   },
   "boal-city-brewing": {
     "name": "Boal City Brewing",
     "emojis": ["🍺"],
     "desc": "Local brewery offering craft beers brewed on-site. Features a cozy taproom with indoor and outdoor seating.",
-    "link": "https://www.boalcitybrewing.com/",
+    "link": "https://www.google.com/maps/search/?api=1&query=Boal+City+Brewing+State+College+PA",
     "linkText": "More Info"
   },
   "phyrst": {
     "name": "The Phyrst",
     "emojis": ["🍺"],
     "desc": "Iconic basement bar known for live music, especially the Phyrst Phamily band, and its green beer tradition. Popular with students and locals.",
-    "link": "https://www.thephyrst.com/",
+    "link": "https://www.google.com/maps/search/?api=1&query=The+Phyrst+State+College+PA",
     "linkText": "More Info"
   },
   "primanti-bros": {
     "name": "Primanti Bros",
     "emojis": ["🍺"],
     "desc": "Bar and restaurant famous for Pittsburgh-style sandwiches topped with coleslaw and fries. Full bar with casual dining.",
-    "link": "https://www.primantibros.com/",
+    "link": "https://www.google.com/maps/search/?api=1&query=Primanti+Bros+State+College+PA",
     "linkText": "More Info"
   },
   "end-zone": {
     "name": "The End Zone Show Club",
     "emojis": ["🎭"],
     "desc": "Gentleman's club located approximately 10 minutes from State College. Features state-of-the-art lighting and sound system with stage seating for over 150 people.",
-    "link": "https://endzoneshowclub.com/",
+    "link": "https://www.google.com/maps/search/?api=1&query=The+End+Zone+Show+Club+State+College+PA",
     "linkText": "More Info"
   }
 }
