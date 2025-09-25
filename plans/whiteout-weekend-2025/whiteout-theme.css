@@ -1,0 +1,143 @@
+/* Whiteout Weekend 2025 Custom Theme */
+
+:root {
+  /* Penn State Whiteout Theme Colors */
+  --psu-navy: #002E5C;
+  --psu-white: #FFFFFF;
+  --psu-gray: #F5F5F5;
+  --psu-light-blue: #E6F3FF;
+  --psu-accent: #FFD700;
+  --psu-red: #E63946;
+}
+
+/* Header Overlay Enhancement */
+#tripHeader {
+  position: relative;
+  background-attachment: fixed;
+}
+
+#tripHeader::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,46,92,0.6) 0%, rgba(0,0,0,0.4) 100%);
+  z-index: 1;
+}
+
+#tripHeader .header-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Navigation Theme Update */
+nav {
+  background: var(--psu-white);
+  border-bottom: 3px solid var(--psu-navy);
+  box-shadow: 0 4px 16px rgba(0,46,92,0.15);
+}
+
+nav a {
+  color: var(--psu-navy);
+  font-weight: 700;
+}
+
+nav a.active, nav a:focus {
+  background: var(--psu-navy);
+  color: var(--psu-white);
+  box-shadow: 0 2px 8px rgba(0,46,92,0.2);
+}
+
+nav a:hover {
+  background: var(--psu-light-blue);
+  color: var(--psu-navy);
+}
+
+/* Section Headers */
+h2 {
+  color: var(--psu-navy);
+  border-bottom: 3px solid var(--psu-accent);
+  font-weight: 700;
+}
+
+/* Itinerary Styling */
+.itinerary-label {
+  background: linear-gradient(135deg, var(--psu-navy) 0%, #003d7a 100%);
+  color: var(--psu-white);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,46,92,0.2);
+}
+
+.itinerary li {
+  border-left: 4px solid var(--psu-navy);
+  background: var(--psu-gray);
+  box-shadow: 0 2px 8px rgba(0,46,92,0.1);
+}
+
+.itinerary strong {
+  color: var(--psu-navy);
+  font-weight: 700;
+}
+
+/* Explore Section */
+.explore-grid {
+  gap: 1.5rem;
+}
+
+.food-card, .activity-card {
+  background: var(--psu-white);
+  border: 2px solid var(--psu-light-blue);
+  box-shadow: 0 4px 12px rgba(0,46,92,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.food-card:hover, .activity-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,46,92,0.15);
+  border-color: var(--psu-navy);
+}
+
+.food-card .name, .activity-card .name {
+  color: var(--psu-navy);
+  font-weight: 700;
+}
+
+/* Emoji Filter Buttons */
+.emoji-filters button {
+  background: var(--psu-light-blue);
+  color: var(--psu-navy);
+  border: 2px solid var(--psu-light-blue);
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.emoji-filters button:hover,
+.emoji-filters button.active {
+  background: var(--psu-navy);
+  color: var(--psu-white);
+  border-color: var(--psu-navy);
+  transform: translateY(-1px);
+}
+
+/* Special Game Day Highlight */
+.itinerary-event:has(span[style*="PENN STATE vs OREGON"]) {
+  background: linear-gradient(135deg, var(--psu-light-blue) 0%, var(--psu-white) 100%);
+  border: 2px solid var(--psu-navy);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  box-shadow: 0 4px 12px rgba(0,46,92,0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  #tripHeader {
+    background-attachment: scroll;
+  }
+  
+  .food-card, .activity-card {
+    border-width: 1px;
+  }
+}
