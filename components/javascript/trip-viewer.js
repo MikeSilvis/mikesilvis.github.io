@@ -102,7 +102,8 @@ fetch(jsonPath)
     // Scrollspy functionality
     const sections = [
       {id: 'itinerary', nav: 'nav-itinerary'},
-      {id: 'explore', nav: 'nav-explore'}
+      {id: 'explore', nav: 'nav-explore'},
+      {id: 'map', nav: 'nav-map'}
     ];
     function onScrollSpy() {
       let scrollPos = window.scrollY || window.pageYOffset;
@@ -160,8 +161,170 @@ fetch(jsonPath)
       });
     }
     renderItinerary(tripData.itinerary, 'itineraryList');
+
+    // Initialize map with locations
+    initializeMap(tripData, exploreData);
   })
   .catch(err => {
     document.getElementById('itineraryList').innerHTML = '<li>Error loading itinerary.</li>';
     document.getElementById('exploreGrid').innerHTML = '<div>Error loading explore data.</div>';
-  }); 
+  });
+
+// Global map variable
+let map;
+
+// Initialize Google Maps
+function initMap() {
+  // This function will be called by the Google Maps API callback
+  // The actual map initialization will happen in initializeMap()
+}
+
+function initializeMap(tripData, exploreData) {
+  // Wait for Google Maps API to be available
+  if (typeof google === 'undefined' || !google.maps) {
+    setTimeout(() => initializeMap(tripData, exploreData), 100);
+    return;
+  }
+
+  // Center map on State College, PA (Penn State area)
+  const center = { lat: 40.7934, lng: -77.8600 };
+  
+  map = new google.maps.Map(document.getElementById('mapContainer'), {
+    zoom: 13,
+    center: center,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    styles: [
+      {
+        featureType: 'poi',
+        elementType: 'labels',
+        stylers: [{ visibility: 'off' }]
+      }
+    ]
+  });
+
+  // Collect all locations from itinerary and explore data
+  const allLocations = [];
+  
+  // Extract locations from itinerary
+  tripData.itinerary.forEach(day => {
+    if (day.timeBlocks) {
+      day.timeBlocks.forEach(block => {
+        if (block.options) {
+          block.options.forEach(option => {
+            if (option.link && option.link.includes('google.com/maps')) {
+              allLocations.push({
+                title: option.title || 'Itinerary Location',
+                description: option.desc || '',
+                link: option.link,
+                type: 'itinerary',
+                emoji: '🗓️'
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+
+  // Extract locations from explore data
+  exploreData.forEach(location => {
+    if (location.link && location.link.includes('google.com/maps')) {
+      allLocations.push({
+        title: location.name,
+        description: location.desc,
+        link: location.link,
+        type: 'explore',
+        emoji: location.emojis ? location.emojis[0] : '📍'
+      });
+    }
+  });
+
+  // Add markers for each location using geocoding
+  const bounds = new google.maps.LatLngBounds();
+  let markersAdded = 0;
+  
+  allLocations.forEach((location, index) => {
+    // Extract query from Google Maps link
+    const query = extractCoordinatesFromLink(location.link);
+    if (query) {
+      geocodeLocation(query, (coords) => {
+        if (coords) {
+          const marker = new google.maps.Marker({
+            position: coords,
+            map: map,
+            title: location.title,
+            icon: {
+              url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
+                <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="16" cy="16" r="12" fill="#4285F4" stroke="#fff" stroke-width="2"/>
+                  <text x="16" y="20" text-anchor="middle" fill="white" font-size="14" font-family="Arial">${location.emoji}</text>
+                </svg>
+              `)}`,
+              scaledSize: new google.maps.Size(32, 32),
+              anchor: new google.maps.Point(16, 16)
+            }
+          });
+
+          // Create info window content
+          const infoContent = `
+            <div style="max-width: 300px; padding: 8px;">
+              <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #333;">${location.emoji} ${location.title}</h3>
+              <p style="margin: 0 0 8px 0; font-size: 14px; color: #666; line-height: 1.4;">${location.description}</p>
+              <a href="${location.link}" target="_blank" style="color: #4285F4; text-decoration: none; font-size: 14px;">📍 View on Google Maps</a>
+            </div>
+          `;
+
+          const infoWindow = new google.maps.InfoWindow({
+            content: infoContent
+          });
+
+          marker.addListener('click', () => {
+            infoWindow.open(map, marker);
+          });
+
+          // Add to bounds
+          bounds.extend(coords);
+          markersAdded++;
+          
+          // Fit bounds when all markers are added
+          if (markersAdded === allLocations.length) {
+            map.fitBounds(bounds);
+          }
+        }
+      });
+    }
+  });
+}
+
+function extractCoordinatesFromLink(link) {
+  // Extract coordinates from Google Maps link
+  // Format: https://www.google.com/maps/search/?api=1&query=...
+  try {
+    const url = new URL(link);
+    const query = url.searchParams.get('query');
+    if (query) {
+      // Return the query string for geocoding
+      return query;
+    }
+  } catch (e) {
+    console.error('Error parsing coordinates from link:', e);
+  }
+  return null;
+}
+
+function geocodeLocation(query, callback) {
+  if (!query) {
+    callback(null);
+    return;
+  }
+  
+  const geocoder = new google.maps.Geocoder();
+  geocoder.geocode({ address: query }, (results, status) => {
+    if (status === 'OK' && results[0]) {
+      callback(results[0].geometry.location);
+    } else {
+      console.warn('Geocoding failed for:', query, 'Status:', status);
+      callback(null);
+    }
+  });
+} 
