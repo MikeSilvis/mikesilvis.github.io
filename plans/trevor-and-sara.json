@@ -2,9 +2,9 @@
   "title": "🇺🇸 Trevor & Sara's 4th of July Visit 🇺🇸",
   "subtitle": "Welcome to your State College adventure! Here's everything you need for an unforgettable Fourth of July weekend.",
   "header": {
-    "textColor": "#333333",
-    "height": "200px",
-    "customCSS": "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"
+    "textColor": "#ffffff",
+    "height": "250px",
+    "customCSS": "background: linear-gradient(90deg, #B22234 0%, #B22234 33%, #ffffff 33%, #ffffff 66%, #3C3B6E 66%, #3C3B6E 100%); box-shadow: 0 4px 15px rgba(0,0,0,0.2);"
   },
   "itinerary": [
     {
