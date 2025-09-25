@@ -16,8 +16,60 @@ fetch(jsonPath)
     if (tripData.title) document.getElementById('tripTitle').textContent = tripData.title;
     if (tripData.subtitle) document.getElementById('tripSubtitle').textContent = tripData.subtitle;
 
-    // Get unique emojis for filters
-    const uniqueEmojis = Array.from(new Set(tripData.explore.flatMap(f => f.emojis)));
+    // Apply header styling if provided
+    if (tripData.header) {
+      const header = document.getElementById('tripHeader');
+      const headerContent = header.querySelector('.header-content');
+      
+      // Set up basic header layout
+      header.style.display = 'flex';
+      header.style.alignItems = 'center';
+      header.style.justifyContent = 'center';
+      
+      if (tripData.header.backgroundImage) {
+        header.style.backgroundImage = `url(${tripData.header.backgroundImage})`;
+        header.style.backgroundSize = 'cover';
+        header.style.backgroundPosition = 'center';
+        header.style.backgroundRepeat = 'no-repeat';
+        
+        // Only apply overlay if there's a background image
+        if (tripData.header.overlay) {
+          header.style.position = 'relative';
+          header.style.setProperty('--overlay-color', tripData.header.overlay);
+          header.style.setProperty('--overlay', `linear-gradient(${tripData.header.overlay}, ${tripData.header.overlay})`);
+          header.style.backgroundImage = `var(--overlay), url(${tripData.header.backgroundImage})`;
+        }
+      }
+      
+      if (tripData.header.textColor) {
+        headerContent.style.color = tripData.header.textColor;
+      }
+      
+      if (tripData.header.height) {
+        header.style.height = tripData.header.height;
+      }
+      
+      if (tripData.header.customCSS) {
+        const style = document.createElement('style');
+        style.textContent = `#tripHeader { ${tripData.header.customCSS} }`;
+        document.head.appendChild(style);
+      }
+    }
+
+    // Load explore locations data
+    return fetch('../plans/explore-locations.json')
+      .then(response => response.json())
+      .then(exploreLocations => {
+        // Map explore IDs to full objects
+        const exploreData = tripData.explore.map(id => exploreLocations[id]).filter(Boolean);
+        
+        // Get unique emojis for filters
+        const uniqueEmojis = Array.from(new Set(exploreData.flatMap(f => f.emojis)));
+        
+        return { tripData, exploreData, uniqueEmojis };
+      });
+  })
+  .then(({ tripData, exploreData, uniqueEmojis }) => {
 
     function renderEmojiFilters(selected) {
       const filters = document.getElementById('emojiFilters');
@@ -40,7 +92,7 @@ fetch(jsonPath)
       renderEmojiFilters(emoji);
       const grid = document.getElementById('exploreGrid');
       grid.innerHTML = '';
-      tripData.explore.filter(f => emoji === 'all' || f.emojis.includes(emoji)).forEach(f => {
+      exploreData.filter(f => emoji === 'all' || f.emojis.includes(emoji)).forEach(f => {
         grid.innerHTML += `<div class="food-card"><span class="emoji">${f.emojis.join(' ')}</span> <span class="name">${f.name}</span><div class="desc">${f.desc}</div><div><a href='${f.link}' target='_blank' title='${f.linkText}' style='margin-top:4px;display:inline-block;font-size:0.98rem;color:var(--blue);text-decoration:underline;'>${f.linkText}</a></div></div>`;
       });
     }
