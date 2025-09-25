@@ -4,7 +4,7 @@ document.getElementById('exploreGrid').innerHTML = '<div>Loading explore data...
 
 // Use the JSON file specified by the HTML page
 const tripJsonFile = window.TRIP_JSON || '';
-const jsonPath = '../plans/' + tripJsonFile;
+const jsonPath = './' + tripJsonFile;
 
 fetch(jsonPath)
   .then(response => {
@@ -57,7 +57,7 @@ fetch(jsonPath)
     }
 
     // Load explore locations data
-    return fetch('../plans/explore-locations.json')
+    return fetch('../../data/explore-locations.json')
       .then(response => response.json())
       .then(exploreLocations => {
         // Map explore IDs to full objects
