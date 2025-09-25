@@ -144,9 +144,12 @@ fetch(jsonPath)
               `<div class='itinerary-content'>` +
                 block.options.map(opt => {
                   if (opt.title && opt.desc) {
-                    return `<div class='itinerary-event'><span class='itinerary-title'>${opt.title}</span><br>${opt.desc}</div>`;
-                  } else {
+                    const linkHtml = opt.link ? `<br><a href='${opt.link}' target='_blank' style='color: var(--blue); text-decoration: underline; font-size: 0.95em;'>📍 View on Google Maps</a>` : '';
+                    return `<div class='itinerary-event'><span class='itinerary-title'>${opt.title}</span><br>${opt.desc}${linkHtml}</div>`;
+                  } else if (opt.desc) {
                     return `<div class='itinerary-event'>${opt.desc}</div>`;
+                  } else {
+                    return `<div class='itinerary-event'>No content</div>`;
                   }
                 }).join('') +
               `</div>` +

@@ -57,7 +57,7 @@ nav a:hover {
 
 /* Section Styling */
 section {
-  background: var(--psu-white) !important;
+  background: #f8f9fa !important;
   border: 1px solid var(--psu-light-blue);
   box-shadow: 0 4px 20px rgba(0,46,92,0.1);
 }
@@ -79,7 +79,7 @@ h2 {
 
 .itinerary li {
   border-left: 4px solid var(--psu-navy);
-  background: var(--psu-white);
+  background: #f8f9fa;
   box-shadow: 0 2px 8px rgba(0,46,92,0.1);
   border: 1px solid var(--psu-light-blue);
 }
