@@ -62,10 +62,17 @@
     "link": "https://www.yelp.com/biz/the-tavern-restaurant-state-college",
     "linkText": "More Info"
   },
-  "champs": {
-    "name": "Champs",
+  "champs-north-atherton": {
+    "name": "Champs (North Atherton)",
     "emojis": ["🍔"],
-    "desc": "Sports bar with wings, burgers, and a lively atmosphere.",
+    "desc": "Sports bar with wings, burgers, and a lively atmosphere. Located on North Atherton Street.",
+    "link": "https://www.yelp.com/biz/champs-sports-grill-state-college",
+    "linkText": "More Info"
+  },
+  "champs-downtown": {
+    "name": "Champs (Downtown)",
+    "emojis": ["🍺"],
+    "desc": "More of a bar atmosphere with wings, burgers, and drinks. Located in downtown State College.",
     "link": "https://www.yelp.com/biz/champs-sports-grill-state-college",
     "linkText": "More Info"
   },
@@ -120,7 +127,7 @@
   },
   "local-whiskey": {
     "name": "Local Whiskey",
-    "emojis": ["🍽️"],
+    "emojis": ["🍺"],
     "desc": "Bar with a huge whiskey selection and upscale pub food.",
     "link": "https://www.yelp.com/biz/local-whiskey-state-college",
     "linkText": "More Info"
@@ -148,16 +155,16 @@
   },
   "doggies": {
     "name": "Doggies",
-    "emojis": ["🍔"],
-    "desc": "Hot dogs, fries, and late-night eats.",
+    "emojis": ["🍺"],
+    "desc": "Bar with hot dogs, fries, and late-night eats.",
     "link": "https://www.yelp.com/biz/doggies-state-college",
     "linkText": "More Info"
   },
   "waffle-shop": {
-    "name": "Waffle Shop",
-    "emojis": ["🥞"],
-    "desc": "Beloved breakfast spot for pancakes, waffles, and eggs.",
-    "link": "https://www.yelp.com/biz/the-waffle-shop-state-college-2",
+    "name": "The Waffle Shop",
+    "emojis": ["🧇"],
+    "desc": "Family-owned diner known for homemade breakfast favorites like Strawberry Waffles and Chocolate Chip Pancakes, plus a classic lunch menu. Open 7 AM - 2 PM daily.",
+    "link": "https://thewaffleshops.com/",
     "linkText": "More Info"
   },
   "breakfast-on-boal": {
@@ -190,8 +197,8 @@
   },
   "814-cider": {
     "name": "814 Cider",
-    "emojis": ["🍽️"],
-    "desc": "Cider house with a variety of local ciders.",
+    "emojis": ["🍺"],
+    "desc": "Cider bar with a variety of local ciders.",
     "link": "https://www.yelp.com/biz/814-cider-works-state-college",
     "linkText": "More Info"
   },
@@ -200,6 +207,41 @@
     "emojis": ["🥞"],
     "desc": "Popular breakfast and brunch spot.",
     "link": "https://www.yelp.com/biz/the-naked-egg-cafe-boalsburg",
+    "linkText": "More Info"
+  },
+  "pickles": {
+    "name": "Bill Pickle's Tap Room",
+    "emojis": ["🍺"],
+    "desc": "Lively bar offering BBQ, craft cocktails, and a wide selection of whiskey, bourbon, and scotch. Known for Country Night on Tuesdays.",
+    "link": "https://www.billpicklestaproom.com/",
+    "linkText": "More Info"
+  },
+  "buffalo-wild-wings": {
+    "name": "Buffalo Wild Wings",
+    "emojis": ["🍗"],
+    "desc": "Sports bar chain known for Buffalo-style chicken wings, burgers, and a variety of beers. Features numerous TVs for sports viewing.",
+    "link": "https://www.buffalowildwings.com/",
+    "linkText": "More Info"
+  },
+  "boal-city-brewing": {
+    "name": "Boal City Brewing",
+    "emojis": ["🍺"],
+    "desc": "Local brewery offering craft beers brewed on-site. Features a cozy taproom with indoor and outdoor seating.",
+    "link": "https://www.boalcitybrewing.com/",
+    "linkText": "More Info"
+  },
+  "phyrst": {
+    "name": "The Phyrst",
+    "emojis": ["🍺"],
+    "desc": "Iconic basement bar known for live music, especially the Phyrst Phamily band, and its green beer tradition. Popular with students and locals.",
+    "link": "https://www.thephyrst.com/",
+    "linkText": "More Info"
+  },
+  "primanti-bros": {
+    "name": "Primanti Bros",
+    "emojis": ["🍺"],
+    "desc": "Bar and restaurant famous for Pittsburgh-style sandwiches topped with coleslaw and fries. Full bar with casual dining.",
+    "link": "https://www.primantibros.com/",
     "linkText": "More Info"
   }
 }
