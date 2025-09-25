@@ -1,0 +1,107 @@
+{
+  "title": "🏈 Whiteout Weekend 2025 🏈",
+  "subtitle": "Penn State vs Oregon - The ultimate Whiteout experience! Get ready for an unforgettable weekend of football, food, and fun.",
+  "header": {
+    "textColor": "#ffffff",
+    "height": "250px",
+    "backgroundImage": "white-out.webp",
+    "customCSS": "background: linear-gradient(135deg, #002E5C 0%, #ffffff 50%, #00A651 100%); box-shadow: 0 4px 15px rgba(0,0,0,0.2);"
+  },
+  "itinerary": [
+    {
+      "label": "Friday - September 26th (Arrival Day)",
+      "timeBlocks": [
+        {
+          "time": "Morning",
+          "options": [
+            { "desc": "<span style=\"color:var(--blue)\">The Waffle Shop</span><br>🚨 IMPORTANT: Go here on Friday! It will be too busy on Saturday/Sunday with all the game day crowds. Try the famous Strawberry Waffles or Chocolate Chip Pancakes." }
+          ]
+        },
+        {
+          "time": "Afternoon",
+          "options": [
+            { "desc": "<span style=\"color:var(--blue)\">Hike Mount Nittany</span><br>Classic Penn State experience! Take in the stunning views of campus and the valley from the Mike Lynch Overlook. Perfect way to work up an appetite." }
+          ]
+        },
+        {
+          "time": "Evening",
+          "options": [
+            { "desc": "<span style=\"color:var(--blue)\">Evening Option A: Local Whiskey</span><br>End the day with a huge selection of whiskeys and upscale pub food. Great atmosphere to get in the game day spirit! Leaves the evening open to barhop around downtown afterward." },
+            { "desc": "<span style=\"color:var(--blue)\">Evening Option B: Champs North Atherton</span><br>Sports bar with wings, burgers, and a lively atmosphere. Perfect for getting into the game day mood with fellow fans!" }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Saturday - September 27th (Game Day!)",
+      "timeBlocks": [
+        {
+          "time": "Morning",
+          "options": [
+            { "desc": "<span style=\"color:var(--blue)\">Bagel Love Cafe</span><br>🍳 Pro tip: You can get delivery! Start your game day with fresh bagels and breakfast sandwiches without leaving your room." }
+          ]
+        },
+        {
+          "time": "6:30 AM - 12:00 PM",
+          "options": [
+            { "desc": "<span style=\"color:var(--blue)\">ESPN College GameDay</span><br>📍 Old Main Lawn, University Park<br>Fan pit opens at 6:30 AM ET - arrive early! Experience the excitement and energy of College GameDay live from Penn State." }
+          ]
+        },
+        {
+          "time": "Afternoon",
+          "options": [
+            { "desc": "<span style=\"color:var(--blue)\">Tailgate & Pre-Game</span><br>Join the legendary Penn State tailgating scene! Get your white gear ready and soak in the atmosphere before the big game." }
+          ]
+        },
+        {
+          "time": "7:30 PM",
+          "options": [
+            { "desc": "<span style=\"color:var(--blue)\">🏈 PENN STATE vs OREGON WHITEOUT GAME 🏈</span><br>📍 Beaver Stadium, 1 Beaver Stadium, University Park, PA 16802<br>⏰ Kickoff: 7:30 PM ET<br>📺 Broadcast: NBC<br>🎽 DRESS IN WHITE! Experience the most electric atmosphere in college football!" }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Sunday - September 28th (Recovery Day)",
+      "timeBlocks": [
+        {
+          "time": "Morning",
+          "options": [
+            { "desc": "Sleep in and recover from the amazing game day experience!" }
+          ]
+        },
+        {
+          "time": "Afternoon",
+          "options": [
+            { "desc": "Head home with memories of an unforgettable Whiteout weekend!" }
+          ]
+        }
+      ]
+    }
+  ],
+  "explore": [
+    "waffle-shop",
+    "hike-mount-nittany",
+    "local-whiskey",
+    "bagel-love-cafe",
+    "penn-state-creamery",
+    "meyer-dairy",
+    "allen-street-grill",
+    "corner-room",
+    "tavern",
+    "champs-north-atherton",
+    "champs-downtown",
+    "barrel-21",
+    "central-reservation",
+    "happy-valley-brewing",
+    "814-cider",
+    "pickles",
+    "buffalo-wild-wings",
+    "boal-city-brewing",
+    "phyrst",
+    "primanti-bros",
+    "penn-state-arboretum",
+    "palmer-museum-of-art",
+    "wegmans"
+  ]
+}

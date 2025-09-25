@@ -243,5 +243,12 @@
     "desc": "Bar and restaurant famous for Pittsburgh-style sandwiches topped with coleslaw and fries. Full bar with casual dining.",
     "link": "https://www.primantibros.com/",
     "linkText": "More Info"
+  },
+  "end-zone": {
+    "name": "The End Zone Show Club",
+    "emojis": ["🎭"],
+    "desc": "Gentleman's club located approximately 10 minutes from State College. Features state-of-the-art lighting and sound system with stage seating for over 150 people.",
+    "link": "https://endzoneshowclub.com/",
+    "linkText": "More Info"
   }
 }
