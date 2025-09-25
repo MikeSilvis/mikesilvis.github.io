@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../components/css/trip-viewer.css">
   <link rel="stylesheet" href="whiteout-theme.css">
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKywGwcXwCFXiPEKlAb3P26PB48cHpYyk&callback=initMap"></script>
 </head>
 <body>
   <header id="tripHeader">
@@ -19,7 +18,6 @@
   <nav>
     <a href="#itinerary" id="nav-itinerary">🗓️ Itinerary</a>
     <a href="#explore" id="nav-explore">🧭 Explore</a>
-    <a href="#map" id="nav-map">🗺️ Map</a>
   </nav>
 
   <section id="itinerary">
@@ -31,11 +29,6 @@
     <h2>🧭 Explore</h2>
     <div class="emoji-filters" id="emojiFilters" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;"></div>
     <div class="explore-grid" id="exploreGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;"></div>
-  </section>
-
-  <section id="map">
-    <h2>🗺️ Map</h2>
-    <div id="mapContainer" style="width: 100%; height: 600px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);"></div>
   </section>
 
   <script>
