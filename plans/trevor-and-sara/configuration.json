@@ -13,19 +13,28 @@
         {
           "time": "Arrival 9:37 AM",
           "options": [
-            { "desc": "Arrive in State College (UA 4319)" }
+            {
+              "title": "Arrive in State College",
+              "desc": "UA 4319"
+            }
           ]
         },
         {
           "time": "Late Morning",
           "options": [
-            { "desc": "Brunch on the Blackstone at 217 Siltop" }
+            {
+              "title": "Brunch on the Blackstone",
+              "desc": "217 Siltop"
+            }
           ]
         },
         {
           "time": "Evening",
           "options": [
-            { "desc": "<span style=\"color:var(--blue)\">The Infamous Diddy White Party at the Silvs' Pond</span><br>Dress code: All white | Food, drinks, music, and fun by the pond | Celebrate the 4th in style!" }
+            {
+              "title": "The Infamous Diddy White Party at the Silvs' Pond",
+              "desc": "Dress code: All white | Food, drinks, music, and fun by the pond | Celebrate the 4th in style!"
+            }
           ]
         }
       ]
@@ -36,13 +45,19 @@
         {
           "time": "Morning",
           "options": [
-            { "desc": "Penn State Arboretum 🌳" }
+            {
+              "title": "Penn State Arboretum",
+              "desc": "🌳"
+            }
           ]
         },
         {
           "time": "2:30 PM",
           "options": [
-            { "desc": "<span style=\"color:var(--blue)\">Lindsay Houtz Wedding - 2:30 PM</span><br>Celebrate with Lindsay and her special day!" }
+            {
+              "title": "Lindsay Houtz Wedding",
+              "desc": "2:30 PM - Celebrate with Lindsay and her special day!"
+            }
           ]
         }
       ]
@@ -53,13 +68,19 @@
         {
           "time": "Afternoon",
           "options": [
-            { "desc": "Explore State College or possibly hike" }
+            {
+              "title": "Explore State College",
+              "desc": "Or possibly hike"
+            }
           ]
         },
         {
           "time": "Evening",
           "options": [
-            { "desc": "<span style=\"color:var(--blue)\">️Date Night with Dom & Karly</span><br>Sara's choice of restaurant! A perfect evening out with friends." }
+            {
+              "title": "Date Night with Dom & Karly",
+              "desc": "Sara's choice of restaurant! A perfect evening out with friends."
+            }
           ]
         }
       ]
@@ -70,13 +91,19 @@
         {
           "time": "Morning",
           "options": [
-            { "desc": "Breakfast out at Naked Egg or Breakfast on Boal" }
+            {
+              "title": "Breakfast Out",
+              "desc": "Naked Egg or Breakfast on Boal"
+            }
           ]
         },
         {
           "time": "Departure 3:10 PM",
           "options": [
-            { "desc": "State College to Washington (UA 4938)" }
+            {
+              "title": "State College to Washington",
+              "desc": "UA 4938"
+            }
           ]
         }
       ]

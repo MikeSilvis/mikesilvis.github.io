@@ -1,6 +1,6 @@
 {
   "title": "🏈 Whiteout Weekend 2025 🏈",
-  "subtitle": "Penn State vs Oregon - The ultimate Whiteout experience! Get ready for an unforgettable weekend of football, food, and fun.",
+  "subtitle": "Penn State vs Oregon - September 27th",
   "header": {
     "textColor": "#ffffff",
     "height": "300px",
@@ -14,20 +14,32 @@
         {
           "time": "Morning",
           "options": [
-            { "desc": "<span style=\"color:#002E5C; font-weight: bold;\">The Waffle Shop</span><br>🚨 IMPORTANT: Go here on Friday! It will be too busy on Saturday/Sunday with all the game day crowds. Try the famous Strawberry Waffles or Chocolate Chip Pancakes." }
+            {
+              "title": "The Waffle Shop",
+              "desc": "🚨 IMPORTANT: Go here on Friday! It will be too busy on Saturday/Sunday with all the game day crowds. Try the famous Strawberry Waffles or Chocolate Chip Pancakes."
+            }
           ]
         },
         {
           "time": "Afternoon",
           "options": [
-            { "desc": "<span style=\"color:#002E5C; font-weight: bold;\">Hike Mount Nittany</span><br>Classic Penn State experience! Take in the stunning views of campus and the valley from the Mike Lynch Overlook. Perfect way to work up an appetite." }
+            {
+              "title": "Hike Mount Nittany",
+              "desc": "Classic Penn State experience! Take in the stunning views of campus and the valley from the Mike Lynch Overlook. Perfect way to work up an appetite."
+            }
           ]
         },
         {
           "time": "Evening",
           "options": [
-            { "desc": "<span style=\"color:#002E5C; font-weight: bold;\">Evening Option A: Local Whiskey</span><br>End the day with a huge selection of whiskeys and upscale pub food. Great atmosphere to get in the game day spirit! Leaves the evening open to barhop around downtown afterward." },
-            { "desc": "<span style=\"color:#002E5C; font-weight: bold;\">Evening Option B: Champs North Atherton</span><br>Sports bar with wings, burgers, and a lively atmosphere. Perfect for getting into the game day mood with fellow fans!" }
+            {
+              "title": "Evening Option A: Local Whiskey",
+              "desc": "End the day with a huge selection of whiskeys and upscale pub food. Great atmosphere to get in the game day spirit! Leaves the evening open to barhop around downtown afterward."
+            },
+            {
+              "title": "Evening Option B: Champs North Atherton",
+              "desc": "Sports bar with wings, burgers, and a lively atmosphere. Perfect for getting into the game day mood with fellow fans!"
+            }
           ]
         }
       ]
@@ -38,25 +50,41 @@
         {
           "time": "Morning",
           "options": [
-            { "desc": "<span style=\"color:#002E5C; font-weight: bold;\">Bagel Love Cafe</span><br>🍳 Pro tip: You can get delivery! Start your game day with fresh bagels and breakfast sandwiches without leaving your room." }
+            {
+              "title": "Bagel Love Cafe",
+              "desc": "🍳 Pro tip: You can get delivery! Start your game day with fresh bagels and breakfast sandwiches without leaving your room."
+            }
           ]
         },
         {
           "time": "6:30 AM - 12:00 PM",
           "options": [
-            { "desc": "<span style=\"color:#002E5C; font-weight: bold;\">ESPN College GameDay</span><br>📍 Old Main Lawn, University Park<br>Fan pit opens at 6:30 AM ET - arrive early! Experience the excitement and energy of College GameDay live from Penn State." }
+            {
+              "title": "ESPN College GameDay",
+              "desc": "📍 Old Main Lawn, University Park<br>Fan pit opens at 6:30 AM ET - arrive early! Experience the excitement and energy of College GameDay live from Penn State."
+            }
           ]
         },
         {
           "time": "Afternoon",
           "options": [
-            { "desc": "<span style=\"color:#002E5C; font-weight: bold;\">Tailgate & Pre-Game</span><br>Join the legendary Penn State tailgating scene! Get your white gear ready and soak in the atmosphere before the big game." }
+            {
+              "title": "Tailgate & Pre-Game",
+              "desc": "Join the legendary Penn State tailgating scene! Get your white gear ready and soak in the atmosphere before the big game."
+            },
+            {
+              "title": "Visit Mike in Lot 16",
+              "desc": "📍 <a href='https://www.google.com/maps/place/Football+Lot+16+(Orange+A+East+Opp)/@40.814564,-77.8591335,19z/data=!4m6!3m5!1s0x89cea615fd5fbe01:0x38c44c50602bc066!8m2!3d40.814125!4d-77.8589641!16s%2Fg%2F11vzxqw65c?entry=ttu&g_ep=EgoyMDI1MDkyMi4wIKXMDSoASAFQAw%3D%3D' target='_blank'>Football Lot 16 (Orange A East Opp)</a><br>Stop by and say hi to Mike at his tailgate spot!"
+            }
           ]
         },
         {
           "time": "7:30 PM",
           "options": [
-            { "desc": "<span style=\"color:#002E5C; font-weight: bold; font-size: 1.1em;\">🏈 PENN STATE vs OREGON WHITEOUT GAME 🏈</span><br>📍 Beaver Stadium, 1 Beaver Stadium, University Park, PA 16802<br>⏰ Kickoff: 7:30 PM ET<br>📺 Broadcast: NBC<br>🎽 DRESS IN WHITE! Experience the most electric atmosphere in college football!" }
+            {
+              "title": "🏈 PENN STATE vs OREGON WHITEOUT GAME 🏈",
+              "desc": "📍 Beaver Stadium, 1 Beaver Stadium, University Park, PA 16802<br>⏰ Kickoff: 7:30 PM ET<br>📺 Broadcast: NBC<br>🎽 DRESS IN WHITE! Experience the most electric atmosphere in college football!"
+            }
           ]
         }
       ]
@@ -67,13 +95,7 @@
         {
           "time": "Morning",
           "options": [
-            { "desc": "Sleep in and recover from the amazing game day experience!" }
-          ]
-        },
-        {
-          "time": "Afternoon",
-          "options": [
-            { "desc": "Head home with memories of an unforgettable Whiteout weekend!" }
+            { "desc": "Travel Home with an L" }
           ]
         }
       ]

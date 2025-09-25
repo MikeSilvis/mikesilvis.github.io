@@ -143,7 +143,11 @@ fetch(jsonPath)
               `<div class='itinerary-label'>${block.time}</div>` +
               `<div class='itinerary-content'>` +
                 block.options.map(opt => {
-                  return `<div class='itinerary-event'>${opt.desc}</div>`;
+                  if (opt.title && opt.desc) {
+                    return `<div class='itinerary-event'><span class='itinerary-title'>${opt.title}</span><br>${opt.desc}</div>`;
+                  } else {
+                    return `<div class='itinerary-event'>${opt.desc}</div>`;
+                  }
                 }).join('') +
               `</div>` +
             `</div>`;

@@ -1,14 +1,14 @@
 {
   "hike-mount-nittany": {
     "name": "Hike Mount Nittany",
-    "emojis": ["🥾", "🌄"],
+    "emojis": ["🥾"],
     "desc": "A classic, must-do hike for Penn Staters and visitors! The trailhead is in Lemont, PA, and the hike offers stunning views of Penn State campus and the valley from several overlooks, especially the Mike Lynch Overlook. Moderate to strenuous climb, well-marked paths.",
     "link": "https://www.google.com/maps/search/?api=1&query=Mount+Nittany+trailhead+Lemont+PA",
     "linkText": "More info"
   },
   "penn-state-arboretum": {
     "name": "Penn State Arboretum",
-    "emojis": ["🌳", "🌸"],
+    "emojis": ["🎭"],
     "desc": "A beautiful, 370-acre garden and natural area open daily from dawn to dusk. Features the H.O. Smith Botanic Gardens, children's garden, pollinator and bird garden, walking trails, and seasonal events.",
     "link": "https://www.google.com/maps/search/?api=1&query=Penn+State+Arboretum+University+Park+PA",
     "linkText": "Official site"
@@ -22,7 +22,7 @@
   },
   "palmer-museum-of-art": {
     "name": "Palmer Museum of Art",
-    "emojis": ["🖼️"],
+    "emojis": ["🎭"],
     "desc": "The largest art museum collection between Pittsburgh and Philadelphia, with world-class exhibitions and a diverse permanent collection. Free admission.",
     "link": "https://www.google.com/maps/search/?api=1&query=Palmer+Museum+of+Art+Penn+State+University+Park+PA",
     "linkText": "More info"
@@ -36,7 +36,7 @@
   },
   "bagel-love-cafe": {
     "name": "Bagel Love Cafe",
-    "emojis": ["🥞"],
+    "emojis": ["🍽️"],
     "desc": "Fresh bagels, breakfast sandwiches, and coffee in a cozy spot.",
     "link": "https://www.google.com/maps/search/?api=1&query=Bagel+Love+Cafe+State+College+PA",
     "linkText": "More Info"
@@ -64,7 +64,7 @@
   },
   "champs-north-atherton": {
     "name": "Champs (North Atherton)",
-    "emojis": ["🍔"],
+    "emojis": ["🍽️"],
     "desc": "Sports bar with wings, burgers, and a lively atmosphere. Located on North Atherton Street.",
     "link": "https://www.google.com/maps/search/?api=1&query=Champs+Sports+Grill+North+Atherton+State+College+PA",
     "linkText": "More Info"
@@ -78,14 +78,14 @@
   },
   "penn-state-creamery": {
     "name": "Penn State Creamery",
-    "emojis": ["🍦"],
+    "emojis": ["🍰"],
     "desc": "Legendary ice cream made on campus. Try the Peachy Paterno!",
     "link": "https://www.google.com/maps/search/?api=1&query=Penn+State+Creamery+University+Park+PA",
     "linkText": "More Info"
   },
   "meyer-dairy": {
     "name": "Meyer Dairy",
-    "emojis": ["🍦"],
+    "emojis": ["🍰"],
     "desc": "Family-run dairy with unique ice cream flavors and fresh milk.",
     "link": "https://www.google.com/maps/search/?api=1&query=Meyer+Dairy+State+College+PA",
     "linkText": "More Info"
@@ -162,7 +162,7 @@
   },
   "waffle-shop": {
     "name": "The Waffle Shop",
-    "emojis": ["🧇"],
+    "emojis": ["🍽️"],
     "desc": "Family-owned diner known for homemade breakfast favorites like Strawberry Waffles and Chocolate Chip Pancakes, plus a classic lunch menu. Open 7 AM - 2 PM daily.",
     "link": "https://www.google.com/maps/search/?api=1&query=The+Waffle+Shop+State+College+PA",
     "linkText": "More Info"
@@ -218,7 +218,7 @@
   },
   "buffalo-wild-wings": {
     "name": "Buffalo Wild Wings",
-    "emojis": ["🍗"],
+    "emojis": ["🍽️"],
     "desc": "Sports bar chain known for Buffalo-style chicken wings, burgers, and a variety of beers. Features numerous TVs for sports viewing.",
     "link": "https://www.google.com/maps/search/?api=1&query=Buffalo+Wild+Wings+State+College+PA",
     "linkText": "More Info"
