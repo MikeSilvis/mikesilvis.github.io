@@ -4,7 +4,7 @@
   "header": {
     "textColor": "#ffffff",
     "height": "250px",
-    "customCSS": "background: linear-gradient(90deg, #B22234 0%, #B22234 33%, #ffffff 33%, #ffffff 66%, #3C3B6E 66%, #3C3B6E 100%); box-shadow: 0 4px 15px rgba(0,0,0,0.2);"
+    "customCSS": "background: linear-gradient(135deg, #B22234 0%, #ffffff 50%, #3C3B6E 100%); box-shadow: 0 4px 15px rgba(0,0,0,0.2);"
   },
   "itinerary": [
     {
