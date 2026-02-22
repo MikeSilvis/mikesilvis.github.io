@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinewood Derby — Peak Performance Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --bg2: #13161e;
+    --bg3: #1a1e2a;
+    --card: #1e2232;
+    --border: #2a2f45;
+    --orange: #f97316;
+    --orange2: #fb923c;
+    --blue: #3b82f6;
+    --blue2: #60a5fa;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #eab308;
+    --text: #e8eaf0;
+    --text2: #8891a8;
+    --text3: #5a6278;
+    --accent: #f97316;
+    --glow: rgba(249,115,22,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    background: linear-gradient(135deg, #0d0f14 0%, #111827 50%, #0d0f14 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 30px,
+      rgba(249,115,22,0.03) 30px,
+      rgba(249,115,22,0.03) 31px
+    );
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: rgba(249,115,22,0.15);
+    border: 1px solid rgba(249,115,22,0.3);
+    color: var(--orange);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+    animation: fadeDown 0.5s ease;
+  }
+
+  h1.hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 10vw, 7rem);
+    letter-spacing: 0.04em;
+    line-height: 0.9;
+    background: linear-gradient(135deg, #fff 30%, var(--orange) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeDown 0.6s ease 0.1s both;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text2);
+    font-weight: 300;
+    max-width: 540px;
+    margin: 0.8rem auto 0;
+    animation: fadeDown 0.7s ease 0.2s both;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    animation: fadeDown 0.8s ease 0.3s both;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--orange);
+    display: block;
+  }
+
+  .hero-stat .lbl {
+    font-size: 0.7rem;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,15,20,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    flex: 0 0 auto;
+    background: none;
+    border: none;
+    color: var(--text3);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+  /* MAIN LAYOUT */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* SECTIONS */
+  .section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+  .section.active { display: block; }
+
+  @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:none; } }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+    line-height: 1;
+  }
+
+  .section-title span { color: var(--orange); }
+
+  .section-intro {
+    color: var(--text2);
+    max-width: 660px;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover { border-color: rgba(249,115,22,0.3); }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    color: var(--orange);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .card-title .icon { font-size: 1.2rem; }
+
+  /* SPECS TABLE */
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .spec-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .spec-card:hover { transform: translateY(-2px); border-color: var(--orange); }
+
+  .spec-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--orange);
+  }
+
+  .spec-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text3);
+    margin-bottom: 0.4rem;
+  }
+
+  .spec-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.3rem;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .spec-note {
+    font-size: 0.75rem;
+    color: var(--text2);
+    line-height: 1.4;
+  }
+
+  /* PHYSICS DIAGRAM */
+  .track-diagram {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* SLIDER */
+  .slider-section {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .slider-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .slider-label .title {
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .slider-label .value {
+    font-family: 'DM Mono', monospace;
+    color: var(--orange);
+    font-size: 1rem;
+  }
+
+  input[type=range] {
+    width: 100%;
+    height: 4px;
+    appearance: none;
+    background: var(--border);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--orange);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 8px var(--glow);
+    transition: transform 0.15s;
+  }
+
+  input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+  .result-bar-wrap {
+    background: var(--bg2);
+    border-radius: 4px;
+    overflow: hidden;
+    height: 10px;
+    margin-bottom: 0.4rem;
+  }
+
+  .result-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--orange));
+    border-radius: 4px;
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .advantage-display {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--bg2);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .advantage-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--orange);
+    line-height: 1;
+  }
+
+  .advantage-desc {
+    font-size: 0.85rem;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+
+  /* AERO SHAPES */
+  .shapes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .shape-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+    text-align: center;
+  }
+
+  .shape-card:hover, .shape-card.selected {
+    border-color: var(--orange);
+    transform: translateY(-2px);
+  }
+
+  .shape-card.selected { background: rgba(249,115,22,0.08); }
+
+  .shape-svg { margin: 0.5rem auto 0.8rem; display: block; }
+
+  .shape-name {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  .shape-drag {
+    font-family: 'DM Mono', monospace;
+    color: var(--green);
+    font-size: 0.8rem;
+  }
+
+  .shape-detail {
+    font-size: 0.78rem;
+    color: var(--text2);
+    margin-top: 0.4rem;
+    display: none;
+    text-align: left;
+    line-height: 1.5;
+  }
+
+  .shape-card.selected .shape-detail { display: block; }
+
+  /* CHECKLIST */
+  .checklist {
+    list-style: none;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    border-radius: 4px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li:hover { background: var(--bg3); }
+
+  .check-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+    font-size: 0.8rem;
+  }
+
+  .checklist li.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+  }
+
+  .check-text { flex: 1; }
+  .check-title { font-weight: 500; font-size: 0.9rem; }
+  .check-note { font-size: 0.78rem; color: var(--text2); margin-top: 0.2rem; }
+
+  .checklist li.checked .check-title { color: var(--text2); text-decoration: line-through; }
+
+  .progress-wrap {
+    background: var(--bg2);
+    border-radius: 4px;
+    height: 6px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  /* RACE SIM */
+  .race-sim {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .race-lane {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .race-lane-label {
+    font-size: 0.72rem;
+    color: var(--text2);
+    width: 130px;
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .race-track {
+    flex: 1;
+    background: var(--bg2);
+    border-radius: 4px;
+    height: 28px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .race-car {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 18px;
+    border-radius: 2px;
+    transition: left 0.05s linear;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 4px;
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.8);
+    font-family: 'DM Mono', monospace;
+    min-width: 30px;
+  }
+
+  .race-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--orange);
+    width: 50px;
+    text-align: right;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--orange);
+    color: #000;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn:hover { background: var(--orange2); transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--orange);
+    border: 1px solid var(--orange);
+  }
+
+  .btn-ghost:hover { background: rgba(249,115,22,0.1); }
+
+  /* ACCORDION */
+  .accordion-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+    overflow: hidden;
+  }
+
+  .accordion-header {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 1rem 1.2rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.15s;
+  }
+
+  .accordion-header:hover { background: var(--bg3); }
+
+  .accordion-arrow {
+    transition: transform 0.3s;
+    color: var(--text3);
+    font-size: 1rem;
+  }
+
+  .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+
+  .accordion-body {
+    display: none;
+    padding: 0 1.2rem 1.2rem;
+    color: var(--text2);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+  }
+
+  .accordion-item.open .accordion-body { display: block; }
+
+  /* MISTAKES */
+  .mistake-item {
+    display: flex;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    background: rgba(239,68,68,0.06);
+    border: 1px solid rgba(239,68,68,0.2);
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+  }
+
+  .mistake-icon { color: var(--red); font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+  .mistake-text .title { font-weight: 500; font-size: 0.9rem; color: var(--text); }
+  .mistake-text .desc { font-size: 0.8rem; color: var(--text2); margin-top: 0.2rem; }
+
+  .tip-item {
+    display: flex;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    background: rgba(34,197,94,0.06);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+  }
+
+  .tip-icon { color: var(--green); flex-shrink: 0; margin-top: 2px; }
+
+  /* COG VISUALIZER */
+  .cog-viz {
+    position: relative;
+    margin: 1rem 0;
+  }
+
+  /* WEIGHT VIZ */
+  .weight-blocks {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+  }
+
+  .weight-block {
+    width: 24px;
+    height: 24px;
+    border-radius: 3px;
+    background: var(--orange);
+    opacity: 0.3;
+    transition: opacity 0.3s;
+  }
+
+  .weight-block.active { opacity: 1; }
+
+  /* TOOLTIP */
+  [data-tooltip] {
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dashed var(--text3);
+  }
+
+  [data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e2232;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    max-width: 220px;
+    white-space: normal;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 1.5rem 0;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--text3);
+    font-size: 0.8rem;
+  }
+
+  footer span { color: var(--orange); }
+
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    background: rgba(59,130,246,0.15);
+    border: 1px solid rgba(59,130,246,0.3);
+    color: var(--blue2);
+    font-size: 0.68rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .tag.orange {
+    background: rgba(249,115,22,0.12);
+    border-color: rgba(249,115,22,0.3);
+    color: var(--orange);
+  }
+
+  .tag.green {
+    background: rgba(34,197,94,0.1);
+    border-color: rgba(34,197,94,0.25);
+    color: var(--green);
+  }
+
+  /* TRACK SVG */
+  canvas { border-radius: 6px; }
+
+  @media (max-width: 600px) {
+    .specs-grid { grid-template-columns: 1fr 1fr; }
+    .shapes-grid { grid-template-columns: 1fr 1fr; }
+    .hero-stats { gap: 1.2rem; }
+    .section-title { font-size: 2rem; }
+  }
+
+  .inline-highlight {
+    color: var(--orange);
+    font-weight: 600;
+  }
+
+  .number-steps {
+    counter-reset: steps;
+    list-style: none;
+  }
+
+  .number-steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+    font-size: 0.9rem;
+    color: var(--text2);
+  }
+
+  .number-steps li:last-child { border-bottom: none; }
+
+  .number-steps li::before {
+    content: counter(steps, decimal-leading-zero);
+    font-family: 'DM Mono', monospace;
+    color: var(--orange);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+    min-width: 24px;
+  }
+
+  .number-steps li strong { color: var(--text); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">BSA Cub Scout Racing · Physics-Optimized Guide</div>
+  <h1 class="hero-title">Pinewood<br>Derby</h1>
+  <p class="hero-sub">The complete physics-based guide to building the fastest legal car on the track.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">5.00</span><span class="lbl">oz max weight</span></div>
+    <div class="hero-stat"><span class="num">7"</span><span class="lbl">max length</span></div>
+    <div class="hero-stat"><span class="num">~1"</span><span class="lbl">ideal CoG offset</span></div>
+    <div class="hero-stat"><span class="num">4</span><span class="lbl">key factors</span></div>
+  </div>
+</header>
+
+<nav id="main-nav">
+  <button class="nav-btn active" data-tab="intro">🏁 Intro</button>
+  <button class="nav-btn" data-tab="specs">📐 Specs</button>
+  <button class="nav-btn" data-tab="weight">⚖️ Weight & CoG</button>
+  <button class="nav-btn" data-tab="aero">💨 Aerodynamics</button>
+  <button class="nav-btn" data-tab="wheels">🔧 Wheels & Axles</button>
+  <button class="nav-btn" data-tab="stability">🎯 Stability</button>
+  <button class="nav-btn" data-tab="checklist">✅ Checklist</button>
+</nav>
+
+<main>
+
+  <!-- INTRO -->
+  <section class="section active" id="tab-intro">
+    <div class="section-title">What is <span>Pinewood</span> Derby?</div>
+    <p class="section-intro">A gravity-powered wooden car race run by BSA Cub Scout packs. Cars are built from an official BSA kit — a block of pine, four plastic wheels, and four nails for axles — then raced down an inclined track. The car crosses the finish line fastest wins.</p>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🎯</span> The Goal</div>
+      <p style="color:var(--text2);font-size:0.9rem;line-height:1.7;">Build the <strong style="color:var(--text)">fastest legal car</strong> within BSA rules. That means extracting every legal performance advantage from weight distribution, aerodynamics, wheel prep, and car stability — while keeping total mass at exactly 5.000 oz.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title"><span class="icon">📏</span> Standard BSA Rules</div>
+        <ul style="list-style:none;font-size:0.85rem;color:var(--text2);line-height:2;">
+          <li>⚡ Max weight: <strong style="color:var(--text)">5.000 oz</strong></li>
+          <li>⚡ Max length: <strong style="color:var(--text)">7 inches</strong></li>
+          <li>⚡ Max width: <strong style="color:var(--text)">2¾ inches</strong></li>
+          <li>⚡ Min wheelbase: <strong style="color:var(--text)">4¼ inches</strong></li>
+          <li>⚡ Min clearance: <strong style="color:var(--text)">3/8" (center rail)</strong></li>
+          <li>⚡ Wheels: <strong style="color:var(--text)">BSA-approved only</strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="icon">🔑</span> Four Keys to Speed</div>
+        <ul style="list-style:none;font-size:0.85rem;color:var(--text2);line-height:2.2;">
+          <li><span style="color:var(--orange)">①</span> <strong style="color:var(--text)">Weight at max</strong> — always hit 5.00 oz</li>
+          <li><span style="color:var(--orange)">②</span> <strong style="color:var(--text)">CoG rearward</strong> — maximize drop height</li>
+          <li><span style="color:var(--orange)">③</span> <strong style="color:var(--text)">Low aero drag</strong> — wedge/bullet shape</li>
+          <li><span style="color:var(--orange)">④</span> <strong style="color:var(--text)">Frictionless wheels</strong> — polish & align</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">📉</span> The Physics in 60 Seconds</div>
+      <p style="color:var(--text2);font-size:0.9rem;line-height:1.8;margin-bottom:1rem;">At the top of the ramp, your car has <span data-tooltip="PE = mass × gravity × height. Every gram at max weight counts.">potential energy</span>. That converts to kinetic energy (speed) as it rolls down. Three forces slow your car: <strong style="color:var(--red)">rolling friction</strong> (wheel bearings), <strong style="color:var(--red)">air drag</strong> (shape), and <strong style="color:var(--red)">wheel wobble</strong> (misalignment). Your job: minimize all three while maximizing starting potential energy with correct CoG positioning.</p>
+      <canvas id="trackCanvas" width="700" height="120" style="width:100%;max-width:700px;"></canvas>
+    </div>
+  </section>
+
+  <!-- SPECS -->
+  <section class="section" id="tab-specs">
+    <div class="section-title">Optimal <span>Specs</span></div>
+    <p class="section-intro">These are the target numbers for a competition-grade Pinewood Derby car. Every dimension is chosen to maximize physics advantage within BSA rules.</p>
+
+    <div class="specs-grid">
+      <div class="spec-card">
+        <div class="spec-label">Total Weight</div>
+        <div class="spec-value">5.000 oz</div>
+        <div class="spec-note">Use a digital scale. Being even 0.1 oz under gives up ~1 car-length at the finish. Be precise.</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">CoG Position</div>
+        <div class="spec-value">0.9–1.0"</div>
+        <div class="spec-note">Measured forward of the rear axle. The "sweet spot" for most BSA tracks. See Weight section for details.</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">CoG Height</div>
+        <div class="spec-value">As low as possible</div>
+        <div class="spec-note">Low CoG = more stability. Drill weight pockets in the bottom of the car, not the top.</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Body Shape</div>
+        <div class="spec-value">Wedge / Bullet</div>
+        <div class="spec-note">Low frontal area reduces air drag by up to 30% vs a standard block shape.</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Weight Type</div>
+        <div class="spec-value">Tungsten</div>
+        <div class="spec-note">2× denser than lead. Much smaller volume for same mass — perfect for low/rear placement.</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Axle Polish</div>
+        <div class="spec-value">Mirror Finish</div>
+        <div class="spec-note">Eliminate burrs on nail heads. Use progressively finer sandpaper (up to 2000 grit) then polish.</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Lubrication</div>
+        <div class="spec-value">Dry Graphite</div>
+        <div class="spec-note">Apply powdered graphite between wheel hub and axle. Spin 5× while applying. Wipe excess.</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Center Clearance</div>
+        <div class="spec-value">≥ 3/8 inch</div>
+        <div class="spec-note">Required to clear the track's center rail guide. Build low but not too low.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🏆</span> Speed Priority Matrix</div>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--border);">
+              <th style="text-align:left;padding:0.6rem 0.5rem;color:var(--text3);font-weight:500;text-transform:uppercase;font-size:0.72rem;letter-spacing:0.08em;">Factor</th>
+              <th style="text-align:left;padding:0.6rem 0.5rem;color:var(--text3);font-weight:500;text-transform:uppercase;font-size:0.72rem;letter-spacing:0.08em;">Impact</th>
+              <th style="text-align:left;padding:0.6rem 0.5rem;color:var(--text3);font-weight:500;text-transform:uppercase;font-size:0.72rem;letter-spacing:0.08em;">Est. Gain</th>
+              <th style="text-align:left;padding:0.6rem 0.5rem;color:var(--text3);font-weight:500;text-transform:uppercase;font-size:0.72rem;letter-spacing:0.08em;">Difficulty</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:0.6rem 0.5rem;font-weight:500;">Weight at max (5.00 oz)</td>
+              <td style="padding:0.6rem 0.5rem;"><span class="tag orange">Critical</span></td>
+              <td style="padding:0.6rem 0.5rem;color:var(--green);font-family:'DM Mono',monospace;">+3–5 car lengths</td>
+              <td style="padding:0.6rem 0.5rem;color:var(--text2);">Easy</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:0.6rem 0.5rem;font-weight:500;">Rear CoG (0.9–1.0")</td>
+              <td style="padding:0.6rem 0.5rem;"><span class="tag orange">Critical</span></td>
+              <td style="padding:0.6rem 0.5rem;color:var(--green);font-family:'DM Mono',monospace;">+3–5 car lengths</td>
+              <td style="padding:0.6rem 0.5rem;color:var(--text2);">Medium</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:0.6rem 0.5rem;font-weight:500;">Axle polish & alignment</td>
+              <td style="padding:0.6rem 0.5rem;"><span class="tag orange">High</span></td>
+              <td style="padding:0.6rem 0.5rem;color:var(--green);font-family:'DM Mono',monospace;">+2–4 car lengths</td>
+              <td style="padding:0.6rem 0.5rem;color:var(--text2);">Medium</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:0.6rem 0.5rem;font-weight:500;">Graphite lubrication</td>
+              <td style="padding:0.6rem 0.5rem;"><span class="tag">High</span></td>
+              <td style="padding:0.6rem 0.5rem;color:var(--green);font-family:'DM Mono',monospace;">+1–3 car lengths</td>
+              <td style="padding:0.6rem 0.5rem;color:var(--text2);">Easy</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:0.6rem 0.5rem;font-weight:500;">Aerodynamic shape</td>
+              <td style="padding:0.6rem 0.5rem;"><span class="tag">Medium</span></td>
+              <td style="padding:0.6rem 0.5rem;color:var(--green);font-family:'DM Mono',monospace;">+1–2 car lengths</td>
+              <td style="padding:0.6rem 0.5rem;color:var(--text2);">Medium</td>
+            </tr>
+            <tr>
+              <td style="padding:0.6rem 0.5rem;font-weight:500;">Wheel surface prep</td>
+              <td style="padding:0.6rem 0.5rem;"><span class="tag">Medium</span></td>
+              <td style="padding:0.6rem 0.5rem;color:var(--green);font-family:'DM Mono',monospace;">+0.5–1.5 car lengths</td>
+              <td style="padding:0.6rem 0.5rem;color:var(--text2);">Hard</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEIGHT & COG -->
+  <section class="section" id="tab-weight">
+    <div class="section-title">Weight <span>&</span> Center of Gravity</div>
+    <p class="section-intro">This is the single most impactful factor in Pinewood Derby speed. Get this right and you're already ahead of most of the field.</p>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🔭</span> The Physics: Why Rear CoG Wins</div>
+      <p style="color:var(--text2);font-size:0.9rem;line-height:1.8;margin-bottom:0.8rem;">The track has an initial steep drop, then a long flat section. If your <span data-tooltip="The single point where the car's mass is balanced. Also called balance point or center of mass.">Center of Gravity (CoG)</span> is positioned toward the rear, it sits higher on the ramp's slope for longer — meaning your car's mass has fallen a greater height by the time it reaches the flat. More height = more potential energy converted to kinetic energy = higher speed.</p>
+      <p style="color:var(--text2);font-size:0.9rem;line-height:1.8;">Concretely: a rear-weighted car (CoG ~1" ahead of rear axle) can be <strong style="color:var(--orange)">4–5 car lengths faster</strong> than an identical car with the CoG in the center — even at the same total weight.</p>
+    </div>
+
+    <!-- INTERACTIVE SLIDER -->
+    <div class="slider-section">
+      <div class="card-title" style="margin-bottom:1rem;"><span class="icon">🎚️</span> CoG Position Simulator</div>
+      <div class="slider-label">
+        <span class="title">CoG Distance from Rear Axle</span>
+        <span class="value" id="cogValue">1.0 inches</span>
+      </div>
+      <input type="range" id="cogSlider" min="0.5" max="3.5" step="0.1" value="1.0">
+      <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text3);font-family:'DM Mono',monospace;margin-top:-0.5rem;margin-bottom:1rem;">
+        <span>0.5" (rear)</span>
+        <span>1.0" (optimal)</span>
+        <span>3.5" (front)</span>
+      </div>
+
+      <div id="cogPosition" style="margin-bottom:1rem;">
+        <div style="font-size:0.78rem;color:var(--text3);margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.08em;">Speed Advantage vs Front-Weighted Car</div>
+        <div class="result-bar-wrap"><div class="result-bar" id="cogBar" style="width:80%;"></div></div>
+      </div>
+
+      <div class="advantage-display">
+        <div class="advantage-num" id="carLengths">4.5</div>
+        <div class="advantage-desc">
+          <div style="font-weight:600;color:var(--text);margin-bottom:0.3rem;" id="cogStatus">✅ Optimal Zone</div>
+          <div id="cogDesc">Car lengths ahead vs a front-weighted car. This is the sweet spot — rear enough to gain potential energy, front enough to maintain stability.</div>
+        </div>
+      </div>
+
+      <!-- Car visualization -->
+      <div style="margin-top:1.5rem;position:relative;padding-top:0.5rem;">
+        <div style="font-size:0.75rem;color:var(--text3);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.08em;">Car Balance Visualization</div>
+        <svg id="carViz" viewBox="0 0 600 80" style="width:100%;height:auto;">
+          <!-- car body -->
+          <rect x="50" y="20" width="500" height="35" rx="4" fill="#1e2232" stroke="#2a2f45" stroke-width="1.5"/>
+          <!-- wheels -->
+          <circle cx="120" cy="55" r="12" fill="#111" stroke="#444" stroke-width="2"/>
+          <circle cx="480" cy="55" r="12" fill="#111" stroke="#444" stroke-width="2"/>
+          <!-- axle marks -->
+          <line x1="120" y1="20" x2="120" y2="55" stroke="#2a2f45" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="480" y1="20" x2="480" y2="55" stroke="#2a2f45" stroke-width="1" stroke-dasharray="3,3"/>
+          <!-- labels -->
+          <text x="120" y="76" text-anchor="middle" fill="#5a6278" font-size="9" font-family="DM Mono,monospace">REAR</text>
+          <text x="480" y="76" text-anchor="middle" fill="#5a6278" font-size="9" font-family="DM Mono,monospace">FRONT</text>
+          <!-- CoG marker -->
+          <line id="cogLine" x1="410" y1="10" x2="410" y2="55" stroke="#f97316" stroke-width="2"/>
+          <circle id="cogDot" cx="410" cy="37" r="5" fill="#f97316"/>
+          <text id="cogText" x="410" y="8" text-anchor="middle" fill="#f97316" font-size="9" font-family="DM Mono,monospace">CoG</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🪨</span> Weight Material Comparison</div>
+      <div class="specs-grid" style="margin-bottom:0;">
+        <div class="spec-card">
+          <div class="spec-label">Tungsten</div>
+          <div class="spec-value" style="color:var(--green)">Best</div>
+          <div class="spec-note">19.3 g/cm³ density. Tiny cubes hold lots of mass. Safe, non-toxic. Allows precise placement. Recommended for serious builds.</div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-label">Lead</div>
+          <div class="spec-value">Good</div>
+          <div class="spec-note">11.3 g/cm³. Malleable, cheap. Larger volume than tungsten. Handle with gloves. Some packs may restrict use.</div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-label">Steel / Zinc</div>
+          <div class="spec-value" style="color:var(--yellow)">Okay</div>
+          <div class="spec-note">7.8–7.1 g/cm³. Larger volume needed. Harder to place precisely. Use as last resort or supplemental mass.</div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-label">Coins / Random</div>
+          <div class="spec-value" style="color:var(--red)">Avoid</div>
+          <div class="spec-note">Inconsistent, hard to secure, bulky. Often causes top-heavy CoG. Not race-day reliable.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">📏</span> How to Measure Your CoG</div>
+      <ol class="number-steps">
+        <li><strong>Add all weights to the car</strong> — insert tungsten cubes into a pre-drilled pocket near the rear.</li>
+        <li><strong>Balance the car on a round pencil or dowel</strong> placed perpendicular to the car's length on a flat table.</li>
+        <li><strong>Slide the pencil until the car balances level.</strong> Mark this point — it's your CoG.</li>
+        <li><strong>Measure from that mark to the rear axle.</strong> Target: 0.9–1.0 inches forward of the rear axle.</li>
+        <li><strong>Too rear-heavy?</strong> Move weights slightly forward. Too front-heavy? Drill a pocket closer to the rear and repack.</li>
+        <li><strong>Verify again after any painting or finishing</strong> — paint weight can shift balance.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- AERODYNAMICS -->
+  <section class="section" id="tab-aero">
+    <div class="section-title">Aero<span>dynamics</span></div>
+    <p class="section-intro">At Pinewood Derby speeds (~10–15 mph), aerodynamic drag is real — a good shape over a block can net 1–2 car lengths. All 8 designs are shown below ranked by drag, then put them head-to-head in the race simulator. Click any shape card for build notes.</p>
+
+    <!-- ALL 8 SHAPES unified grid -->
+    <div class="shapes-grid" id="shapesGrid" style="grid-template-columns:repeat(auto-fill,minmax(185px,1fr));margin-bottom:1.5rem;">
+
+      <!-- 1 Bullet Nose — best aero -->
+      <div class="shape-card" data-shape="bullet" style="position:relative;">
+        <div style="position:absolute;top:8px;right:8px;font-size:0.6rem;font-family:'DM Mono',monospace;background:rgba(34,197,94,0.15);color:var(--green);border:1px solid rgba(34,197,94,0.3);padding:1px 5px;border-radius:2px;">Cd 0.25</div>
+        <svg class="shape-svg" viewBox="0 0 120 50" width="120" height="50">
+          <path d="M10,37 Q10,15 35,15 L100,15 L100,37 Z" fill="#1e2232" stroke="#3b82f6" stroke-width="1.5"/>
+          <circle cx="25" cy="42" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+          <circle cx="95" cy="42" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+        </svg>
+        <div class="shape-name">Bullet Nose</div>
+        <div class="shape-drag" style="color:var(--green);">⬡ Best Aero</div>
+        <div class="shape-detail">Rounded front taper pushes air smoothly to the sides. Slightly harder to carve but excellent drag coefficient. Combine with low profile for best effect. Works especially well on fast, smooth tracks.</div>
+      </div>
+
+      <!-- 2 Kamm-Tail -->
+      <div class="shape-card" data-shape="kamm" style="position:relative;">
+        <div style="position:absolute;top:8px;right:8px;font-size:0.6rem;font-family:'DM Mono',monospace;background:rgba(34,197,94,0.15);color:var(--green);border:1px solid rgba(34,197,94,0.3);padding:1px 5px;border-radius:2px;">Cd 0.26</div>
+        <svg class="shape-svg" viewBox="0 0 120 50" width="120" height="50">
+          <path d="M10,38 Q10,15 30,15 L90,15 L90,22 L105,30 L90,38 Z" fill="#1e2232" stroke="#22c55e" stroke-width="1.5"/>
+          <circle cx="25" cy="43" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+          <circle cx="90" cy="43" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+        </svg>
+        <div class="shape-name">Kamm-Tail</div>
+        <div class="shape-drag" style="color:var(--green);">⬡ Very Low Drag</div>
+        <div class="shape-detail">Truncated tail based on Wunibald Kamm's aerodynamics research. Smooth front taper + abrupt flat rear cut. The abrupt end creates less drag than a long taper — and leaves room for a rear weight pocket. Best of both worlds.</div>
+      </div>
+
+      <!-- 3 Double Wedge -->
+      <div class="shape-card" data-shape="double" style="position:relative;">
+        <div style="position:absolute;top:8px;right:8px;font-size:0.6rem;font-family:'DM Mono',monospace;background:rgba(34,197,94,0.15);color:var(--green);border:1px solid rgba(34,197,94,0.3);padding:1px 5px;border-radius:2px;">Cd 0.27</div>
+        <svg class="shape-svg" viewBox="0 0 120 50" width="120" height="50">
+          <polygon points="10,38 60,15 110,38" fill="#1e2232" stroke="#f97316" stroke-width="1.5"/>
+          <line x1="60" y1="15" x2="60" y2="38" stroke="#f97316" stroke-width="0.8" stroke-dasharray="2,2"/>
+          <circle cx="25" cy="43" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+          <circle cx="95" cy="43" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+        </svg>
+        <div class="shape-name">Double Wedge</div>
+        <div class="shape-drag" style="color:var(--green);">⬡ Very Low Drag</div>
+        <div class="shape-detail">Two wedges mirrored front-to-rear, peaking at the center. Diamond profile sheds air efficiently at both ends. Weight pocket goes just behind center peak toward rear. Visually striking and fast.</div>
+      </div>
+
+      <!-- 4 Classic Wedge -->
+      <div class="shape-card" data-shape="wedge" style="position:relative;">
+        <div style="position:absolute;top:8px;right:8px;font-size:0.6rem;font-family:'DM Mono',monospace;background:rgba(34,197,94,0.15);color:var(--green);border:1px solid rgba(34,197,94,0.3);padding:1px 5px;border-radius:2px;">Cd 0.28</div>
+        <svg class="shape-svg" viewBox="0 0 120 50" width="120" height="50">
+          <polygon points="10,40 110,40 110,15 10,40" fill="#1e2232" stroke="#f97316" stroke-width="1.5"/>
+          <circle cx="25" cy="44" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+          <circle cx="95" cy="44" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+        </svg>
+        <div class="shape-name">Classic Wedge</div>
+        <div class="shape-drag" style="color:var(--green);">⬡ Very Low Drag</div>
+        <div class="shape-detail">Sloped top from front to rear. Simple to cut from the block. Most popular competitive shape. Front edge angles away air cleanly. Keep front height under 1 inch for best results. Easy to place rear weight pocket.</div>
+      </div>
+
+      <!-- 5 Low-Profile Rail -->
+      <div class="shape-card" data-shape="stealth" style="position:relative;">
+        <div style="position:absolute;top:8px;right:8px;font-size:0.6rem;font-family:'DM Mono',monospace;background:rgba(34,197,94,0.12);color:var(--green);border:1px solid rgba(34,197,94,0.25);padding:1px 5px;border-radius:2px;">Cd 0.30</div>
+        <svg class="shape-svg" viewBox="0 0 120 50" width="120" height="50">
+          <polygon points="10,38 110,38 100,15 20,15" fill="#1e2232" stroke="#8b5cf6" stroke-width="1.5"/>
+          <circle cx="25" cy="43" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+          <circle cx="95" cy="43" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+        </svg>
+        <div class="shape-name">Low-Profile Rail</div>
+        <div class="shape-drag" style="color:var(--green);">◈ Low Drag</div>
+        <div class="shape-detail">Flat-sided, minimal cross-section. Reduces frontal area substantially. Often called "ghost" or "stealth" style. Very low profile means weight placement requires more planning. Excellent for experienced builders.</div>
+      </div>
+
+      <!-- 6 Shark Fin -->
+      <div class="shape-card" data-shape="shark" style="position:relative;">
+        <div style="position:absolute;top:8px;right:8px;font-size:0.6rem;font-family:'DM Mono',monospace;background:rgba(234,179,8,0.12);color:var(--yellow);border:1px solid rgba(234,179,8,0.25);padding:1px 5px;border-radius:2px;">Cd 0.38</div>
+        <svg class="shape-svg" viewBox="0 0 120 50" width="120" height="50">
+          <polygon points="10,38 110,38 90,22 70,15 50,22 30,15 10,38" fill="#1e2232" stroke="#eab308" stroke-width="1.5"/>
+          <circle cx="25" cy="43" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+          <circle cx="95" cy="43" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+        </svg>
+        <div class="shape-name">Shark Fin</div>
+        <div class="shape-drag" style="color:var(--yellow);">◈ Low-Med Drag</div>
+        <div class="shape-detail">Distinctive tall center fin profile that tapers at both front and rear. Striking visual design with decent aerodynamics. Keep the spine narrow (under ½") to minimize frontal area. Great for scouts who want speed and looks.</div>
+      </div>
+
+      <!-- 7 Coffin / Hex -->
+      <div class="shape-card" data-shape="coffin" style="position:relative;">
+        <div style="position:absolute;top:8px;right:8px;font-size:0.6rem;font-family:'DM Mono',monospace;background:rgba(234,179,8,0.12);color:var(--yellow);border:1px solid rgba(234,179,8,0.25);padding:1px 5px;border-radius:2px;">Cd 0.41</div>
+        <svg class="shape-svg" viewBox="0 0 120 50" width="120" height="50">
+          <polygon points="25,15 95,15 110,25 110,38 10,38 10,25" fill="#1e2232" stroke="#a78bfa" stroke-width="1.5"/>
+          <circle cx="25" cy="43" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+          <circle cx="95" cy="43" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+        </svg>
+        <div class="shape-name">Coffin / Hex</div>
+        <div class="shape-drag" style="color:var(--yellow);">◈ Medium Drag</div>
+        <div class="shape-detail">Hexagonal coffin shape — angled front corners and tapered rear give a mid-level aero profile. Very easy to cut from the stock block with straight saw cuts. Good for beginners who want better aero than a block without complex carving.</div>
+      </div>
+
+      <!-- 8 Standard Block — worst -->
+      <div class="shape-card" data-shape="block" style="position:relative;">
+        <div style="position:absolute;top:8px;right:8px;font-size:0.6rem;font-family:'DM Mono',monospace;background:rgba(239,68,68,0.12);color:var(--red);border:1px solid rgba(239,68,68,0.25);padding:1px 5px;border-radius:2px;">Cd 0.52</div>
+        <svg class="shape-svg" viewBox="0 0 120 50" width="120" height="50">
+          <rect x="15" y="15" width="90" height="28" rx="2" fill="#1e2232" stroke="#ef4444" stroke-width="1.5"/>
+          <circle cx="30" cy="44" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+          <circle cx="90" cy="44" r="6" fill="#111" stroke="#555" stroke-width="1.5"/>
+        </svg>
+        <div class="shape-name">Standard Block</div>
+        <div class="shape-drag" style="color:var(--red);">✕ High Drag</div>
+        <div class="shape-detail">The default kit shape — avoid for competition. Large flat front face creates maximum drag. Easy to build but costs you ~1–2 car lengths. At least bevel the front edge 45° if you keep this shape.</div>
+      </div>
+
+    </div>
+
+    <p style="font-size:0.75rem;color:var(--text3);margin-bottom:1.5rem;text-align:center;">↑ Sorted best → worst aerodynamics · Click any card for build notes · Cd values used directly in the race simulator below</p>
+
+    <!-- Race sim -->
+    <div class="race-sim">
+      <div class="card-title" style="margin-bottom:0.3rem;"><span class="icon">🏎️</span> Shape & Weight Race Simulator</div>
+      <p style="font-size:0.8rem;color:var(--text3);margin-bottom:1.2rem;">Each lane corresponds to a shape above. Adjust weight (1–5 oz) and CoG per car, then race. Physics model: heavier + rear CoG + low Cd = faster.</p>
+
+      <!-- CONFIG PANEL -->
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1rem;margin-bottom:1.2rem;">
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text3);margin-bottom:0.8rem;">Car Configuration — Weight &amp; CoG per Shape</div>
+        <div id="carConfigGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.8rem;"></div>
+      </div>
+
+      <!-- LANES -->
+      <div id="raceLanes"></div>
+
+      <div style="margin-top:1.2rem;display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap;">
+        <button class="btn" id="raceBtn" onclick="startRace()">▶ Start Race</button>
+        <button class="btn btn-ghost" onclick="resetRace()">↺ Reset</button>
+        <button class="btn btn-ghost" onclick="resetCarDefaults()" style="font-size:0.78rem;">⟳ Default Configs</button>
+      </div>
+      <div id="raceResult" style="margin-top:0.8rem;display:none;padding:0.6rem 0.8rem;background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.25);border-radius:4px;font-size:0.82rem;color:var(--text2);"></div>
+    </div>
+
+    <!-- Aero tips -->
+    <div class="card" style="margin-top:1.5rem;">
+      <div class="card-title"><span class="icon">💡</span> Aero Optimization Tips</div>
+      <div class="accordion-item">
+        <button class="accordion-header">Keep the front edge low and tapered <span class="accordion-arrow">▼</span></button>
+        <div class="accordion-body">The front face of your car slams into still air. A pointed or angled front edge deflects air to the sides rather than compressing it. Even a simple 45° bevel on the front of a block shape reduces drag noticeably. The lower the profile, the less frontal area.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header">Smooth all transitions and edges <span class="accordion-arrow">▼</span></button>
+        <div class="accordion-body">Sharp corners create turbulent airflow (drag spikes). Sand and round every corner and edge that air flows over. The smoother the transition from front to sides to top, the better the air follows the car's shape without separating into turbulence.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header">Minimize underbody turbulence <span class="accordion-arrow">▼</span></button>
+        <div class="accordion-body">Air rushing under the car creates turbulence around the wheels and axles. A flat, smooth underbody — and recessed axle slots if rules allow — reduces this significantly. Some builders tape a smooth strip along the bottom sides.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header">Does paint finish matter? <span class="accordion-arrow">▼</span></button>
+        <div class="accordion-body">At Pinewood Derby speeds, surface roughness has negligible impact compared to shape. A smooth gloss finish is fine, but don't obsess over paint smoothness when shape and weight are much more important. Use that time for car weight and balance verification instead.</div>
+      </div>
+    </div>
+
+    <!-- AERO CHECKLIST -->
+    <div class="card" style="margin-top:1.5rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">
+        <div class="card-title" style="margin-bottom:0;"><span class="icon">✅</span> Aerodynamics Build Checklist</div>
+        <div style="display:flex;align-items:center;gap:0.8rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:1.1rem;color:var(--orange);" id="aeroPct">0%</div>
+          <button onclick="resetAeroChecklist()" style="background:none;border:1px solid var(--border);color:var(--text3);font-size:0.7rem;padding:0.25rem 0.6rem;border-radius:3px;cursor:pointer;font-family:'DM Sans',sans-serif;">Reset</button>
+        </div>
+      </div>
+      <div class="progress-wrap" style="margin-bottom:1.2rem;"><div class="progress-bar" id="aeroBar" style="width:0%;"></div></div>
+
+      <!-- PHASE 1: Planning -->
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text3);margin-bottom:0.5rem;margin-top:0.2rem;">① Planning</div>
+      <ul class="checklist" id="aeroChecklist1">
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Choose your body shape</div>
+            <div class="check-note">Pick from the 8 designs above based on your skill level and desired look. Wedge or Bullet Nose recommended for beginners aiming for speed.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Sketch the profile on paper first</div>
+            <div class="check-note">Draw a side-view outline to scale (7" × 1¾" roughly). Mark where the axle slots land and where your rear weight pocket will go before cutting anything.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Confirm front height will be under 1"</div>
+            <div class="check-note">The lower the front edge, the less frontal area. Plan your cut so the tallest front point is at most 1 inch from the track surface.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Mark rear weight pocket location before cutting</div>
+            <div class="check-note">Draw the pocket on the blank — it must be on the underside, within 1" of the rear axle slot, deep enough for your tungsten cubes.</div>
+          </div>
+        </li>
+      </ul>
+
+      <!-- PHASE 2: Cutting -->
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text3);margin-bottom:0.5rem;margin-top:1rem;">② Cutting & Shaping</div>
+      <ul class="checklist" id="aeroChecklist2">
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Cut body profile with coping saw or band saw</div>
+            <div class="check-note">Cut just outside your pencil line — you'll sand to final shape. Keep cuts slow and controlled. Adult supervision required.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Drill rear weight pocket</div>
+            <div class="check-note">Use a drill press if possible. Multiple overlapping holes or a Forstner bit works well. Stay at least ¼" from axle slots and outer edges.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Bevel or round all leading edges</div>
+            <div class="check-note">Any edge that air hits first should be angled or rounded — especially the front face. A 45° chamfer on the front dramatically cuts drag even on a block shape.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Taper or round trailing edges where possible</div>
+            <div class="check-note">The rear of the car also affects air separation. A slight taper or the Kamm-style flat cut both reduce turbulence wake behind the car.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Flatten and smooth the underbody</div>
+            <div class="check-note">Sand the bottom face flat. Turbulence under the car (around the axles) is a hidden drag source. A smooth, flush bottom helps reduce it.</div>
+          </div>
+        </li>
+      </ul>
+
+      <!-- PHASE 3: Sanding & Finishing -->
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text3);margin-bottom:0.5rem;margin-top:1rem;">③ Sanding & Finishing</div>
+      <ul class="checklist" id="aeroChecklist3">
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Sand body with 80 → 120 → 220 grit</div>
+            <div class="check-note">Work through progressively finer grits. Always sand with the wood grain. Remove all tool marks and sharp transitions between cut faces.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Apply wood sealer or sanding primer</div>
+            <div class="check-note">Bare pine absorbs paint unevenly and raises grain. A thin coat of sanding sealer or primer locks the grain down and gives a smoother paint surface.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Light sand after primer (320 grit)</div>
+            <div class="check-note">Primer raises the grain slightly. A quick pass with 320 grit after it dries knocks down any raised fibers before the color coat.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Paint and decorate</div>
+            <div class="check-note">Thin, even coats. Let each coat dry fully. 2–3 thin coats beat 1 thick coat every time — thick paint can drip, run, and add uneven weight.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Apply clear coat or lacquer</div>
+            <div class="check-note">A gloss clear coat seals the paint and gives the smoothest possible surface finish. 2 light coats. Let fully cure before installing weights and axles.</div>
+          </div>
+        </li>
+      </ul>
+
+      <!-- PHASE 4: Final check -->
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text3);margin-bottom:0.5rem;margin-top:1rem;">④ Final Aero Verify</div>
+      <ul class="checklist" id="aeroChecklist4">
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Re-verify CoG after painting</div>
+            <div class="check-note">Paint adds a small amount of weight — unevenly. Balance on your pencil again after all coats are dry. Adjust weights if CoG has shifted.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Check minimum ground clearance (≥ 3/8")</div>
+            <div class="check-note">Hold a 3/8" drill bit or gauge under the center of the car. It must pass freely — if not, you risk hitting the track center rail and DQ.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Confirm width is ≤ 2¾"</div>
+            <div class="check-note">Measure at the widest point. Including the wheels if your design is at max width. The official BSA width gauge at impound will catch any overwidth car.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">Confirm length is ≤ 7"</div>
+            <div class="check-note">Measure tip to tail. Even decorative bumpers or nose pieces count toward total length.</div>
+          </div>
+        </li>
+        <li onclick="toggleAeroCheck(this)">
+          <div class="check-box">✓</div>
+          <div class="check-text">
+            <div class="check-title">All decorations are firmly attached</div>
+            <div class="check-note">Stickers, decals, paint details — anything loose can fly off on the track, change weight distribution, or cause a DQ. Press down all edges firmly.</div>
+          </div>
+        </li>
+      </ul>
+
+      <div style="margin-top:1rem;padding:0.6rem 0.8rem;background:var(--bg2);border-radius:4px;border:1px solid var(--border);">
+        <span id="aeroSummary" style="font-size:0.8rem;color:var(--text3);">Check off items as you complete each step.</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- WHEELS -->
+  <section class="section" id="tab-wheels">
+    <div class="section-title">Wheels <span>&</span> Axles</div>
+    <p class="section-intro">After weight and CoG, wheel and axle preparation is the highest-ROI improvement. Even small friction increases in four axles compound significantly over 32 feet of track.</p>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">⚙️</span> Why Axle Prep Matters</div>
+      <p style="color:var(--text2);font-size:0.9rem;line-height:1.8;">BSA nail axles have factory burrs, ridges, and rough surfaces. Each wheel contacts its axle at a tiny point — but friction at that point persists for 4+ seconds of race time. A polished axle can reduce rolling friction by 30–50% compared to a raw nail. Across four wheels, this is substantial.</p>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="card-title" style="margin-bottom:1rem;font-family:'DM Mono',monospace;font-size:1rem;color:var(--text);">Axle Prep Steps</div>
+        <ul id="axleChecklist" class="checklist">
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="check-text">
+              <div class="check-title">Inspect for burrs</div>
+              <div class="check-note">Examine nail head rim under good light. Look for sharp raised edges or casting marks.</div>
+            </div>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="check-text">
+              <div class="check-title">File the crimp marks</div>
+              <div class="check-note">Use a fine needle file to smooth the crimp mark on the nail head edge (where the wheel contacts).</div>
+            </div>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="check-text">
+              <div class="check-title">Sand with 400 → 800 → 1200 → 2000 grit</div>
+              <div class="check-note">Mount axle in a drill on low speed. Hold sandpaper against the shaft. Work through grits progressively.</div>
+            </div>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="check-text">
+              <div class="check-title">Polish to mirror finish</div>
+              <div class="check-note">Use metal polish (Mothers Mag, Brasso) with a cloth on spinning axle. Polish until reflective.</div>
+            </div>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="check-text">
+              <div class="check-title">Apply graphite lube</div>
+              <div class="check-note">Coat the axle shaft with dry powdered graphite. Spin the wheel 5–10 times to distribute. Wipe excess.</div>
+            </div>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="check-text">
+              <div class="check-title">Check axle alignment</div>
+              <div class="check-note">Install and sight down the track — wheels should be parallel and not toe in/out. Use a flat surface to verify.</div>
+            </div>
+          </li>
+        </ul>
+        <div style="margin-top:0.8rem;">
+          <div style="font-size:0.72rem;color:var(--text3);margin-bottom:0.3rem;">Axle Progress</div>
+          <div class="progress-wrap"><div class="progress-bar" id="axleProgress" style="width:0%;"></div></div>
+          <div id="axleProgressText" style="font-size:0.78rem;color:var(--text3);">0 / 6 steps complete</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card-title" style="margin-bottom:1rem;font-family:'DM Mono',monospace;font-size:1rem;color:var(--text);">Wheel Prep</div>
+        <ul id="wheelChecklist" class="checklist">
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="check-text">
+              <div class="check-title">Inspect wheel bore</div>
+              <div class="check-note">Check for flashing (plastic fins) inside the hub bore — these create contact friction. Remove carefully.</div>
+            </div>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="check-text">
+              <div class="check-title">True the wheel (if allowed)</div>
+              <div class="check-note">Mount on axle in a drill, hold against fine sandpaper at low speed to make tread perfectly round. Check local rules.</div>
+            </div>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="check-text">
+              <div class="check-title">Check for wobble</div>
+              <div class="check-note">Spin wheel on axle. Watch for any side-to-side wobble. Reject warped wheels from the kit — swap for a better one.</div>
+            </div>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="check-text">
+              <div class="check-title">Minimize wheel contact area</div>
+              <div class="check-note">The wheel hub should only barely contact the car body. Leave a 1–2mm gap. Too tight = friction. Too loose = wobble.</div>
+            </div>
+          </li>
+        </ul>
+        <div style="margin-top:0.8rem;">
+          <div style="font-size:0.72rem;color:var(--text3);margin-bottom:0.3rem;">Wheel Progress</div>
+          <div class="progress-wrap"><div class="progress-bar" id="wheelProgress" style="width:0%;"></div></div>
+          <div id="wheelProgressText" style="font-size:0.78rem;color:var(--text3);">0 / 4 steps complete</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:1.5rem;">
+      <div class="card-title"><span class="icon">🚫</span> Common Wheel Mistakes</div>
+      <div class="mistake-item">
+        <div class="mistake-icon">✗</div>
+        <div class="mistake-text">
+          <div class="title">Using WD-40 or oil lubricants</div>
+          <div class="desc">These attract dust and actually increase friction over the course of a race. Only dry graphite powder is BSA-legal and effective.</div>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-icon">✗</div>
+        <div class="mistake-text">
+          <div class="title">Pressing axles in too tight</div>
+          <div class="desc">An axle pressed in with too much force bends slightly, causing wheels to toe in or out and drag against the car body.</div>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-icon">✗</div>
+        <div class="mistake-text">
+          <div class="title">Ignoring one "boring" wheel</div>
+          <div class="desc">All four wheels matter. One rough axle can negate three perfect ones. Treat all four identically.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STABILITY -->
+  <section class="section" id="tab-stability">
+    <div class="section-title">Stability <span>&</span> Track Setup</div>
+    <p class="section-intro">A fast car that wobbles, bounces off rails, or veers sideways loses all that speed. Stability is the foundation that lets your weight and wheel prep actually work.</p>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title"><span class="icon">⚖️</span> Wheel Load Distribution</div>
+        <p style="color:var(--text2);font-size:0.85rem;line-height:1.7;margin-bottom:0.8rem;">With a rear CoG, the rear wheels carry ~3.5–4 oz and the front wheels carry only ~1–1.5 oz. This is intentional and fine — but the front wheels must still have <em>some</em> load to track straight.</p>
+        <p style="color:var(--text2);font-size:0.85rem;line-height:1.7;">If your CoG is too far back, front wheels become unloaded, causing the car to "steer" erratically down the lane or bounce off the center rail repeatedly.</p>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="icon">🎯</span> The Rail-Riding Trick</div>
+        <p style="color:var(--text2);font-size:0.85rem;line-height:1.7;margin-bottom:0.8rem;">Many competitive builders angle one front wheel slightly outward so it rides the center rail, effectively eliminating side-to-side drift entirely. This is called "rail-riding."</p>
+        <p style="color:var(--text2);font-size:0.85rem;line-height:1.7;">Check if this is legal at your pack. When legal, it straightens the car perfectly and lets you optimize the other 3 wheels for minimum friction.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span> Track Type Adjustments</div>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--border);">
+              <th style="text-align:left;padding:0.7rem 0.5rem;color:var(--text3);font-weight:500;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;">Track Type</th>
+              <th style="text-align:left;padding:0.7rem 0.5rem;color:var(--text3);font-weight:500;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;">Recommended CoG</th>
+              <th style="text-align:left;padding:0.7rem 0.5rem;color:var(--text3);font-weight:500;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;">Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:0.7rem 0.5rem;font-weight:500;">Fast aluminum track (smooth)</td>
+              <td style="padding:0.7rem 0.5rem;font-family:'DM Mono',monospace;color:var(--orange);">0.9–1.0" from rear axle</td>
+              <td style="padding:0.7rem 0.5rem;color:var(--text2);">Smooth track can handle maximum rear bias. Most competitive packs.</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:0.7rem 0.5rem;font-weight:500;">Older wood track (rough)</td>
+              <td style="padding:0.7rem 0.5rem;font-family:'DM Mono',monospace;color:var(--yellow);">1.0–1.3" from rear axle</td>
+              <td style="padding:0.7rem 0.5rem;color:var(--text2);">Bumpy surface needs more front weight to prevent bouncing and rail contact.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.7rem 0.5rem;font-weight:500;">Unknown track</td>
+              <td style="padding:0.7rem 0.5rem;font-family:'DM Mono',monospace;color:var(--blue2);">1.0" from rear axle</td>
+              <td style="padding:0.7rem 0.5rem;color:var(--text2);">Safe middle ground. Adjust 0.1–0.2" if you can test-run before race day.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🔎</span> Stability Checklist</div>
+      <div class="tip-item">
+        <div class="tip-icon">✓</div>
+        <div class="mistake-text">
+          <div class="title" style="color:var(--text);">Roll the car on a flat surface</div>
+          <div class="desc">Before race day, push the car gently on a flat table. It should roll in a perfectly straight line. Any curving means a misaligned axle.</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon">✓</div>
+        <div class="mistake-text">
+          <div class="title" style="color:var(--text);">Verify all 4 wheels touch</div>
+          <div class="desc">Set the car on glass or a mirror. All four wheel edges should contact evenly. If one wheel rocks, re-seat that axle.</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon">✓</div>
+        <div class="mistake-text">
+          <div class="title" style="color:var(--text);">Secure all weights firmly</div>
+          <div class="desc">Loose weights shift during the race, changing CoG mid-run. Epoxy every weight block in place. Verify by shaking the car — zero rattles allowed.</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon">✓</div>
+        <div class="mistake-text">
+          <div class="title" style="color:var(--text);">Re-graphite at race day</div>
+          <div class="desc">Bring a tube of graphite powder to the race. Apply fresh lube just before each heat. A little graphite goes a long way.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section class="section" id="tab-checklist">
+    <div class="section-title">Build <span>Checklist</span></div>
+    <p class="section-intro">Your complete race-day readiness checklist. Check off each item as you build. Aim for 100% before race day.</p>
+
+    <div class="card" style="margin-bottom:1.5rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;">
+        <div class="card-title" style="margin-bottom:0;">Overall Readiness</div>
+        <div style="font-family:'DM Mono',monospace;font-size:1.2rem;color:var(--orange);" id="overallPct">0%</div>
+      </div>
+      <div class="progress-wrap" style="height:10px;"><div class="progress-bar" id="overallBar" style="width:0%;"></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🔧</span> Build Phase</div>
+      <ul class="checklist" id="buildChecklist">
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Chose aerodynamic body shape (wedge or bullet)</div><div class="check-note">Cut and sand the body to final shape.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Drilled rear weight pocket</div><div class="check-note">Bottom of car, 0.5–1.0" from rear axle slot. Sized for tungsten cubes.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Packed tungsten weights into pocket</div><div class="check-note">Fit snugly with no movement. Dry-fit first, then epoxy when CoG verified.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Verified CoG at 0.9–1.0" from rear axle</div><div class="check-note">Balance test on pencil/dowel. Measured and confirmed.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">CoG is low (near bottom of car)</div><div class="check-note">Weights are in bottom pocket, not glued on top.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Epoxied all weights permanently</div><div class="check-note">Shake test: zero rattles. Let cure for 24+ hours.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Sanded and finished body</div><div class="check-note">Smooth surfaces, rounded edges. Painted and sealed.</div></div></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">⚙️</span> Wheel & Axle Phase</div>
+      <ul class="checklist" id="wheelBuildChecklist">
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">All 4 axles polished (mirror finish)</div><div class="check-note">400 → 800 → 1200 → 2000 grit + metal polish.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Wheel bore inspected, flashing removed</div><div class="check-note">Use a craft knife or micro drill bit to remove any plastic fins in hub.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Wheels trued (if allowed)</div><div class="check-note">Each wheel spins without side wobble. Tread is round.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Graphite applied to all axles</div><div class="check-note">Powder on shaft, spun in 5–10 times. Excess wiped off.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Axles aligned — car rolls straight</div><div class="check-note">Roll test on flat table. Straight line tracking confirmed.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">All 4 wheels contact table surface evenly</div><div class="check-note">No rocking. Check on glass or flat surface.</div></div></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🏁</span> Race Day Phase</div>
+      <ul class="checklist" id="raceDayChecklist">
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Final weigh-in: exactly 5.000 oz</div><div class="check-note">Bring a digital scale to verify. If under, use small adhesive weight strips to hit max.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Fresh graphite applied before each heat</div><div class="check-note">Bring graphite powder tube. A tiny tap on each axle before each run.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">No loose parts</div><div class="check-note">Final shake test — zero rattles or movement. Wheels secure but spinning freely.</div></div></li>
+        <li onclick="toggleMasterCheck(this)"><div class="check-box">✓</div><div class="check-text"><div class="check-title">Verified legal dimensions</div><div class="check-note">Measure length, width, height, and clearance against official gauges at impound.</div></div></li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="card-title" style="margin-bottom:1rem;"><span class="icon">⚠️</span> Most Common Race-Losing Mistakes</div>
+
+    <div class="mistake-item">
+      <div class="mistake-icon">✗</div>
+      <div class="mistake-text"><div class="title">Car weighs less than 5.000 oz</div><div class="desc">The #1 fixable mistake. Every 0.1 oz under max costs you real time. Buy tungsten putty to fine-tune to exactly 5.00 oz.</div></div>
+    </div>
+    <div class="mistake-item">
+      <div class="mistake-icon">✗</div>
+      <div class="mistake-text"><div class="title">CoG too far forward (center or front)</div><div class="desc">Many builders put weights in the middle out of caution. This wastes the biggest advantage available. Move mass rearward.</div></div>
+    </div>
+    <div class="mistake-item">
+      <div class="mistake-icon">✗</div>
+      <div class="mistake-text"><div class="title">Skipping axle prep</div><div class="desc">Raw factory nails have burrs that create enormous friction. This is a 2–3 hour job that pays back 2–4 car lengths. Don't skip it.</div></div>
+    </div>
+    <div class="mistake-item">
+      <div class="mistake-icon">✗</div>
+      <div class="mistake-text"><div class="title">Loose weights glued on top of car</div><div class="desc">Raises CoG (bad for stability) and risks a weight detaching during race (DQ). Always drill pockets and epoxy securely.</div></div>
+    </div>
+    <div class="mistake-item">
+      <div class="mistake-icon">✗</div>
+      <div class="mistake-text"><div class="title">Misaligned axles (toe-in/toe-out)</div><div class="desc">A wheel pointing even 2° off-center causes it to drag sideways the entire race. Roll test every car before race day.</div></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>🏎️ Based on <span>physics principles</span> and racer consensus — always test your own car!</p>
+  <p style="margin-top:0.4rem;font-size:0.72rem;">Results vary by track, rules, and build execution. Verify all modifications against your local BSA pack rules before race day.</p>
+</footer>
+
+<script>
+  // NAV
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // ACCORDION
+  document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      item.classList.toggle('open');
+    });
+  });
+
+  // COG SLIDER
+  const cogSlider = document.getElementById('cogSlider');
+  const cogValue = document.getElementById('cogValue');
+  const cogBar = document.getElementById('cogBar');
+  const carLengths = document.getElementById('carLengths');
+  const cogStatus = document.getElementById('cogStatus');
+  const cogDesc = document.getElementById('cogDesc');
+  const cogLine = document.getElementById('cogLine');
+  const cogDot = document.getElementById('cogDot');
+  const cogText = document.getElementById('cogText');
+
+  function updateCog() {
+    const val = parseFloat(cogSlider.value);
+    cogValue.textContent = val.toFixed(1) + ' inches';
+
+    // Calculate advantage (peak at 0.9–1.1")
+    let advantage, barPct, status, desc;
+    if (val <= 0.5) {
+      advantage = 1.5; barPct = 30;
+      status = '⚠️ Too Far Rear'; desc = 'Risk of front wheels lifting on the ramp. Unstable, may veer off course.';
+    } else if (val <= 0.7) {
+      advantage = 3.5; barPct = 70;
+      status = '👍 Good'; desc = 'Getting close to optimal. Most mass is benefiting from the ramp height difference.';
+    } else if (val <= 1.2) {
+      const peak = 1.0, span = 0.25;
+      const dist = Math.abs(val - peak);
+      advantage = parseFloat((5.0 - (dist/span)*0.8).toFixed(1));
+      advantage = Math.min(advantage, 5.0);
+      barPct = 85 + (1 - dist/span) * 15;
+      status = '✅ Optimal Zone'; desc = 'Car lengths ahead vs a front-weighted car. This is the sweet spot — rear enough to gain potential energy, front enough to maintain stability.';
+    } else if (val <= 2.0) {
+      advantage = parseFloat((4.0 - (val-1.2)*2.5).toFixed(1));
+      barPct = 65;
+      status = '😐 Acceptable'; desc = 'CoG moving toward center. You\'re leaving speed on the table — try moving mass further back.';
+    } else if (val <= 2.8) {
+      advantage = parseFloat((2.0 - (val-2.0)*1.5).toFixed(1));
+      barPct = 35;
+      status = '📉 Below Average'; desc = 'Center-weighted car. Likely what most beginners build — faster than front, but not competitive.';
+    } else {
+      advantage = 0; barPct = 10;
+      status = '❌ Front-Weighted'; desc = 'Maximum disadvantage. Mass falls the least height. Slowest possible CoG position.';
+    }
+
+    carLengths.textContent = Math.max(0, advantage).toFixed(1);
+    cogBar.style.width = barPct + '%';
+    cogStatus.textContent = status;
+    cogDesc.textContent = desc;
+
+    // Update SVG car viz
+    // car body x: 50 to 550 (width 500)
+    // rear axle at x=120, front axle at x=480
+    // distance from rear in inches, track is ~4.25" wheelbase
+    const trackPx = 480 - 120; // 360px for 4.25"
+    const pxPerInch = trackPx / 4.25;
+    const cogX = 480 - (val * pxPerInch); // from front axle backward
+    const clampedX = Math.max(60, Math.min(540, cogX));
+
+    cogLine.setAttribute('x1', clampedX);
+    cogLine.setAttribute('x2', clampedX);
+    cogDot.setAttribute('cx', clampedX);
+    cogText.setAttribute('x', clampedX);
+  }
+
+  cogSlider.addEventListener('input', updateCog);
+  updateCog();
+
+  // SHAPES
+  document.querySelectorAll('.shape-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.shape-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+    });
+  });
+
+  // ─── RACE SIMULATION ────────────────────────────────────────────────────────
+
+  // Physics constants (approximate BSA track model)
+  // Track: 32ft (~9.75m), drop height ~4ft (~1.22m)
+  // Energy model: KE = m*g*h_effective - friction_losses - drag_losses
+  // Effective height depends on CoG position (rear CoG = higher drop on slope)
+  // Speed ∝ sqrt(2 * g * h_eff * (1 - Cd_factor) * weight_factor / rolling_factor)
+
+  const CAR_DEFINITIONS = [
+    {
+      id: 'rc1', name: 'Classic Wedge',   emoji: '🟧',
+      color: 'linear-gradient(90deg,#f97316,#fb923c)',
+      Cd: 0.28,   // drag coefficient (lower = better)
+      desc: 'Low sloped front, classic competition shape'
+    },
+    {
+      id: 'rc2', name: 'Bullet Nose',    emoji: '🟦',
+      color: 'linear-gradient(90deg,#3b82f6,#60a5fa)',
+      Cd: 0.25,
+      desc: 'Rounded taper, best aero of all shapes'
+    },
+    {
+      id: 'rc3', name: 'Low-Profile Rail', emoji: '🟪',
+      color: 'linear-gradient(90deg,#8b5cf6,#a78bfa)',
+      Cd: 0.30,
+      desc: 'Flat minimal cross-section, very sleek'
+    },
+    {
+      id: 'rc4', name: 'Standard Block',  emoji: '🟥',
+      color: 'linear-gradient(90deg,#ef4444,#f87171)',
+      Cd: 0.52,
+      desc: 'Default kit shape, high frontal drag'
+    },
+    {
+      id: 'rc5', name: 'Kamm-Tail',      emoji: '🟩',
+      color: 'linear-gradient(90deg,#22c55e,#4ade80)',
+      Cd: 0.26,
+      desc: 'Smooth front + truncated tail — fast & practical'
+    },
+    {
+      id: 'rc6', name: 'Shark Fin',      emoji: '🟨',
+      color: 'linear-gradient(90deg,#eab308,#facc15)',
+      Cd: 0.38,
+      desc: 'Central spine fin — looks cool, mid-tier aero'
+    },
+    {
+      id: 'rc7', name: 'Double Wedge',   emoji: '🔶',
+      color: 'linear-gradient(90deg,#f97316,#dc2626)',
+      Cd: 0.27,
+      desc: 'Diamond profile sheds air front & rear'
+    },
+    {
+      id: 'rc8', name: 'Coffin / Hex',   emoji: '🔷',
+      color: 'linear-gradient(90deg,#a78bfa,#7c3aed)',
+      Cd: 0.41,
+      desc: 'Angled hex cuts — easy build, decent aero'
+    }
+  ];
+
+  // Mutable config per car (weight oz, CoG inches from rear)
+  const carConfigs = CAR_DEFINITIONS.map(c => ({
+    id: c.id,
+    weight: 5.0,
+    cog: 1.0   // inches from rear axle
+  }));
+
+  // Build the config UI
+  function buildConfigUI() {
+    const grid = document.getElementById('carConfigGrid');
+    grid.innerHTML = '';
+    CAR_DEFINITIONS.forEach((car, i) => {
+      const cfg = carConfigs[i];
+      const div = document.createElement('div');
+      div.style.cssText = 'background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:0.7rem;';
+      div.innerHTML = `
+        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.5rem;">
+          <div style="width:10px;height:10px;border-radius:2px;background:${car.color};flex-shrink:0;"></div>
+          <span style="font-size:0.78rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${car.name}</span>
+        </div>
+        <div style="font-size:0.7rem;color:var(--text3);margin-bottom:0.6rem;">Cd = ${car.Cd.toFixed(2)}</div>
+        <div style="font-size:0.7rem;color:var(--text3);display:flex;justify-content:space-between;"><span>Weight</span><span id="wlbl_${car.id}" style="color:var(--orange);font-family:'DM Mono',monospace;">${cfg.weight.toFixed(1)} oz</span></div>
+        <input type="range" min="1" max="5" step="0.1" value="${cfg.weight}" style="width:100%;margin:2px 0 6px;"
+          oninput="updateCarWeight('${car.id}', this.value)">
+        <div style="font-size:0.7rem;color:var(--text3);display:flex;justify-content:space-between;"><span>CoG from rear</span><span id="clbl_${car.id}" style="color:var(--blue2);font-family:'DM Mono',monospace;">${cfg.cog.toFixed(1)}"</span></div>
+        <input type="range" min="0.5" max="3.5" step="0.1" value="${cfg.cog}" style="width:100%;margin:2px 0 0;"
+          oninput="updateCarCog('${car.id}', this.value)">
+      `;
+      grid.appendChild(div);
+    });
+  }
+
+  function updateCarWeight(id, val) {
+    const i = carConfigs.findIndex(c => c.id === id);
+    carConfigs[i].weight = parseFloat(val);
+    document.getElementById('wlbl_' + id).textContent = parseFloat(val).toFixed(1) + ' oz';
+  }
+
+  function updateCarCog(id, val) {
+    const i = carConfigs.findIndex(c => c.id === id);
+    carConfigs[i].cog = parseFloat(val);
+    document.getElementById('clbl_' + id).textContent = parseFloat(val).toFixed(1) + '"';
+  }
+
+  function resetCarDefaults() {
+    carConfigs.forEach(c => { c.weight = 5.0; c.cog = 1.0; });
+    buildConfigUI();
+    buildLanesUI();
+    resetRace();
+  }
+
+  // Build lane UI
+  function buildLanesUI() {
+    const container = document.getElementById('raceLanes');
+    container.innerHTML = '';
+    CAR_DEFINITIONS.forEach((car, i) => {
+      const lane = document.createElement('div');
+      lane.className = 'race-lane';
+      lane.innerHTML = `
+        <div class="race-lane-label" style="width:130px;font-size:0.72rem;">${car.name}</div>
+        <div class="race-track" id="track_${car.id}">
+          <div class="race-car" id="${car.id}" style="background:${car.color};">🏁</div>
+        </div>
+        <div class="race-time" id="time_${car.id}">—</div>
+        <div id="rank_${car.id}" style="width:20px;font-size:0.75rem;color:var(--text3);font-family:'DM Mono',monospace;text-align:center;"></div>
+      `;
+      container.appendChild(lane);
+    });
+  }
+
+  // Physics: compute a "speed score" for each car (higher = faster)
+  // Model: v_final ∝ sqrt( weight * cog_factor ) * (1 - drag_factor)
+  // cog_factor: rear CoG gains potential energy advantage (peak at ~1.0")
+  // drag_factor: proportional to Cd
+  function computeSpeedScore(cfg, car) {
+    const w = cfg.weight;  // oz, max 5
+    // Potential energy advantage: rear-weighted CoG is higher on slope
+    // Ramp angle ~22°. CoG advantage peaks near 1.0" from rear axle.
+    // At center (~2.125"), advantage = 0. At 0.9-1.0", max gain.
+    const cogOptimal = 1.0;
+    const cogCenter = 2.125;
+    const cogDist = cfg.cog; // inches from rear
+    // Height advantage above center-weighted baseline
+    const rampHeight = 1.22; // meters total drop
+    const rampLen = 9.75;    // meters track length
+    const rampAngle = Math.asin(rampHeight / rampLen);
+    // Additional height from rear CoG placement (approximate)
+    // Δh = (cogCenter - cogDist) * sin(rampAngle) * 0.0254 (inches to meters)
+    const deltaH = (cogCenter - cogDist) * Math.sin(rampAngle) * 0.0254;
+    const hEff = rampHeight + deltaH;
+
+    // Mass penalty for rotational inertia of wheels (constant across cars)
+    const rollingFactor = 0.88; // fraction of PE converted to translational KE
+
+    // Weight converts directly to more PE (heavier = faster on gravity track)
+    // Normalize weight: max weight = 5oz, effect scales linearly
+    const weightFactor = w / 5.0;
+
+    // Drag loss (simplified): proportional to Cd, more effect at higher speeds
+    // Approximate percentage of energy lost to drag over track
+    const dragLoss = car.Cd * 0.18; // tuned so block loses ~9% vs wedge ~5%
+
+    // Final speed score (arbitrary units, relative comparison)
+    const score = Math.sqrt(hEff * weightFactor * rollingFactor) * (1 - dragLoss);
+    return score;
+  }
+
+  let raceRunning = false;
+  let raceFrame = null;
+
+  function resetRace() {
+    if (raceFrame) cancelAnimationFrame(raceFrame);
+    raceRunning = false;
+    CAR_DEFINITIONS.forEach(car => {
+      const el = document.getElementById(car.id);
+      if (el) el.style.left = '0px';
+      const t = document.getElementById('time_' + car.id);
+      if (t) t.textContent = '—';
+      const r = document.getElementById('rank_' + car.id);
+      if (r) r.textContent = '';
+    });
+    const btn = document.getElementById('raceBtn');
+    if (btn) btn.textContent = '▶ Start Race';
+    const res = document.getElementById('raceResult');
+    if (res) res.style.display = 'none';
+  }
+
+  function startRace() {
+    if (raceRunning) { resetRace(); return; }
+    resetRace();
+    raceRunning = true;
+    document.getElementById('raceBtn').textContent = '■ Stop';
+
+    // Compute speed scores
+    const scores = CAR_DEFINITIONS.map((car, i) => ({
+      car,
+      score: computeSpeedScore(carConfigs[i], car),
+      cfg: carConfigs[i]
+    }));
+
+    const maxScore = Math.max(...scores.map(s => s.score));
+    // Normalize to relative speeds (1.0 = fastest)
+    const speeds = scores.map(s => s.score / maxScore);
+
+    const positions = new Array(8).fill(0);
+    const finished = new Array(8).fill(false);
+    const finishTimes = new Array(8).fill(null);
+    const startTime = performance.now();
+    const baseRate = 0.22; // percent per frame at full speed
+    let rankCounter = 0;
+
+    const RACE_DURATION_BASELINE = 4.2; // seconds for max-score car (scaled)
+
+    function frame(now) {
+      if (!raceRunning) return;
+      const elapsed = (now - startTime) / 1000;
+
+      // Acceleration profile: cars accelerate on the ramp (~first 40% of track)
+      const rampPct = 0.40;
+
+      CAR_DEFINITIONS.forEach((car, i) => {
+        if (finished[i]) return;
+        const pct = positions[i] / 100;
+        // Acceleration: higher on ramp section
+        const accelPhase = pct < rampPct ? (pct / rampPct) : 1.0;
+        const speed = speeds[i] * baseRate * (0.3 + 0.7 * accelPhase);
+        positions[i] += speed * (1 + (Math.random() - 0.5) * 0.01);
+
+        const trackEl = document.getElementById('track_' + car.id);
+        const carEl = document.getElementById(car.id);
+        if (!trackEl || !carEl) return;
+        const trackW = trackEl.clientWidth;
+        const carW = 30;
+        const px = Math.min(positions[i] / 100, 1) * (trackW - carW);
+        carEl.style.left = px + 'px';
+
+        if (positions[i] >= 100) {
+          finished[i] = true;
+          rankCounter++;
+          finishTimes[i] = elapsed;
+          // Scale elapsed to realistic race time
+          const scaledTime = (RACE_DURATION_BASELINE / speeds[i]).toFixed(2);
+          document.getElementById('time_' + car.id).textContent = scaledTime + 's';
+          const rankEl = document.getElementById('rank_' + car.id);
+          if (rankEl) {
+            rankEl.textContent = '#' + rankCounter;
+            rankEl.style.color = rankCounter === 1 ? '#f97316' : rankCounter <= 3 ? '#22c55e' : '#5a6278';
+          }
+        }
+      });
+
+      if (finished.every(Boolean)) {
+        raceRunning = false;
+        document.getElementById('raceBtn').textContent = '▶ Race Again';
+        // Show winner summary
+        const winnerIdx = finishTimes.indexOf(Math.min(...finishTimes));
+        const winner = CAR_DEFINITIONS[winnerIdx];
+        const winnerCfg = carConfigs[winnerIdx];
+        const res = document.getElementById('raceResult');
+        res.style.display = 'block';
+        res.innerHTML = `🏆 <strong style="color:var(--orange);">${winner.name}</strong> wins! 
+          &nbsp;(${winnerCfg.weight.toFixed(1)} oz · CoG ${winnerCfg.cog.toFixed(1)}" from rear · Cd ${winner.Cd.toFixed(2)}) 
+          &mdash; Try adjusting weights and CoG to see different outcomes.`;
+        return;
+      }
+      raceFrame = requestAnimationFrame(frame);
+    }
+
+    raceFrame = requestAnimationFrame(frame);
+  }
+
+  // Init simulator
+  buildConfigUI();
+  buildLanesUI();
+
+  // CHECKLISTS
+  function toggleCheck(li) {
+    li.classList.toggle('checked');
+    updateChecklistProgress(li.parentElement);
+  }
+
+  function updateChecklistProgress(list) {
+    const total = list.querySelectorAll('li').length;
+    const done = list.querySelectorAll('li.checked').length;
+    const pct = total > 0 ? Math.round((done/total)*100) : 0;
+
+    if (list.id === 'axleChecklist') {
+      document.getElementById('axleProgress').style.width = pct + '%';
+      document.getElementById('axleProgressText').textContent = done + ' / ' + total + ' steps complete';
+    } else if (list.id === 'wheelChecklist') {
+      document.getElementById('wheelProgress').style.width = pct + '%';
+      document.getElementById('wheelProgressText').textContent = done + ' / ' + total + ' steps complete';
+    }
+    updateOverall();
+  }
+
+  function toggleMasterCheck(li) {
+    li.classList.toggle('checked');
+    updateOverall();
+  }
+
+  function updateOverall() {
+    const allLi = document.querySelectorAll('#tab-checklist .checklist li');
+    const total = allLi.length;
+    const done = document.querySelectorAll('#tab-checklist .checklist li.checked').length;
+    const pct = Math.round((done/total)*100);
+    document.getElementById('overallBar').style.width = pct + '%';
+    document.getElementById('overallPct').textContent = pct + '%';
+  }
+
+  // TRACK CANVAS
+  const canvas = document.getElementById('trackCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function drawTrack() {
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    // Background
+    ctx.fillStyle = '#13161e';
+    ctx.fillRect(0, 0, w, h);
+
+    // Draw ramp
+    ctx.strokeStyle = '#2a2f45';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(0, 20); ctx.lineTo(280, 80);
+    ctx.stroke();
+
+    // Flat section
+    ctx.beginPath();
+    ctx.moveTo(280, 80); ctx.lineTo(w, 80);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Height drop indicator
+    ctx.strokeStyle = 'rgba(249,115,22,0.5)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(60, 35); ctx.lineTo(60, 80);
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(249,115,22,0.7)';
+    ctx.font = '10px DM Mono, monospace';
+    ctx.fillText('h₁', 63, 60);
+
+    ctx.beginPath();
+    ctx.moveTo(200, 60); ctx.lineTo(200, 80);
+    ctx.stroke();
+    ctx.fillText('h₂', 203, 72);
+
+    // Gravity arrow
+    ctx.strokeStyle = '#3b82f6';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(380, 30); ctx.lineTo(380, 65);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(376, 62); ctx.lineTo(380, 70); ctx.lineTo(384, 62);
+    ctx.fillStyle = '#3b82f6';
+    ctx.fill();
+    ctx.fillStyle = '#3b82f6';
+    ctx.font = '9px DM Mono, monospace';
+    ctx.fillText('g', 383, 50);
+
+    // Labels
+    ctx.fillStyle = '#5a6278';
+    ctx.font = '9px DM Mono, monospace';
+    ctx.fillText('START', 10, 15);
+    ctx.fillText('FLAT SECTION', 310, 75);
+
+    // Front car (CoG forward)
+    ctx.fillStyle = 'rgba(239,68,68,0.4)';
+    ctx.fillRect(90, 28, 35, 10);
+    ctx.fillStyle = 'rgba(239,68,68,0.8)';
+    ctx.font = '8px sans-serif';
+    ctx.fillText('•', 99, 38); // CoG dot
+
+    // Rear car (CoG rear)
+    ctx.fillStyle = 'rgba(34,197,94,0.4)';
+    ctx.fillRect(30, 40, 35, 10);
+    ctx.fillStyle = 'rgba(34,197,94,0.8)';
+    ctx.fillText('•', 35, 50);
+
+    ctx.fillStyle = '#5a6278';
+    ctx.font = '8px DM Mono, monospace';
+    ctx.fillText('Rear CoG (more height = faster)', 10, 105);
+
+    // Finish flag
+    ctx.fillStyle = '#f97316';
+    ctx.fillRect(w - 25, 68, 20, 2);
+    ctx.fillStyle = '#f97316';
+    ctx.font = '14px sans-serif';
+    ctx.fillText('🏁', w - 28, 68);
+  }
+
+  drawTrack();
+
+  // ─── AERO CHECKLIST ────────────────────────────────────────────────────────
+  const AERO_LIST_IDS = ['aeroChecklist1','aeroChecklist2','aeroChecklist3','aeroChecklist4'];
+
+  function toggleAeroCheck(li) {
+    li.classList.toggle('checked');
+    updateAeroProgress();
+  }
+
+  function updateAeroProgress() {
+    let total = 0, done = 0;
+    AERO_LIST_IDS.forEach(id => {
+      const list = document.getElementById(id);
+      if (!list) return;
+      const items = list.querySelectorAll('li');
+      total += items.length;
+      done  += list.querySelectorAll('li.checked').length;
+    });
+
+    const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+    const bar = document.getElementById('aeroBar');
+    const pctEl = document.getElementById('aeroPct');
+    const summary = document.getElementById('aeroSummary');
+    if (bar)     bar.style.width = pct + '%';
+    if (pctEl)   pctEl.textContent = pct + '%';
+    if (summary) {
+      if (pct === 0)        summary.textContent = 'Check off items as you complete each step.';
+      else if (pct < 30)    summary.textContent = `Good start — ${done} of ${total} steps done. Keep going!`;
+      else if (pct < 60)    summary.textContent = `Making progress — ${done} of ${total} steps done. Body shaping underway.`;
+      else if (pct < 85)    summary.textContent = `Almost there — ${done} of ${total} steps done. Finishing phase in sight!`;
+      else if (pct < 100)   summary.textContent = `Nearly complete — ${done} of ${total} steps done. Almost race-ready!`;
+      else                  summary.textContent = `✅ All ${total} aero steps complete — your car is shape-optimized and ready!`;
+
+      summary.style.color = pct === 100 ? 'var(--green)' : 'var(--text3)';
+    }
+  }
+
+  function resetAeroChecklist() {
+    AERO_LIST_IDS.forEach(id => {
+      const list = document.getElementById(id);
+      if (list) list.querySelectorAll('li').forEach(li => li.classList.remove('checked'));
+    });
+    updateAeroProgress();
+  }
+</script>
+
+</body>
+</html>
