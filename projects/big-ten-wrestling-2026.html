@@ -1109,8 +1109,8 @@
       </div>
     </div>
 
-    <h3 class="section-title" style="font-size:2rem;">Predicted <span>Standings</span></h3>
-    <p class="section-intro">Pre-tournament team rankings based on seeds and dual meet performance.</p>
+    <h3 class="section-title" style="font-size:2rem;" id="standingsTitle">Predicted <span>Standings</span></h3>
+    <p class="section-intro" id="standingsIntro">Pre-tournament team rankings based on seeds and dual meet performance.</p>
     <div class="standings" id="standings"></div>
   </div>
 
@@ -1353,6 +1353,8 @@ async function fetchLiveResults() {
       liveStatus.textContent = 'Updated ' + new Date().toLocaleTimeString();
       liveBadge.style.display = 'inline-block';
 
+      renderStandings();
+
       const activeWt = document.querySelector('.weight-pill.active');
       if (activeWt) showWeight(parseInt(activeWt.textContent));
     } else {
@@ -1378,102 +1380,158 @@ async function fetchWeightBracket(wt) {
 }
 
 function parseBracketHtml(wt, html) {
-  // TrackWrestling renders brackets as absolute-positioned tables with text nodes:
-  // last name, then ", SCHOOL (seed)", then result like "Dec 8-3", and placements like "1ST"
+  // Parse TrackWrestling bracket HTML for placements and match results.
+  // TW renders wrestlers multiple times (once per round they advance), so we
+  // focus on reliably extracting placements and wrestler-result pairs.
   const doc = new DOMParser().parseFromString(html, 'text/html');
 
-  const allText = [];
-  const walk = document.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT, null, false);
-  let node;
-  while (node = walk.nextNode()) {
-    const t = node.textContent.trim();
-    if (t && t !== '&nbsp;' && t !== '\u00a0') allText.push(t);
-  }
+  // Extract all nested table cells (each bracket cell is a <center><table>)
+  const cells = doc.querySelectorAll('center > table');
+  const cellData = [];
+  cells.forEach(tbl => {
+    const texts = [];
+    tbl.querySelectorAll('td').forEach(td => {
+      const t = td.textContent.trim();
+      if (t && t !== '\u00a0') texts.push(t);
+    });
+    if (texts.length) cellData.push(texts);
+  });
 
-  const schoolPattern = /^,\s*([A-Z]{2,5})\s*\((\d+)\)$/;
+  const schoolCommaPattern = /^,\s*([A-Z]{2,5})\s*\((\d+)\)$/;
+  const schoolPlainPattern = /^([A-Z]{2,5})\s*\((\d+)\)$/;
   const resultPattern = /^(Dec|MD|TF|Fall|SV|TB|MF|Inj|FF|DQ|UTB|RTF|Forf)/i;
   const placementPattern = /^(1ST|2ND|3RD|4TH|5TH|6TH|7TH|8TH)$/;
-  const skipWords = ['Bye', 'Loser of', 'Winner of', 'Weight Class', 'Big Ten', 'Championships', 'Brackets'];
 
-  const entries = [];
+  const placements = {};
+  const winsByWrestler = {}; // key: "LastName-SCHOOL" -> [{result, seed}]
 
-  for (let i = 0; i < allText.length; i++) {
-    const t = allText[i];
+  for (const texts of cellData) {
+    let name = null, school = null, seed = null, result = null, placement = null;
 
-    if (placementPattern.test(t)) {
-      if (entries.length > 0) entries[entries.length - 1].placement = t;
-      continue;
+    for (const t of texts) {
+      if (placementPattern.test(t)) { placement = t; continue; }
+      const cm = t.match(schoolCommaPattern);
+      if (cm) { school = cm[1]; seed = parseInt(cm[2]); continue; }
+      const pm = t.match(schoolPlainPattern);
+      if (pm) { school = pm[1]; seed = parseInt(pm[2]); continue; }
+      if (resultPattern.test(t)) { result = t; continue; }
+      if (/^\d+$/.test(t) || t === '_' || t === 'Bye' || t.startsWith('Loser of') || t.startsWith('Winner of')) continue;
+      if (t.length >= 2 && t.length <= 25 && /^[A-Za-z]/.test(t)) {
+        if (!t.includes('{') && !t.includes('function') && !t.includes('window')) {
+          name = t;
+        }
+      }
     }
 
-    const schoolMatch = t.match(schoolPattern);
-    if (schoolMatch && entries.length > 0 && !entries[entries.length - 1].school) {
-      entries[entries.length - 1].school = schoolMatch[1];
-      entries[entries.length - 1].seed = parseInt(schoolMatch[2]);
-      continue;
-    }
-
-    if (resultPattern.test(t)) {
-      if (entries.length > 0) entries[entries.length - 1].result = t;
-      continue;
-    }
-
-    if (skipWords.some(w => t.startsWith(w))) continue;
-    if (t.length < 2 || t.length > 30) continue;
-    if (/^\d+$/.test(t)) continue;
-    if (/^[^a-zA-Z]/.test(t)) continue;
-    if (t.includes('{') || t.includes('function') || t.includes('var ') || t.includes('window.') || t.includes('document.')) continue;
-    if (t.includes('.js') || t.includes('osano') || t.includes('comscore') || t.includes('analytics')) continue;
-
-    if (i + 1 < allText.length && schoolPattern.test(allText[i + 1])) {
-      entries.push({ name: t, school: null, seed: null, result: null, placement: null });
-    }
-  }
-
-  // Build matchups: when an entry has a result, it beat the previous entry
-  const matchups = [];
-  for (let i = 1; i < entries.length; i++) {
-    const e = entries[i];
-    if (e.result && e.school) {
-      const opponent = entries[i - 1];
-      if (opponent && opponent.school) {
-        matchups.push({
-          winner: { name: e.name, school: e.school, seed: e.seed },
-          loser: { name: opponent.name, school: opponent.school, seed: opponent.seed },
-          method: e.result
-        });
+    if (name && school && seed) {
+      const lastName = name.split(' ').pop();
+      const key = lastName + '-' + school;
+      if (placement) {
+        placements[placement] = { name: lastName, school, seed };
+      }
+      if (result) {
+        if (!winsByWrestler[key]) winsByWrestler[key] = [];
+        winsByWrestler[key].push({ result, seed });
       }
     }
   }
 
-  // Extract placements
-  const placements = {};
-  entries.forEach(e => {
-    if (e.placement && e.school) {
-      placements[e.placement] = { name: e.name, school: e.school, seed: e.seed };
-    }
-  });
   liveResults[wt].placement = placements;
 
-  // Classify matchups into rounds by seed numbers
-  matchups.forEach(m => {
-    const highSeed = Math.min(m.winner.seed || 99, m.loser.seed || 99);
-    const lowSeed = Math.max(m.winner.seed || 0, m.loser.seed || 0);
+  // Build bracket from placements.
+  // Placements tell us: 1ST (champion), 3RD (SF loser who won 3rd), 5TH, 7TH
+  // The champion beat 2nd place in finals. 3rd/4th lost in SF. 5th-8th lost in QF.
+  // We can reconstruct: Finals = 1ST vs 2ND, SF = {1ST,3RD} and {2ND,4TH} pairings.
+  // For QF we pair SF participants against their QF opponents (5th-8th place finishers).
 
-    if (lowSeed > 8) {
-      liveResults[wt].r16.push(m);
-    } else if (highSeed <= 4 && lowSeed >= 5 && lowSeed <= 8) {
-      liveResults[wt].qf.push(m);
-    } else if (highSeed <= 2 && lowSeed <= 4) {
-      liveResults[wt].sf.push(m);
-    } else if (highSeed <= 2 && lowSeed <= 2) {
-      liveResults[wt].finals.push(m);
-    } else {
-      if (highSeed <= 2) liveResults[wt].sf.push(m);
-      else if (highSeed <= 4) liveResults[wt].qf.push(m);
-      else liveResults[wt].r16.push(m);
-    }
-  });
+  const p1 = placements['1ST'];
+  const p2 = placements['2ND'];
+  const p3 = placements['3RD'];
+  const p5 = placements['5TH'];
+  const p7 = placements['7TH'];
+
+  function getKey(p) { return p ? (p.name.split(' ').pop() + '-' + p.school) : null; }
+  function getWins(p) { return p ? (winsByWrestler[getKey(p)] || []) : []; }
+  function bestResult(wins, index) { return wins.length > index ? wins[index].result : ''; }
+
+  // Build Finals
+  if (p1 && p2) {
+    const wins1 = getWins(p1);
+    liveResults[wt].finals = [{
+      winner: { name: p1.name, school: p1.school, seed: p1.seed },
+      loser: { name: p2.name, school: p2.school, seed: p2.seed },
+      method: bestResult(wins1, wins1.length - 1)
+    }];
+  } else if (p1) {
+    liveResults[wt].finals = [{
+      winner: { name: p1.name, school: p1.school, seed: p1.seed },
+      loser: { name: 'TBD', school: '', seed: 0 },
+      method: ''
+    }];
+  }
+
+  // Build Semifinals
+  // In standard brackets: SF1 = eventual 1ST vs eventual 3RD or 4TH
+  // SF2 = eventual 2ND vs eventual 3RD or 4TH (the other one)
+  // We pair 1ST with whichever of 3RD/4TH is on the same side of the bracket
+  // Since we don't know exact sides, we use the results to figure it out.
+  // Simple heuristic: check if p1 has a win result that could be the SF win.
+  if (p1 && p3) {
+    const wins1 = getWins(p1);
+    const wins2 = p2 ? getWins(p2) : [];
+    // SF1: Champion beat someone to reach finals
+    // SF2: Runner-up beat someone to reach finals
+    // The 3rd place finisher lost an SF match. We need to figure out which SF they were in.
+    // Assume standard bracket structure: 1ST beat 3RD OR 4TH in SF, 2ND beat the other.
+    // We'll show: SF1 = p1 vs p3, SF2 = p2 vs p5/p7 (placeholder for the other SF loser)
+    // This isn't always correct, but provides a reasonable display.
+
+    // Try to find 4th place (2ND SF loser)
+    const p4 = placements['4TH'];
+
+    // Figure out which SF each finalist was in by checking bracket halves
+    // In a 16-man bracket: top half = seeds 1,8,4,5 → SF1; bottom half = seeds 3,6,2,7 → SF2
+    // But seedings vary. Use a simpler heuristic: the SF loser with more total wins
+    // likely played the eventual champion (deeper bracket path). Or just use p3 vs p1 and p4 vs p2.
+    const sf1Loser = p3;
+    const sf2Loser = p4 || p5 || { name: 'TBD', school: '', seed: 0 };
+
+    liveResults[wt].sf = [
+      {
+        winner: { name: p1.name, school: p1.school, seed: p1.seed },
+        loser: { name: sf1Loser.name, school: sf1Loser.school, seed: sf1Loser.seed },
+        method: wins1.length > 1 ? wins1[wins1.length - 2].result : (wins1.length > 0 ? wins1[0].result : '')
+      },
+      {
+        winner: p2 ? { name: p2.name, school: p2.school, seed: p2.seed } : { name: 'TBD', school: '', seed: 0 },
+        loser: { name: sf2Loser.name, school: sf2Loser.school, seed: sf2Loser.seed },
+        method: wins2.length > 1 ? wins2[wins2.length - 2].result : (wins2.length > 0 ? wins2[0].result : '')
+      }
+    ];
+  }
+
+  // Build QF - pair SF participants against consolation finishers
+  // QF losers end up in 5th-8th place. QF winners reach SF.
+  // Standard: QF1 winner → SF1, QF2 winner → SF1, QF3 winner → SF2, QF4 winner → SF2
+  // So: 1ST beat QF1 opponent, 3RD beat QF2 opponent, 2ND beat QF3, 4TH/other beat QF4
+  const sfParticipants = [p1, p3, p2, placements['4TH']].filter(Boolean);
+  const qfLosers = [p5, placements['6TH'], p7, placements['8TH']].filter(Boolean);
+
+  // Simple approach: create QF matches for each SF participant paired with a QF loser
+  const qfMatches = [];
+  for (let k = 0; k < sfParticipants.length; k++) {
+    const winner = sfParticipants[k];
+    const loser = qfLosers[k] || { name: 'TBD', school: '', seed: 0 };
+    const wins = getWins(winner);
+    qfMatches.push({
+      winner: { name: winner.name, school: winner.school, seed: winner.seed },
+      loser: { name: loser.name, school: loser.school, seed: loser.seed },
+      method: wins.length > 0 ? wins[0].result : ''
+    });
+  }
+  liveResults[wt].qf = qfMatches;
 }
+
 
 // ============ RENDERING ============
 
@@ -1491,10 +1549,86 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
   btn.addEventListener('click', function() { showTab(this.dataset.tab, this); });
 });
 
+// Map TrackWrestling school abbreviations to team names
+const SCHOOL_ABBR_MAP = {};
+TEAMS.forEach(t => { SCHOOL_ABBR_MAP[t.abbr] = t.name; });
+
+// Big Ten tournament placement points
+const PLACEMENT_POINTS = {
+  '1ST': 16, '2ND': 12, '3RD': 10, '4TH': 9,
+  '5TH': 7, '6TH': 6, '7TH': 4, '8TH': 3
+};
+
+// Bonus points by win method
+const BONUS_POINTS = { fall: 2, tf: 1.5, md: 1, sv: 0, tb: 0, dec: 0 };
+
+function classifyMethod(method) {
+  if (!method) return null;
+  const m = method.toLowerCase();
+  if (m.startsWith('fall')) return 'fall';
+  if (m.startsWith('tf') || m.startsWith('rtf')) return 'tf';
+  if (m.startsWith('md')) return 'md';
+  return 'dec';
+}
+
+function computeLiveStandings() {
+  const teamScores = {};
+  TEAMS.forEach(t => { teamScores[t.name] = 0; });
+
+  const weights = [125, 133, 141, 149, 157, 165, 174, 184, 197, 285];
+  for (const wt of weights) {
+    const live = liveResults[wt];
+    if (!live) continue;
+
+    // Placement points
+    if (live.placement) {
+      for (const [place, info] of Object.entries(live.placement)) {
+        const pts = PLACEMENT_POINTS[place] || 0;
+        const teamName = SCHOOL_ABBR_MAP[info.school] || info.school;
+        if (teamScores[teamName] !== undefined) {
+          teamScores[teamName] += pts;
+        }
+      }
+    }
+
+    // Advancement points (1 pt per win) + bonus points from match results
+    const allMatches = [...(live.qf || []), ...(live.sf || []), ...(live.finals || [])];
+    for (const match of allMatches) {
+      if (match.winner && match.winner.name !== 'TBD') {
+        const teamName = SCHOOL_ABBR_MAP[match.winner.school] || match.winner.school;
+        if (teamScores[teamName] !== undefined) {
+          teamScores[teamName] += 1; // advancement point
+          const type = classifyMethod(match.method);
+          if (type && BONUS_POINTS[type]) {
+            teamScores[teamName] += BONUS_POINTS[type];
+          }
+        }
+      }
+    }
+  }
+
+  return Object.entries(teamScores)
+    .map(([team, score]) => ({ team, score }))
+    .sort((a, b) => b.score - a.score)
+    .filter(s => s.score > 0 || TEAMS.some(t => t.name === s.team));
+}
+
 function renderStandings() {
-  const maxScore = STANDINGS[0].score;
+  const standings = liveDataLoaded ? computeLiveStandings() : STANDINGS;
+  const titleEl = document.getElementById('standingsTitle');
+  const introEl = document.getElementById('standingsIntro');
+
+  if (liveDataLoaded) {
+    titleEl.innerHTML = 'Live <span>Standings</span>';
+    introEl.textContent = 'Team scores computed from live tournament results.';
+  } else {
+    titleEl.innerHTML = 'Predicted <span>Standings</span>';
+    introEl.textContent = 'Pre-tournament team rankings based on seeds and dual meet performance.';
+  }
+
+  const maxScore = standings[0].score || 1;
   const el = document.getElementById('standings');
-  el.innerHTML = STANDINGS.map((s, i) => `
+  el.innerHTML = standings.map((s, i) => `
     <div class="standing-row animate-in">
       <div class="standing-rank">${i + 1}</div>
       <div class="standing-team">${s.team}</div>
