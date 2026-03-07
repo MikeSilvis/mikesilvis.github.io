@@ -82,23 +82,60 @@ export function buildSeededBracket(wrestlers) {
 }
 
 export function buildLiveBracket(wrestlers, live) {
-  const qfMatches = live.qf || [];
+  const w = wrestlers;
+  const liveQf = live.qf || [];
   const sfMatches = live.sf || [];
   const finalMatches = live.finals || [];
 
+  // Expected QF matchups by seed: 1v8, 4v5, 3v6, 2v7
+  const seededQf = [
+    [w[0], w[7]],
+    [w[3], w[4]],
+    [w[2], w[5]],
+    [w[1], w[6]],
+  ];
+
+  // Try to match each seeded QF to a live result
+  const qfSlots = seededQf.map(([top, bottom]) => {
+    const match = liveQf.find(m => {
+      const names = [m.winner.name, m.loser.name];
+      return names.some(n => top.name.includes(n) || n.includes(top.name.split(' ').pop())) ||
+             names.some(n => bottom.name.includes(n) || n.includes(bottom.name.split(' ').pop()));
+    });
+    if (match) return { type: 'result', match };
+    return { type: 'pending', top, bottom };
+  });
+
   // QF column
-  const qfContent = qfMatches.map((m, i) => (
-    <BracketMatchup key={i}>
-      <BracketSeed
-        wrestler={{ name: m.winner.name, school: m.winner.school }}
-        state="winner"
-      />
-      <BracketSeed
-        wrestler={{ name: m.loser.name, school: m.loser.school, score: m.method }}
-        state="loser"
-      />
-    </BracketMatchup>
-  ));
+  const qfContent = qfSlots.map((slot, i) => {
+    if (slot.type === 'result') {
+      const m = slot.match;
+      return (
+        <BracketMatchup key={i}>
+          <BracketSeed
+            wrestler={{ name: m.winner.name, school: m.winner.school }}
+            state="winner"
+          />
+          <BracketSeed
+            wrestler={{ name: m.loser.name, school: m.loser.school, score: m.method }}
+            state="loser"
+          />
+        </BracketMatchup>
+      );
+    }
+    return (
+      <BracketMatchup key={i}>
+        <BracketSeed wrestler={slot.top} showSeedNum state="pending" />
+        <BracketSeed wrestler={slot.bottom} showSeedNum state="pending" />
+      </BracketMatchup>
+    );
+  });
+
+  // Determine QF winners for SF projections
+  const qfWinners = qfSlots.map(slot => {
+    if (slot.type === 'result') return { name: slot.match.winner.name, school: slot.match.winner.school };
+    return null;
+  });
 
   // SF column
   let sfContent;
@@ -115,16 +152,16 @@ export function buildLiveBracket(wrestlers, live) {
         />
       </BracketMatchup>
     ));
-  } else if (qfMatches.length >= 4) {
+  } else {
     sfContent = (
       <>
         <BracketMatchup className={styles.bracketSf}>
-          <BracketSeed wrestler={{ name: qfMatches[0].winner.name, school: qfMatches[0].winner.school }} state="pending" />
-          <BracketSeed wrestler={{ name: qfMatches[1].winner.name, school: qfMatches[1].winner.school }} state="pending" />
+          <BracketSeed wrestler={qfWinners[0] || { name: 'TBD' }} state="pending" />
+          <BracketSeed wrestler={qfWinners[1] || { name: 'TBD' }} state="pending" />
         </BracketMatchup>
         <BracketMatchup className={styles.bracketSf}>
-          <BracketSeed wrestler={{ name: qfMatches[2].winner.name, school: qfMatches[2].winner.school }} state="pending" />
-          <BracketSeed wrestler={{ name: qfMatches[3].winner.name, school: qfMatches[3].winner.school }} state="pending" />
+          <BracketSeed wrestler={qfWinners[2] || { name: 'TBD' }} state="pending" />
+          <BracketSeed wrestler={qfWinners[3] || { name: 'TBD' }} state="pending" />
         </BracketMatchup>
       </>
     );
