@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const { fetchAllWeights, fetchWeight, WEIGHTS } = require('./api/scraper');
 const Cache = require('./api/cache');
 
 const app = express();
-const cache = new Cache(60000); // 60-second TTL
+const cache = new Cache(300000); // 5-minute TTL (OpenAI API calls)
 const PORT = process.env.PORT || 3000;
 
 // API routes before static files

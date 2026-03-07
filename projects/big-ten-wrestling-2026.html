@@ -1139,9 +1139,11 @@
       </div>
     </div>
 
-    <h3 class="section-title" style="font-size:2rem;" id="standingsTitle">Predicted <span>Standings</span></h3>
-    <p class="section-intro" id="standingsIntro">Pre-tournament team rankings based on seeds and dual meet performance.</p>
-    <div class="standings" id="standings"></div>
+    <div id="standingsSection" style="display:none;">
+      <h3 class="section-title" style="font-size:2rem;" id="standingsTitle">Live <span>Standings</span></h3>
+      <p class="section-intro" id="standingsIntro">Team scores computed from live tournament results.</p>
+      <div class="standings" id="standings"></div>
+    </div>
   </div>
 
   <!-- SCHEDULE -->
@@ -1194,22 +1196,6 @@ const TEAMS = [
   { name: "Michigan State", abbr: "MSU", location: "East Lansing, MI", color: "#18453B", initial: "MS", ig: "@msu_wrestling", igUrl: "https://instagram.com/msu_wrestling", wrestlers: "Wisler" }
 ];
 
-const STANDINGS = [
-  { team: "Penn State", score: 81.0 },
-  { team: "Ohio State", score: 69.5 },
-  { team: "Nebraska", score: 59.5 },
-  { team: "Iowa", score: 44.0 },
-  { team: "Michigan", score: 44.0 },
-  { team: "Minnesota", score: 43.5 },
-  { team: "Illinois", score: 38.0 },
-  { team: "Rutgers", score: 33.5 },
-  { team: "Purdue", score: 28.0 },
-  { team: "Wisconsin", score: 24.0 },
-  { team: "Northwestern", score: 20.5 },
-  { team: "Maryland", score: 15.0 },
-  { team: "Indiana", score: 12.0 },
-  { team: "Michigan State", score: 8.5 }
-];
 
 const SCHEDULE = [
   { label: "Session I", day: "Saturday", time: "10:00 AM ET", broadcast: "BTN / B1G+", rounds: "First Round, Quarterfinals, Wrestlebacks Rd 1", details: "All ten weight classes begin competition. First round matchups followed by quarterfinals and first round of consolations." },
@@ -1486,18 +1472,14 @@ function computeLiveStandings() {
 }
 
 function renderStandings() {
-  const standings = liveDataLoaded ? computeLiveStandings() : STANDINGS;
-  const titleEl = document.getElementById('standingsTitle');
-  const introEl = document.getElementById('standingsIntro');
-
-  if (liveDataLoaded) {
-    titleEl.innerHTML = 'Live <span>Standings</span>';
-    introEl.textContent = 'Team scores computed from live tournament results.';
-  } else {
-    titleEl.innerHTML = 'Predicted <span>Standings</span>';
-    introEl.textContent = 'Pre-tournament team rankings based on seeds and dual meet performance.';
+  const section = document.getElementById('standingsSection');
+  if (!liveDataLoaded) {
+    section.style.display = 'none';
+    return;
   }
 
+  section.style.display = '';
+  const standings = computeLiveStandings();
   const maxScore = standings[0].score || 1;
   const el = document.getElementById('standings');
   el.innerHTML = standings.map((s, i) => `
@@ -1731,14 +1713,11 @@ function buildLiveBracket(wt, wrestlers, live) {
 
 function buildSeededBracket(w) {
   const qf = [[w[0], w[7]], [w[3], w[4]], [w[2], w[5]], [w[1], w[6]]];
-  const sfW = [qf[0][0], qf[1][0], qf[2][0], qf[3][0]];
-  const finW = [sfW[0], sfW[3]];
-  const champ = finW[0];
 
   return `
     <div class="bracket">
       <div class="bracket-round">
-        <div class="bracket-round-label">Quarterfinals (Projected)</div>
+        <div class="bracket-round-label">Quarterfinals (Seeded)</div>
         ${qf.map(m => `
           <div class="bracket-matchup">
             <div class="bracket-seed"><span class="seed-num">${m[0].seed}</span><span class="seed-name">${m[0].name}</span><span class="seed-school">${m[0].school}</span></div>
@@ -1749,27 +1728,27 @@ function buildSeededBracket(w) {
       <div class="bracket-round">
         <div class="bracket-round-label">Semifinals</div>
         <div class="bracket-matchup bracket-sf">
-          <div class="bracket-seed"><span class="seed-num">${sfW[0].seed}</span><span class="seed-name">${sfW[0].name}</span></div>
-          <div class="bracket-seed"><span class="seed-num">${sfW[1].seed}</span><span class="seed-name">${sfW[1].name}</span></div>
+          <div class="bracket-seed bracket-pending"><span class="seed-name">TBD</span></div>
+          <div class="bracket-seed bracket-pending"><span class="seed-name">TBD</span></div>
         </div>
         <div class="bracket-matchup bracket-sf">
-          <div class="bracket-seed"><span class="seed-num">${sfW[2].seed}</span><span class="seed-name">${sfW[2].name}</span></div>
-          <div class="bracket-seed"><span class="seed-num">${sfW[3].seed}</span><span class="seed-name">${sfW[3].name}</span></div>
+          <div class="bracket-seed bracket-pending"><span class="seed-name">TBD</span></div>
+          <div class="bracket-seed bracket-pending"><span class="seed-name">TBD</span></div>
         </div>
       </div>
       <div class="bracket-round">
         <div class="bracket-round-label">Finals</div>
         <div class="bracket-matchup bracket-final">
-          <div class="bracket-seed"><span class="seed-num">${finW[0].seed}</span><span class="seed-name">${finW[0].name}</span></div>
-          <div class="bracket-seed"><span class="seed-num">${finW[1].seed}</span><span class="seed-name">${finW[1].name}</span></div>
+          <div class="bracket-seed bracket-pending"><span class="seed-name">TBD</span></div>
+          <div class="bracket-seed bracket-pending"><span class="seed-name">TBD</span></div>
         </div>
       </div>
       <div class="bracket-round">
-        <div class="bracket-round-label">Projected Champion</div>
-        <div class="bracket-champ" style="opacity:0.6;">
-          <div class="bracket-champ-label">Projected Champion</div>
-          <div class="bracket-champ-name">${champ.name}</div>
-          <div class="bracket-champ-school">${champ.school} &bull; ${champ.record}</div>
+        <div class="bracket-round-label">Champion</div>
+        <div class="bracket-champ" style="opacity:0.5;">
+          <div class="bracket-champ-label">Champion</div>
+          <div class="bracket-champ-name">TBD</div>
+          <div class="bracket-champ-school">Awaiting results</div>
         </div>
       </div>
     </div>
