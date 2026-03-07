@@ -4,6 +4,10 @@ node = "20"
 [tasks.install]
 run = "npm install"
 
+[tasks.dev]
+depends = ["install"]
+run = "lsof -ti:3000 | xargs kill -9 2>/dev/null; npx vite --port 3000"
+
 [tasks.server]
 depends = ["install"]
-run = "node server.js"
+run = "lsof -ti:3000 | xargs kill -9 2>/dev/null; npm run build && node server.js"
