@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Big Ten Wrestling Championships</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #001a33;
+    --bg2: #002244;
+    --bg3: #002E5C;
+    --card: #003366;
+    --border: #1a4a7a;
+    --gold: #c4a44a;
+    --gold2: #d4b85a;
+    --gold-glow: rgba(196,164,74,0.15);
+    --white: #ffffff;
+    --text: #e8ecf2;
+    --text2: #8da4c0;
+    --text3: #5a7a9e;
+    --green: #22c55e;
+    --red: #ef4444;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    background: linear-gradient(135deg, #001a33 0%, #002E5C 50%, #001a33 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-radial-gradient(
+      circle at 50% 50%,
+      transparent,
+      transparent 60px,
+      rgba(196,164,74,0.03) 60px,
+      rgba(196,164,74,0.03) 61px
+    );
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: var(--gold-glow);
+    border: 1px solid rgba(196,164,74,0.3);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+    animation: fadeDown 0.5s ease;
+  }
+
+  h1.hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeDown 0.6s ease 0.1s both;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text2);
+    font-weight: 300;
+    max-width: 540px;
+    margin: 0.8rem auto 0;
+    animation: fadeDown 0.7s ease 0.2s both;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    animation: fadeDown 0.8s ease 0.3s both;
+  }
+
+  .hero-stat { text-align: center; }
+
+  .hero-stat .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-stat .lbl {
+    font-size: 0.7rem;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* LIVE BANNER */
+  .live-banner {
+    background: linear-gradient(90deg, rgba(239,68,68,0.15), rgba(196,164,74,0.15));
+    border-bottom: 1px solid var(--border);
+    padding: 0.6rem 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: pulse 1.5s ease infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .live-banner a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .live-banner a:hover { text-decoration: underline; }
+
+  .live-status {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text3);
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(0,26,51,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    flex: 0 0 auto;
+    background: none;
+    border: none;
+    color: var(--text3);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  @media (min-width: 961px) {
+    nav { justify-content: center; }
+  }
+
+  /* MAIN LAYOUT */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* SECTIONS */
+  .section { display: none; animation: fadeIn 0.4s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:none; } }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+    line-height: 1;
+  }
+
+  .section-title span { color: var(--gold); }
+
+  .section-intro {
+    color: var(--text2);
+    max-width: 660px;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover { border-color: rgba(196,164,74,0.3); }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .card-title .icon { font-size: 1.2rem; }
+
+  /* INFO GRID */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .info-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .info-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+
+  .info-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  .info-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text3);
+    margin-bottom: 0.4rem;
+  }
+
+  .info-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .info-note {
+    font-size: 0.75rem;
+    color: var(--text2);
+    line-height: 1.4;
+  }
+
+  /* HASHTAGS */
+  .hashtag-bar {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .hashtag {
+    display: inline-block;
+    background: var(--gold-glow);
+    border: 1px solid rgba(196,164,74,0.25);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .hashtag:hover { background: rgba(196,164,74,0.25); }
+
+  /* STANDINGS */
+  .standings { margin-top: 1.5rem; }
+
+  .standing-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(26,74,122,0.4);
+  }
+
+  .standing-rank {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    width: 2rem;
+    text-align: center;
+  }
+
+  .standing-team {
+    flex: 1;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .standing-score {
+    font-family: 'DM Mono', monospace;
+    color: var(--gold);
+    font-size: 0.9rem;
+    width: 3.5rem;
+    text-align: right;
+  }
+
+  .standing-bar {
+    width: 120px;
+    height: 6px;
+    background: var(--bg);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .standing-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+    border-radius: 3px;
+    transition: width 0.6s ease;
+  }
+
+  /* SCHEDULE ACCORDION */
+  .session-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .session-card:hover { border-color: rgba(196,164,74,0.3); }
+
+  .session-header {
+    padding: 1.2rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    user-select: none;
+  }
+
+  .session-header:hover { background: rgba(196,164,74,0.05); }
+
+  .session-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+  }
+
+  .session-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text2);
+  }
+
+  .session-chevron {
+    color: var(--text3);
+    transition: transform 0.3s;
+    font-size: 0.8rem;
+  }
+
+  .session-card.expanded .session-chevron { transform: rotate(180deg); }
+
+  .session-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .session-card.expanded .session-body { max-height: 400px; }
+
+  .session-content {
+    padding: 0 1.5rem 1.2rem;
+    font-size: 0.9rem;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+
+  .session-broadcast {
+    display: inline-block;
+    background: var(--gold-glow);
+    border: 1px solid rgba(196,164,74,0.3);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    margin-top: 0.5rem;
+  }
+
+  /* WEIGHT CLASS PILLS */
+  .weight-pills {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .weight-pill {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .weight-pill:hover { border-color: var(--gold); color: var(--text); }
+  .weight-pill.active { background: var(--gold); color: #001a33; border-color: var(--gold); font-weight: 600; }
+
+  /* BRACKET */
+  .bracket {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    min-height: 280px;
+    align-items: start;
+  }
+
+  .bracket-round {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .bracket-round-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    color: var(--text3);
+    text-align: center;
+    margin-bottom: 0.3rem;
+  }
+
+  .bracket-matchup {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 0.8rem;
+  }
+
+  .bracket-seed {
+    padding: 0.5rem 0.7rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(26,74,122,0.3);
+    transition: background 0.2s;
+  }
+
+  .bracket-seed:last-child { border-bottom: none; }
+  .bracket-seed:hover { background: rgba(196,164,74,0.08); }
+
+  .bracket-seed .seed-num {
+    font-family: 'DM Mono', monospace;
+    color: var(--text3);
+    font-size: 0.7rem;
+    margin-right: 0.4rem;
+  }
+
+  .bracket-seed .seed-name {
+    flex: 1;
+    font-weight: 500;
+    color: var(--text);
+    font-size: 0.78rem;
+  }
+
+  .bracket-seed .seed-school {
+    font-size: 0.7rem;
+    color: var(--text2);
+    margin-left: 0.3rem;
+  }
+
+  .bracket-seed .seed-score {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text3);
+    margin-left: 0.4rem;
+  }
+
+  .bracket-winner { background: rgba(196,164,74,0.08); }
+  .bracket-winner .seed-name { color: var(--gold); font-weight: 600; }
+  .bracket-loser { opacity: 0.5; }
+
+  .bracket-sf { margin-top: 1.5rem; }
+  .bracket-final { margin-top: 3rem; }
+  .bracket-champ {
+    margin-top: 4.5rem;
+    text-align: center;
+    background: var(--gold-glow);
+    border: 1px solid rgba(196,164,74,0.4);
+    border-radius: 8px;
+    padding: 1.2rem;
+  }
+
+  .bracket-champ-label {
+    font-family: 'Bebas Neue', sans-serif;
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.3rem;
+  }
+
+  .bracket-champ-name {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .bracket-champ-school {
+    color: var(--text2);
+    font-size: 0.85rem;
+  }
+
+  .bracket-pending .seed-name {
+    color: var(--text3);
+    font-style: italic;
+  }
+
+  /* DATA LOADING */
+  .loading-indicator {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text3);
+    font-size: 0.9rem;
+  }
+
+  .loading-indicator .spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .live-badge {
+    display: inline-block;
+    background: rgba(239,68,68,0.15);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: var(--red);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  .data-source {
+    font-size: 0.75rem;
+    color: var(--text3);
+    text-align: right;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+
+  .data-source a { color: var(--text3); text-decoration: none; }
+  .data-source a:hover { color: var(--text2); }
+
+  /* WRESTLER CARDS */
+  .wrestler-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .wrestler-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+
+  .wrestler-card:hover { border-color: rgba(196,164,74,0.3); }
+
+  .wrestler-header {
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .wrestler-photo-wrap {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--bg3);
+    border: 2px solid rgba(196,164,74,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .wrestler-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .wrestler-photo-fallback {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    color: var(--gold);
+  }
+
+  .wrestler-seed-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.6rem;
+    color: #001a33;
+    flex-shrink: 0;
+    border: 1px solid var(--card);
+  }
+
+  .wrestler-info { flex: 1; min-width: 0; }
+
+  .wrestler-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .wrestler-school {
+    font-size: 0.78rem;
+    color: var(--text2);
+  }
+
+  .wrestler-record {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--gold);
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .wrestler-expand-icon {
+    color: var(--text3);
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .wrestler-card.expanded .wrestler-expand-icon { transform: rotate(180deg); }
+
+  .wrestler-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .wrestler-card.expanded .wrestler-body { max-height: 300px; }
+
+  .wrestler-bio {
+    padding: 0 1.2rem 1rem;
+    font-size: 0.85rem;
+    color: var(--text2);
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    padding-top: 0.8rem;
+    margin: 0 1.2rem;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .wrestler-rank-badge {
+    display: inline-block;
+    background: rgba(196,164,74,0.1);
+    border: 1px solid rgba(196,164,74,0.25);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+    margin-bottom: 0.4rem;
+  }
+
+  .wrestler-ig-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    transition: opacity 0.2s;
+  }
+
+  .wrestler-ig-link:hover { opacity: 0.8; }
+
+  .wrestler-result-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+    margin-left: 0.3rem;
+  }
+
+  .wrestler-result-badge.win {
+    background: rgba(34,197,94,0.15);
+    border: 1px solid rgba(34,197,94,0.3);
+    color: var(--green);
+  }
+
+  .wrestler-result-badge.loss {
+    background: rgba(239,68,68,0.15);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: var(--red);
+  }
+
+  /* TEAMS GRID */
+  .teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .team-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .team-card:hover { border-color: rgba(196,164,74,0.3); }
+
+  .team-header {
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .team-initial {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .team-info { flex: 1; }
+
+  .team-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+
+  .team-location {
+    font-size: 0.78rem;
+    color: var(--text2);
+  }
+
+  .team-expand-icon {
+    color: var(--text3);
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+  }
+
+  .team-card.expanded .team-expand-icon { transform: rotate(180deg); }
+
+  .team-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .team-card.expanded .team-body { max-height: 400px; }
+
+  .team-detail {
+    padding: 0 1.2rem 1rem;
+    border-top: 1px solid var(--border);
+    margin: 0 1.2rem;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .team-ig-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    transition: opacity 0.2s;
+  }
+
+  .team-ig-link:hover { opacity: 0.8; }
+
+  .team-wrestlers {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .team-wrestlers strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* STORYLINE CARDS */
+  .storyline-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    transition: border-color 0.2s;
+  }
+
+  .storyline-card:hover { border-color: rgba(196,164,74,0.4); border-left-color: var(--gold); }
+
+  .storyline-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+
+  .storyline-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .storyline-body {
+    font-size: 0.9rem;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+
+  /* SOCIAL SECTION */
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .social-embed {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 200px;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--text3);
+    font-size: 0.8rem;
+  }
+
+  footer strong { color: var(--text2); }
+
+  /* ANIMATION CLASS */
+  .animate-in {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .animate-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .bracket {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .bracket-sf, .bracket-final, .bracket-champ {
+      margin-top: 0;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .standing-bar { width: 80px; }
+
+    .hero-stats { gap: 1.2rem; }
+  }
+
+  @media (max-width: 480px) {
+    header { padding: 2rem 1rem 1.5rem; }
+    main { padding: 1.5rem 1rem 3rem; }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .weight-pills { gap: 0.35rem; }
+
+    .weight-pill {
+      font-size: 0.78rem;
+      padding: 0.4rem 0.7rem;
+    }
+
+    .standing-bar { display: none; }
+
+    .wrestler-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .teams-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-badge">112th Big Ten Wrestling Championships</div>
+  <h1 class="hero-title">Big Ten Wrestling Championships</h1>
+  <p class="hero-sub">March 7-8, 2026 &bull; Bryce Jordan Center &bull; State College, PA</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">14</span><span class="lbl">Teams</span></div>
+    <div class="hero-stat"><span class="num">10</span><span class="lbl">Weight Classes</span></div>
+    <div class="hero-stat"><span class="num">5</span><span class="lbl">Sessions</span></div>
+    <div class="hero-stat"><span class="num">2</span><span class="lbl">Days</span></div>
+  </div>
+</header>
+
+<!-- LIVE BANNER -->
+<div class="live-banner" id="liveBanner" style="display:none;">
+  <span class="live-dot"></span>
+  <span id="liveText">Loading live results...</span>
+  <span class="live-status" id="liveStatus"></span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <button class="nav-btn active" data-tab="overview">Overview</button>
+  <button class="nav-btn" data-tab="schedule">Schedule</button>
+  <button class="nav-btn" data-tab="weights">Weight Classes</button>
+  <button class="nav-btn" data-tab="teams">Teams</button>
+  <button class="nav-btn" data-tab="storylines">Storylines</button>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <!-- OVERVIEW -->
+  <div id="overview" class="section active">
+    <h2 class="section-title">Tournament <span>Overview</span></h2>
+    <p class="section-intro">The 112th Big Ten Wrestling Championships returns to Penn State's Bryce Jordan Center. Fourteen teams compete across ten weight classes over two action-packed days.</p>
+
+    <div class="hashtag-bar">
+      <a class="hashtag" href="https://www.instagram.com/explore/tags/B1GWrestling/" target="_blank" rel="noopener">#B1GWrestling</a>
+      <a class="hashtag" href="https://www.instagram.com/explore/tags/B1GWrestle/" target="_blank" rel="noopener">#B1GWrestle</a>
+      <a class="hashtag" href="https://www.instagram.com/b1gwrestling/" target="_blank" rel="noopener">@b1gwrestling</a>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card animate-in">
+        <div class="info-label">Location</div>
+        <div class="info-value">BJC</div>
+        <div class="info-note">Bryce Jordan Center, State College, PA</div>
+      </div>
+      <div class="info-card animate-in">
+        <div class="info-label">Dates</div>
+        <div class="info-value">Mar 7-8</div>
+        <div class="info-note">Saturday & Sunday, 2026</div>
+      </div>
+      <div class="info-card animate-in">
+        <div class="info-label">Sessions</div>
+        <div class="info-value">5</div>
+        <div class="info-note">3 Saturday, 2 Sunday</div>
+      </div>
+      <div class="info-card animate-in">
+        <div class="info-label">Broadcast</div>
+        <div class="info-value">BTN / B1G+</div>
+        <div class="info-note">Big Ten Network & B1G+ streaming</div>
+      </div>
+      <div class="info-card animate-in">
+        <div class="info-label">Teams</div>
+        <div class="info-value">14</div>
+        <div class="info-note">All Big Ten wrestling programs</div>
+      </div>
+      <div class="info-card animate-in">
+        <div class="info-label">Weight Classes</div>
+        <div class="info-value">125-285</div>
+        <div class="info-note">10 NCAA weight classes</div>
+      </div>
+    </div>
+
+    <h3 class="section-title" style="font-size:2rem;">Predicted <span>Standings</span></h3>
+    <p class="section-intro">Pre-tournament team rankings based on seeds and dual meet performance.</p>
+    <div class="standings" id="standings"></div>
+  </div>
+
+  <!-- SCHEDULE -->
+  <div id="schedule" class="section">
+    <h2 class="section-title">Tournament <span>Schedule</span></h2>
+    <p class="section-intro">Five sessions across two days. All times Eastern.</p>
+    <div id="scheduleCards"></div>
+  </div>
+
+  <!-- WEIGHT CLASSES -->
+  <div id="weights" class="section">
+    <h2 class="section-title">Weight <span>Classes</span> <span class="live-badge" id="weightLiveBadge" style="display:none;">LIVE RESULTS</span></h2>
+    <p class="section-intro">Select a weight class to view the bracket and wrestler profiles. Results update live from FloWrestling.</p>
+    <div class="weight-pills" id="weightPills"></div>
+    <div id="weightContent"></div>
+  </div>
+
+  <!-- TEAMS -->
+  <div id="teams" class="section">
+    <h2 class="section-title">The <span>Teams</span></h2>
+    <p class="section-intro">All 14 Big Ten wrestling programs competing for the conference title.</p>
+    <div class="teams-grid" id="teamsGrid"></div>
+  </div>
+
+  <!-- STORYLINES -->
+  <div id="storylines" class="section">
+    <h2 class="section-title">Key <span>Storylines</span></h2>
+    <p class="section-intro">The narratives to follow heading into this weekend's championship.</p>
+    <div id="storylineCards"></div>
+  </div>
+</main>
+
+<footer>
+  <strong>2026 Big Ten Wrestling Championships</strong><br>
+  March 7-8, 2026 &bull; Bryce Jordan Center, State College, PA<br>
+  Broadcast on BTN &amp; B1G+ &bull; Follow <a href="https://instagram.com/b1gwrestling" target="_blank" rel="noopener" style="color:var(--gold)">@b1gwrestling</a>
+</footer>
+
+<script>
+// ============ DATA ============
+
+const TEAMS = [
+  { name: "Penn State", abbr: "PSU", location: "State College, PA", color: "#002E5C", initial: "PS", ig: "@pennstatewrest", igUrl: "https://instagram.com/pennstatewrest", wrestlers: "Lilledahl, Blaze, Van Ness, Duke, Mesenbrink, Haines, Welsh, Barr, Mirasola" },
+  { name: "Ohio State", abbr: "OSU", location: "Columbus, OH", color: "#BB0000", initial: "OS", ig: "@wrestlingbucks", igUrl: "https://instagram.com/wrestlingbucks", wrestlers: "Bouzakis, Davino, Mendez, Stiles, Kharchla, Feldman" },
+  { name: "Nebraska", abbr: "NEB", location: "Lincoln, NE", color: "#E41C38", initial: "NE", ig: "@huskerwrestling", igUrl: "https://instagram.com/huskerwrestling", wrestlers: "Hardy, Allred, McDanel, Taylor, Minto, Ferrari" },
+  { name: "Iowa", abbr: "IOWA", location: "Iowa City, IA", color: "#FFCD00", initial: "IA", ig: "@iowahawkeyewrestling", igUrl: "https://instagram.com/iowahawkeyewrestling", wrestlers: "Ayala, Bailey, Kueter, Caliendo, Kennedy" },
+  { name: "Michigan", abbr: "MICH", location: "Ann Arbor, MI", color: "#00274C", initial: "MI", ig: "@umichwrestling", igUrl: "https://instagram.com/umichwrestling", wrestlers: "McNeil, Catrabone, Ghadiali, Mantanona" },
+  { name: "Minnesota", abbr: "MINN", location: "Minneapolis, MN", color: "#7A0019", initial: "MN", ig: "@gopherwrestling", igUrl: "https://instagram.com/gopherwrestling", wrestlers: "McEnelly, Volk, Vombaur, Sparks" },
+  { name: "Illinois", abbr: "ILL", location: "Champaign, IL", color: "#E84A27", initial: "IL", ig: "@illiniwrestling", igUrl: "https://instagram.com/illiniwrestling", wrestlers: "Byrd, Webster" },
+  { name: "Rutgers", abbr: "RUT", location: "Piscataway, NJ", color: "#CC0033", initial: "RU", ig: "@ruwrestling", igUrl: "https://instagram.com/ruwrestling", wrestlers: "Barbosa, Shawver, Olivieri" },
+  { name: "Purdue", abbr: "PUR", location: "West Lafayette, IN", color: "#CEB888", initial: "PU", ig: "@purduewrestling", igUrl: "https://instagram.com/purduewrestling", wrestlers: "Boarman, Blaze" },
+  { name: "Wisconsin", abbr: "WIS", location: "Madison, WI", color: "#C5050C", initial: "WI", ig: "@badgerwrestling", igUrl: "https://instagram.com/badgerwrestling", wrestlers: "Zargo, Ingham" },
+  { name: "Northwestern", abbr: "NW", location: "Evanston, IL", color: "#4E2A84", initial: "NW", ig: "@nuwrestle", igUrl: "https://instagram.com/nuwrestle", wrestlers: "" },
+  { name: "Maryland", abbr: "MD", location: "College Park, MD", color: "#E03A3E", initial: "MD", ig: "@terpswrestling", igUrl: "https://instagram.com/terpswrestling", wrestlers: "John" },
+  { name: "Indiana", abbr: "IND", location: "Bloomington, IN", color: "#990000", initial: "IN", ig: "@indianawr", igUrl: "https://instagram.com/indianawr", wrestlers: "Moran" },
+  { name: "Michigan State", abbr: "MSU", location: "East Lansing, MI", color: "#18453B", initial: "MS", ig: "@msu_wrestling", igUrl: "https://instagram.com/msu_wrestling", wrestlers: "Wisler" }
+];
+
+const STANDINGS = [
+  { team: "Penn State", score: 81.0 },
+  { team: "Ohio State", score: 69.5 },
+  { team: "Nebraska", score: 59.5 },
+  { team: "Iowa", score: 44.0 },
+  { team: "Michigan", score: 44.0 },
+  { team: "Minnesota", score: 43.5 },
+  { team: "Illinois", score: 38.0 },
+  { team: "Rutgers", score: 33.5 },
+  { team: "Purdue", score: 28.0 },
+  { team: "Wisconsin", score: 24.0 },
+  { team: "Northwestern", score: 20.5 },
+  { team: "Maryland", score: 15.0 },
+  { team: "Indiana", score: 12.0 },
+  { team: "Michigan State", score: 8.5 }
+];
+
+const SCHEDULE = [
+  { label: "Session I", day: "Saturday", time: "10:00 AM ET", broadcast: "BTN / B1G+", rounds: "First Round, Quarterfinals, Wrestlebacks Rd 1", details: "All ten weight classes begin competition. First round matchups followed by quarterfinals and first round of consolations." },
+  { label: "Session II", day: "Saturday", time: "5:00 PM ET", broadcast: "B1G+", rounds: "Consolation Rounds 2 & 3", details: "The wrestleback bracket continues as eliminated quarterfinalists and first-round losers battle for survival." },
+  { label: "Session III", day: "Saturday", time: "7:00 PM ET", broadcast: "BTN", rounds: "Semifinals", details: "The four semifinal bouts in each weight class. Winners advance to Sunday's championship finals." },
+  { label: "Session IV", day: "Sunday", time: "12:00 PM ET", broadcast: "B1G+", rounds: "Consolation Semifinals, 7th Place Bouts", details: "Consolation semifinal matchups to determine who wrestles for third and fifth place. Seventh-place bouts also contested." },
+  { label: "Session V", day: "Sunday", time: "4:30 PM ET", broadcast: "BTN / B1G+", rounds: "Championship Finals, 3rd & 5th Place", details: "Ten championship finals determine Big Ten champions at each weight. Third- and fifth-place consolation finals also contested." }
+];
+
+// Seeded bracket data (fallback if scrape fails)
+const WEIGHT_CLASSES = {
+  125: { wrestlers: [
+    { seed: 1, name: "Luke Lilledahl", school: "Penn State", record: "17-0", rank: "#1", bio: "True freshman sensation. Undefeated and dominant, Lilledahl has been a bonus-point machine for the Nittany Lions." },
+    { seed: 2, name: "Nic Bouzakis", school: "Ohio State", record: "14-1", rank: "#4", bio: "Former top recruit who has found his stride with the Buckeyes. Athletic and explosive." },
+    { seed: 3, name: "Jore Volk", school: "Minnesota", record: "21-4", rank: "#6", bio: "Experienced Gopher with elite scrambling ability. Tough competitor with deep NCAA experience." },
+    { seed: 4, name: "Jacob Moran", school: "Indiana", record: "16-3", rank: "#8", bio: "Transfer who has been outstanding for the Hoosiers. Tech fall machine." },
+    { seed: 5, name: "Spencer Moore", school: "Illinois", record: "15-7", rank: "#12", bio: "Solid competitor for the Fighting Illini." },
+    { seed: 6, name: "Nicolar Rivera", school: "Wisconsin", record: "17-5", rank: "#15", bio: "Tough Badger who has had a strong season." },
+    { seed: 7, name: "Nick Corday", school: "Michigan State", record: "11-13", rank: "#22", bio: "Spartan competitor who battles hard every match." },
+    { seed: 8, name: "Dean Peterson", school: "Iowa", record: "11-5", rank: "#18", bio: "Hawkeye who earned his spot in the bracket." }
+  ]},
+  133: { wrestlers: [
+    { seed: 1, name: "Marcus Blaze", school: "Penn State", record: "19-0", rank: "#1", bio: "Undefeated transfer who has been dominant since arriving in State College. Quick on his feet with punishing top game." },
+    { seed: 2, name: "Lucas Byrd", school: "Illinois", record: "17-0", rank: "#2", bio: "Defending NCAA champion. Recently suffered a surprise loss to Boarman. Elite technician seeking another conference title." },
+    { seed: 3, name: "Ben Davino", school: "Ohio State", record: "24-1", rank: "#3", bio: "Has been on a tear this season with 24 wins. A serious title contender at the deepest weight in the tournament." },
+    { seed: 4, name: "Drake Ayala", school: "Iowa", record: "11-7", rank: "#7", bio: "Experienced Hawkeye who brings a scramble-heavy style." },
+    { seed: 5, name: "Dylan Shawver", school: "Rutgers", record: "18-10", rank: "#10", bio: "Scarlet Knight veteran who has been through wars in the Big Ten." },
+    { seed: 6, name: "Zan Fugitt", school: "Wisconsin", record: "17-5", rank: "#13", bio: "Strong Badger competitor with improving technique." },
+    { seed: 7, name: "Blake Boarman", school: "Purdue", record: "12-12", rank: "#16", bio: "Upset Lucas Byrd in the regular season. Rides confidence into the tournament." },
+    { seed: 8, name: "Jacob Van Dee", school: "Nebraska", record: "16-5", rank: "#20", bio: "Husker competitor who has been a steady presence." }
+  ]},
+  141: { wrestlers: [
+    { seed: 1, name: "Jesse Mendez", school: "Ohio State", record: "19-0", rank: "#1", bio: "Two-time NCAA champion hunting a third title. Undefeated again this season with an 80+ career win streak. Generational talent." },
+    { seed: 2, name: "Brock Hardy", school: "Nebraska", record: "19-4", rank: "#3", bio: "Tough and physical Husker who is one of the few wrestlers with a realistic shot at challenging Mendez." },
+    { seed: 3, name: "Vance Vombaur", school: "Minnesota", record: "20-4", rank: "#5", bio: "Explosive Gopher who has been impressive all season. A serious contender." },
+    { seed: 4, name: "Nasir Bailey", school: "Iowa", record: "12-6", rank: "#8", bio: "Athletic Hawkeye who has shown flashes of elite ability." },
+    { seed: 5, name: "Dylan Ragusin", school: "Michigan", record: "12-6", rank: "#10", bio: "Experienced Wolverine with NCAA tournament pedigree." },
+    { seed: 6, name: "Braeden Davis", school: "Penn State", record: "10-4", rank: "#14", bio: "Young Nittany Lion gaining experience at a tough weight." },
+    { seed: 7, name: "Joey Olivieri", school: "Rutgers", record: "16-1", rank: "#17", bio: "Scarlet Knight who has been outstanding this season." },
+    { seed: 8, name: "Billy DeKraker", school: "Northwestern", record: "14-10", rank: "#24", bio: "Wildcat who competed hard in the opening rounds." }
+  ]},
+  149: { wrestlers: [
+    { seed: 1, name: "Shayne Van Ness", school: "Penn State", record: "18-0", rank: "#1", bio: "Undefeated and electric. Van Ness combines explosive offense with suffocating defense. A fan favorite and strong title contender." },
+    { seed: 2, name: "Ethan Stiles", school: "Ohio State", record: "14-4", rank: "#3", bio: "Technical Buckeye who is dangerous from every position." },
+    { seed: 3, name: "Joseph Zargo", school: "Wisconsin", record: "17-4", rank: "#5", bio: "Breakout Badger who has had a fantastic season." },
+    { seed: 4, name: "Lachlan McNeil", school: "Michigan", record: "15-5", rank: "#9", bio: "Solid Wolverine who has been impressive in conference duals." },
+    { seed: 5, name: "Ryder Block", school: "Iowa", record: "11-7", rank: "#12", bio: "Young Hawkeye gaining experience at a loaded weight." },
+    { seed: 6, name: "Carter Young", school: "Maryland", record: "12-3", rank: "#14", bio: "Terps competitor who has had a strong conference campaign." },
+    { seed: 7, name: "Chance Lamer", school: "Nebraska", record: "16-6", rank: "#16", bio: "Husker who battles hard for every point." },
+    { seed: 8, name: "Drew Roberts", school: "Minnesota", record: "10-7", rank: "#21", bio: "Young Gopher with potential to surprise." }
+  ]},
+  157: { wrestlers: [
+    { seed: 1, name: "PJ Duke", school: "Penn State", record: "16-1", rank: "#1", bio: "One-loss season for the talented Nittany Lion. Duke has been dominant with a mix of top riding and explosive shots." },
+    { seed: 2, name: "Kannon Webster", school: "Illinois", record: "18-3", rank: "#4", bio: "Impressive Illini wrestler with big bonus-point ability." },
+    { seed: 3, name: "Antrell Taylor", school: "Nebraska", record: "21-2", rank: "#6", bio: "Husker who has been one of the biggest risers in the rankings." },
+    { seed: 4, name: "Cameron Catrabone", school: "Michigan", record: "17-6", rank: "#8", bio: "Tough Wolverine who competes at a high pace." },
+    { seed: 5, name: "Brandon Cannon", school: "Ohio State", record: "14-1", rank: "#11", bio: "Buckeye with an impressive record entering the tournament." },
+    { seed: 6, name: "Darius Marines", school: "Michigan State", record: "16-13", rank: "#13", bio: "Spartan competitor who is battle-tested." },
+    { seed: 7, name: "Charlie Millard", school: "Minnesota", record: "18-7", rank: "#18", bio: "Gopher who has been a solid contributor." },
+    { seed: 8, name: "Luke Mechler", school: "Wisconsin", record: "16-7", rank: "#23", bio: "Badger who earned his bracket position." }
+  ]},
+  165: { wrestlers: [
+    { seed: 1, name: "Mitchell Mesenbrink", school: "Penn State", record: "19-0", rank: "#1", bio: "Two-time national champion and undefeated. Arguably the best pound-for-pound wrestler in college wrestling." },
+    { seed: 2, name: "Andrew Barbosa", school: "Rutgers", record: "18-5", rank: "#4", bio: "Scarlet Knight who has emerged as a real contender at this weight." },
+    { seed: 3, name: "Mikey Caliendo", school: "Iowa", record: "17-3", rank: "#6", bio: "Hawkeye who brings intensity and scoring ability." },
+    { seed: 4, name: "Andrew Sparks", school: "Minnesota", record: "19-4", rank: "#9", bio: "Hard-working Gopher who has shown flashes of elite ability." },
+    { seed: 5, name: "Paddy Gallagher", school: "Ohio State", record: "13-7", rank: "#11", bio: "Buckeye who competes hard at a tough weight." },
+    { seed: 6, name: "LJ Araujo", school: "Nebraska", record: "15-7", rank: "#14", bio: "Husker who has been a solid competitor all season." },
+    { seed: 7, name: "Braeden Scoles", school: "Illinois", record: "15-7", rank: "#17", bio: "Illini wrestler who is tough to score on." },
+    { seed: 8, name: "Joey Blaze", school: "Purdue", record: "18-1", rank: "#3", bio: "Explosive Boilermaker with one of the best records in the weight class. A legitimate title threat." }
+  ]},
+  174: { wrestlers: [
+    { seed: 1, name: "Levi Haines", school: "Penn State", record: "18-0", rank: "#1", bio: "Senior captain and undefeated. This is his final Big Ten tournament, determined to go out on top in front of the home crowd." },
+    { seed: 2, name: "Carson Kharchla", school: "Ohio State", record: "16-3", rank: "#4", bio: "Former top-ranked wrestler who remains extremely dangerous. Can't be counted out." },
+    { seed: 3, name: "Patrick Kennedy", school: "Iowa", record: "17-2", rank: "#6", bio: "Experienced Hawkeye with solid fundamental wrestling." },
+    { seed: 4, name: "Christopher Minto", school: "Nebraska", record: "19-4", rank: "#8", bio: "Physical Husker who has had a breakout season." },
+    { seed: 5, name: "Beau Mantanona", school: "Michigan", record: "18-6", rank: "#10", bio: "Wolverine who brings toughness to every bout." },
+    { seed: 6, name: "Colin Kelly", school: "Illinois", record: "16-7", rank: "#13", bio: "Illini competitor with solid technique." },
+    { seed: 7, name: "Lenny Pinto", school: "Rutgers", record: "11-8", rank: "#16", bio: "Scarlet Knight who battles hard." },
+    { seed: 8, name: "Ethan Riddle", school: "Minnesota", record: "15-9", rank: "#22", bio: "Gopher who has shown improvement throughout the season." }
+  ]},
+  184: { wrestlers: [
+    { seed: 1, name: "Rocco Welsh", school: "Penn State", record: "17-0", rank: "#1", bio: "Undefeated and dangerous. Welsh has stepped into a starting role and hasn't looked back. Pins opponents at a high rate." },
+    { seed: 2, name: "Max McEnelly", school: "Minnesota", record: "18-1", rank: "#3", bio: "One of the biggest surprises in the Big Ten. McEnelly has been dominant and rides elite confidence." },
+    { seed: 3, name: "Silas Allred", school: "Nebraska", record: "17-6", rank: "#4", bio: "Former top recruit who has emerged as a serious contender. Physical and powerful." },
+    { seed: 4, name: "Brock Mantanona", school: "Michigan", record: "17-5", rank: "#8", bio: "Athletic Wolverine who is dangerous from every position." },
+    { seed: 5, name: "Angelo Ferrari", school: "Iowa", record: "10-2", rank: "#10", bio: "Young Hawkeye with tremendous upside." },
+    { seed: 6, name: "Dylan Fishback", school: "Ohio State", record: "16-7", rank: "#13", bio: "Buckeye who has been improving all season." },
+    { seed: 7, name: "Chris Moore", school: "Illinois", record: "15-9", rank: "#17", bio: "Illini veteran who has been through wars." },
+    { seed: 8, name: "Shane Cartagena-Walsh", school: "Rutgers", record: "21-7", rank: "#21", bio: "Scarlet Knight who has racked up an impressive win total." }
+  ]},
+  197: { wrestlers: [
+    { seed: 1, name: "Josh Barr", school: "Penn State", record: "16-0", rank: "#1", bio: "Undefeated this season and nearly unstoppable. Barr has elite athleticism and a complete skill set." },
+    { seed: 2, name: "Camden McDanel", school: "Nebraska", record: "19-5", rank: "#3", bio: "Physical Husker who uses his size and strength to control bouts." },
+    { seed: 3, name: "Wyatt Ingham", school: "Wisconsin", record: "16-6", rank: "#5", bio: "Badger who has emerged as a serious contender at this weight." },
+    { seed: 4, name: "Luke Geog", school: "Ohio State", record: "14-6", rank: "#8", bio: "Buckeye who is capable of putting up big scores." },
+    { seed: 5, name: "Gabe Sollars", school: "Indiana", record: "12-9", rank: "#11", bio: "Hoosier who competes hard in every bout." },
+    { seed: 6, name: "Branson John", school: "Maryland", record: "23-6", rank: "#14", bio: "Terp with an impressive win total this season." },
+    { seed: 7, name: "Remy Cotton", school: "Rutgers", record: "15-5", rank: "#18", bio: "Scarlet Knight with solid upper body offense." },
+    { seed: 8, name: "Kael Wisler", school: "Michigan State", record: "24-8", rank: "#22", bio: "Spartan who has been prolific this season with 24 wins." }
+  ]},
+  285: { wrestlers: [
+    { seed: 1, name: "Taye Ghadiali", school: "Michigan", record: "21-2", rank: "#2", bio: "Wolverine heavyweight who has been dominant. Athletic and powerful with one of the best records in the weight class." },
+    { seed: 2, name: "Nick Feldman", school: "Ohio State", record: "21-4", rank: "#3", bio: "Big and powerful Buckeye. Uses his size to control opponents." },
+    { seed: 3, name: "Cole Mirasola", school: "Penn State", record: "16-4", rank: "#5", bio: "Nittany Lion who has improved dramatically. Aggressive style unusual for heavyweights." },
+    { seed: 4, name: "AJ Ferrari", school: "Nebraska", record: "14-2", rank: "#8", bio: "Dynamic heavyweight with incredible athleticism." },
+    { seed: 5, name: "Ben Kueter", school: "Iowa", record: "6-6", rank: "#10", bio: "Multi-sport athlete (also plays football). Brings unique athleticism to the mat." },
+    { seed: 6, name: "Hunter Catka", school: "Rutgers", record: "18-8", rank: "#13", bio: "Physical Scarlet Knight heavyweight." },
+    { seed: 7, name: "Luke Luffman", school: "Illinois", record: "13-5", rank: "#17", bio: "Illini heavyweight with solid technique." },
+    { seed: 8, name: "Braxton Amos", school: "Wisconsin", record: "18-5", rank: "#22", bio: "Former Greco-Roman standout with unique upper body offense." }
+  ]}
+};
+
+const STORYLINES = [
+  { title: "Penn State's Historic Dominance", body: "The Nittany Lions enter the tournament with a staggering seven #1 seeds across ten weight classes, and nine wrestlers projected for the semifinals. Cael Sanderson's program is positioned for yet another conference title." },
+  { title: "Undefeated Watch: Eight Unbeatens", body: "Eight wrestlers enter without a loss: Lilledahl (125, PSU), Blaze (133, PSU), Byrd (133, ILL), Mendez (141, OSU), Van Ness (149, PSU), Mesenbrink (165, PSU), Haines (174, PSU), Welsh (184, PSU), and Barr (197, PSU). Seven of the eight are Nittany Lions." },
+  { title: "Mendez Hunts a Third NCAA Title", body: "Ohio State's Jesse Mendez at 141 lbs is chasing history. Already a two-time NCAA champion, an undefeated season and Big Ten title would cement his legacy. His 80+ match win streak is the longest active streak in Division I." },
+  { title: "133 lbs: The Deepest Weight in the Country", body: "The 133 lb bracket features three wrestlers ranked in the top 3 nationally: #1 Marcus Blaze (PSU, 19-0), #2 Lucas Byrd (ILL, 17-0), and #3 Ben Davino (OSU, 24-1). Add in Blake Boarman, who already upset Byrd, and you have the most loaded bracket in the tournament." },
+  { title: "Senior Sendoffs: Levi Haines' Final Run", body: "Penn State captain Levi Haines wrestles his final Big Ten tournament at 174 lbs. The senior is undefeated at 18-0 and determined to go out on top in front of the home crowd at the Bryce Jordan Center." },
+  { title: "Byrd Upset: Defending Champ Stunned", body: "In one of the biggest upsets of the regular season, Purdue's Blake Boarman defeated defending NCAA champion Lucas Byrd. The loss shook up the 133 lb bracket. Can Boarman do it again on the big stage?" },
+  { title: "Record-Breaking Attendance Expected", body: "Penn State set a single-dual attendance record of 16,006 fans at the Bryce Jordan Center earlier this season. With the Big Ten Championships on home turf, the Nittany Lion faithful are expected to pack the BJC." }
+];
+
+// ============ LIVE RESULTS SCRAPER ============
+
+const RESULTS_URL = 'https://www.flowrestling.org/articles/15588668-2026-big-ten-wrestling-championships-results-brackets';
+const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+
+// Parsed live results stored here, keyed by weight class
+let liveResults = {};
+let liveDataLoaded = false;
+
+async function fetchLiveResults() {
+  const banner = document.getElementById('liveBanner');
+  const liveText = document.getElementById('liveText');
+  const liveStatus = document.getElementById('liveStatus');
+  const liveBadge = document.getElementById('weightLiveBadge');
+
+  banner.style.display = 'flex';
+  liveText.textContent = 'Fetching live results from FloWrestling...';
+
+  try {
+    const resp = await fetch(CORS_PROXY + encodeURIComponent(RESULTS_URL));
+    if (!resp.ok) throw new Error('Fetch failed: ' + resp.status);
+    const html = await resp.text();
+    parseResults(html);
+    liveDataLoaded = true;
+
+    const matchCount = Object.values(liveResults).reduce((sum, wt) => sum + (wt.qf ? wt.qf.length : 0) + (wt.sf ? wt.sf.length : 0) + (wt.finals ? wt.finals.length : 0), 0);
+    liveText.innerHTML = '<strong>Live results loaded</strong> &mdash; ' + matchCount + ' matches from FloWrestling';
+    liveStatus.textContent = 'Updated ' + new Date().toLocaleTimeString();
+    liveBadge.style.display = 'inline-block';
+
+    // Re-render current weight class with live data
+    const activeWt = document.querySelector('.weight-pill.active');
+    if (activeWt) showWeight(parseInt(activeWt.textContent));
+  } catch (err) {
+    console.warn('Live results fetch failed, using seeded brackets:', err);
+    liveText.textContent = 'Using seeded brackets (live results unavailable)';
+    liveStatus.textContent = err.message;
+  }
+}
+
+function parseResults(html) {
+  // Create a DOM parser to extract match results from the article HTML
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const text = doc.body.innerText || doc.body.textContent;
+
+  // Weight classes to look for
+  const weights = [125, 133, 141, 149, 157, 165, 174, 184, 197, 285];
+
+  // Initialize results structure
+  weights.forEach(w => { liveResults[w] = { qf: [], sf: [], finals: [], r16: [] }; });
+
+  // Parse match lines: "Name (School) record def. Name (School) record (Method)"
+  // The article organizes results by round then by weight
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+
+  let currentRound = '';
+  let currentWeight = 0;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    // Detect round headers
+    const roundLower = line.toLowerCase();
+    if (roundLower.includes('quarterfinal')) currentRound = 'qf';
+    else if (roundLower.includes('semifinal') && !roundLower.includes('consolation')) currentRound = 'sf';
+    else if (roundLower.includes('final') && !roundLower.includes('semifinal') && !roundLower.includes('consolation') && !roundLower.includes('quarterfinal')) currentRound = 'finals';
+    else if (roundLower.includes('round of 16') || roundLower.includes('first round') || roundLower.includes('championship first')) currentRound = 'r16';
+
+    // Detect weight class headers
+    const wtMatch = line.match(/^(\d{3})\s*(lbs?|pounds?)?$/i) || line.match(/^(\d{3})\s*(lbs?|pounds?)?\s*$/i);
+    if (wtMatch && weights.includes(parseInt(wtMatch[1]))) {
+      currentWeight = parseInt(wtMatch[1]);
+      continue;
+    }
+    // Also check for inline weight mentions like "125 lbs" or just "125"
+    const inlineWt = line.match(/^#?\d*\s*(\d{3})\s*(lbs?)?/);
+    if (inlineWt && weights.includes(parseInt(inlineWt[1])) && line.length < 15) {
+      currentWeight = parseInt(inlineWt[1]);
+      continue;
+    }
+
+    // Parse match result lines
+    if (currentWeight && currentRound && line.includes('def.')) {
+      const match = parseMatchLine(line);
+      if (match && liveResults[currentWeight] && liveResults[currentWeight][currentRound]) {
+        liveResults[currentWeight][currentRound].push(match);
+      }
+    }
+  }
+}
+
+function parseMatchLine(line) {
+  // Pattern: "Name (School) Record def. Name (School) Record (Method Score)"
+  const defIdx = line.indexOf(' def. ');
+  if (defIdx === -1) return null;
+
+  const winnerPart = line.substring(0, defIdx).trim();
+  const loserPart = line.substring(defIdx + 6).trim();
+
+  const winner = parseWrestlerFromLine(winnerPart);
+  const loserAndMethod = parseLoserAndMethod(loserPart);
+
+  if (!winner || !loserAndMethod) return null;
+
+  return {
+    winner: winner,
+    loser: loserAndMethod.wrestler,
+    method: loserAndMethod.method || ''
+  };
+}
+
+function parseWrestlerFromLine(str) {
+  // Pattern: "Name (School) Record" - e.g. "Luke Lilledahl (Penn State) 18-0"
+  const match = str.match(/^(.+?)\s*\(([^)]+)\)\s*([\d]+-[\d]+)?/);
+  if (!match) return null;
+  return { name: match[1].trim(), school: match[2].trim(), record: match[3] || '' };
+}
+
+function parseLoserAndMethod(str) {
+  // Pattern: "Name (School) Record (Method Score)" or with method at end
+  // First try to find the method in parentheses at the end
+  const methodPatterns = [
+    /\((Dec\s+[\d-]+)\)\s*$/i,
+    /\((MD\s+[\d-]+)\)\s*$/i,
+    /\((TF\s+[\d:.-]+)\)\s*$/i,
+    /\((Fall\s+[\d:.]+)\)\s*$/i,
+    /\((SV[- ]\d+\s+[\d-]+)\)\s*$/i,
+    /\((TB[- ]\d+\s+[\d-]+)\)\s*$/i,
+    /\((MF)\)\s*$/i,
+    /\((Inj\.\s*[\d:.]*)\)\s*$/i
+  ];
+
+  let method = '';
+  let rest = str;
+
+  for (const pat of methodPatterns) {
+    const m = rest.match(pat);
+    if (m) {
+      method = m[1];
+      rest = rest.substring(0, m.index).trim();
+      break;
+    }
+  }
+
+  // If no parenthesized method found, look for method after the record
+  if (!method) {
+    const altMatch = rest.match(/^(.+?)\s*\(([^)]+)\)\s*([\d]+-[\d]+)\s+(.+)$/);
+    if (altMatch) {
+      method = altMatch[4].trim();
+      rest = altMatch[1] + ' (' + altMatch[2] + ') ' + altMatch[3];
+    }
+  }
+
+  const wrestler = parseWrestlerFromLine(rest);
+  if (!wrestler) return null;
+
+  return { wrestler, method };
+}
+
+// ============ RENDERING ============
+
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  // Delay observer so the section is rendered (display:block) before intersection checks
+  requestAnimationFrame(() => observeAnimations());
+}
+
+// Setup nav click handlers
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', function() { showTab(this.dataset.tab, this); });
+});
+
+function renderStandings() {
+  const maxScore = STANDINGS[0].score;
+  const el = document.getElementById('standings');
+  el.innerHTML = STANDINGS.map((s, i) => `
+    <div class="standing-row animate-in">
+      <div class="standing-rank">${i + 1}</div>
+      <div class="standing-team">${s.team}</div>
+      <div class="standing-score">${s.score.toFixed(1)}</div>
+      <div class="standing-bar"><div class="standing-bar-fill" style="width:${(s.score / maxScore * 100).toFixed(1)}%"></div></div>
+    </div>
+  `).join('');
+}
+
+function renderSchedule() {
+  const el = document.getElementById('scheduleCards');
+  el.innerHTML = SCHEDULE.map(s => `
+    <div class="session-card animate-in" onclick="this.classList.toggle('expanded')">
+      <div class="session-header">
+        <div>
+          <div class="session-label">${s.label} &mdash; ${s.day}</div>
+          <div class="session-time">${s.time}</div>
+        </div>
+        <div class="session-chevron">&#9660;</div>
+      </div>
+      <div class="session-body">
+        <div class="session-content">
+          <strong>${s.rounds}</strong><br>
+          ${s.details}<br>
+          <span class="session-broadcast">${s.broadcast}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderWeightPills() {
+  const weights = Object.keys(WEIGHT_CLASSES);
+  const el = document.getElementById('weightPills');
+  el.innerHTML = weights.map((w, i) => `
+    <button class="weight-pill${i === 0 ? ' active' : ''}" onclick="showWeight(${w})">${w}</button>
+  `).join('');
+}
+
+function showWeight(wt) {
+  document.querySelectorAll('.weight-pill').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.weight-pill').forEach(p => { if (p.textContent == wt) p.classList.add('active'); });
+
+  const data = WEIGHT_CLASSES[wt];
+  if (!data) return;
+  const w = data.wrestlers;
+  const el = document.getElementById('weightContent');
+  const live = liveResults[wt] || {};
+  const hasLive = liveDataLoaded && (live.qf && live.qf.length > 0);
+
+  // Build bracket using live data if available, otherwise use seeds
+  let bracketHtml = '';
+
+  if (hasLive) {
+    bracketHtml = buildLiveBracket(wt, w, live);
+  } else {
+    bracketHtml = buildSeededBracket(w);
+  }
+
+  // Wrestler cards - update records with live data
+  const wrestlerData = w.map(wr => {
+    const liveRecord = findLiveRecord(wr.name, live);
+    return { ...wr, record: liveRecord || wr.record };
+  });
+
+  // Build results summary for each wrestler
+  let wrestlerHtml = `
+    <h3 class="section-title" style="font-size:1.8rem;margin-top:1rem;">Wrestler <span>Profiles</span></h3>
+    <div class="wrestler-grid">
+      ${wrestlerData.map(wr => {
+        const results = getWrestlerResults(wr.name, live);
+        return `
+        <div class="wrestler-card animate-in" onclick="this.classList.toggle('expanded')">
+          <div class="wrestler-header">
+            <div class="wrestler-photo-wrap">
+              ${wr.img ? `<img class="wrestler-photo" src="${wr.img}" alt="${wr.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="wrestler-photo-fallback" style="display:none">${wr.name.split(' ').map(n=>n[0]).join('')}</span>` : `<span class="wrestler-photo-fallback">${wr.name.split(' ').map(n=>n[0]).join('')}</span>`}
+              <div class="wrestler-seed-badge">${wr.seed}</div>
+            </div>
+            <div class="wrestler-info">
+              <div class="wrestler-name">${wr.name}</div>
+              <div class="wrestler-school">${wr.school}</div>
+            </div>
+            <div class="wrestler-record">${wr.record}</div>
+            <div class="wrestler-expand-icon">&#9660;</div>
+          </div>
+          <div class="wrestler-body">
+            <div class="wrestler-bio">
+              <span class="wrestler-rank-badge">${wr.rank} nationally</span>
+              ${results.length > 0 ? results.map(r =>
+                `<span class="wrestler-result-badge ${r.won ? 'win' : 'loss'}">${r.won ? 'W' : 'L'} ${r.method}</span>`
+              ).join('') : ''}<br>
+              ${wr.bio}
+              ${wr.ig ? `<br><a class="wrestler-ig-link" href="https://instagram.com/${wr.ig.replace('@','')}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">&#9758; ${wr.ig}</a>` : ''}
+            </div>
+          </div>
+        </div>
+      `}).join('')}
+    </div>
+  `;
+
+  const sourceHtml = hasLive ? `<div class="data-source">Results via <a href="${RESULTS_URL}" target="_blank" rel="noopener">FloWrestling</a></div>` : '';
+
+  el.innerHTML = bracketHtml + sourceHtml + wrestlerHtml;
+  observeAnimations();
+}
+
+function buildLiveBracket(wt, wrestlers, live) {
+  // Build QF matchups from live data
+  const qfMatches = live.qf || [];
+  const sfMatches = live.sf || [];
+  const finalMatches = live.finals || [];
+
+  // QF column
+  let qfHtml = qfMatches.map(m => {
+    return `
+      <div class="bracket-matchup">
+        <div class="bracket-seed bracket-winner">
+          <span class="seed-name">${m.winner.name}</span>
+          <span class="seed-school">${m.winner.school}</span>
+        </div>
+        <div class="bracket-seed bracket-loser">
+          <span class="seed-name">${m.loser.name}</span>
+          <span class="seed-school">${m.loser.school}</span>
+          <span class="seed-score">${m.method}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // SF column
+  let sfHtml = '';
+  if (sfMatches.length > 0) {
+    sfHtml = sfMatches.map((m, i) => `
+      <div class="bracket-matchup ${i === 0 ? 'bracket-sf' : ''}">
+        <div class="bracket-seed bracket-winner">
+          <span class="seed-name">${m.winner.name}</span>
+          <span class="seed-school">${m.winner.school}</span>
+        </div>
+        <div class="bracket-seed bracket-loser">
+          <span class="seed-name">${m.loser.name}</span>
+          <span class="seed-school">${m.loser.school}</span>
+          <span class="seed-score">${m.method}</span>
+        </div>
+      </div>
+    `).join('');
+  } else {
+    // Predict SF from QF winners
+    if (qfMatches.length >= 4) {
+      sfHtml = `
+        <div class="bracket-matchup bracket-sf">
+          <div class="bracket-seed bracket-pending"><span class="seed-name">${qfMatches[0].winner.name}</span><span class="seed-school">${qfMatches[0].winner.school}</span></div>
+          <div class="bracket-seed bracket-pending"><span class="seed-name">${qfMatches[1].winner.name}</span><span class="seed-school">${qfMatches[1].winner.school}</span></div>
+        </div>
+        <div class="bracket-matchup bracket-sf">
+          <div class="bracket-seed bracket-pending"><span class="seed-name">${qfMatches[2].winner.name}</span><span class="seed-school">${qfMatches[2].winner.school}</span></div>
+          <div class="bracket-seed bracket-pending"><span class="seed-name">${qfMatches[3].winner.name}</span><span class="seed-school">${qfMatches[3].winner.school}</span></div>
+        </div>`;
+    }
+  }
+
+  // Finals column
+  let finalsHtml = '';
+  if (finalMatches.length > 0) {
+    finalsHtml = finalMatches.map(m => `
+      <div class="bracket-matchup bracket-final">
+        <div class="bracket-seed bracket-winner">
+          <span class="seed-name">${m.winner.name}</span>
+          <span class="seed-school">${m.winner.school}</span>
+        </div>
+        <div class="bracket-seed bracket-loser">
+          <span class="seed-name">${m.loser.name}</span>
+          <span class="seed-school">${m.loser.school}</span>
+          <span class="seed-score">${m.method}</span>
+        </div>
+      </div>
+    `).join('');
+  } else if (sfMatches.length >= 2) {
+    finalsHtml = `
+      <div class="bracket-matchup bracket-final">
+        <div class="bracket-seed bracket-pending"><span class="seed-name">${sfMatches[0].winner.name}</span></div>
+        <div class="bracket-seed bracket-pending"><span class="seed-name">${sfMatches[1].winner.name}</span></div>
+      </div>`;
+  } else {
+    finalsHtml = `<div class="bracket-matchup bracket-final"><div class="bracket-seed bracket-pending"><span class="seed-name">TBD</span></div><div class="bracket-seed bracket-pending"><span class="seed-name">TBD</span></div></div>`;
+  }
+
+  // Champion
+  let champHtml = '';
+  if (finalMatches.length > 0) {
+    const champ = finalMatches[0].winner;
+    champHtml = `
+      <div class="bracket-champ">
+        <div class="bracket-champ-label">Champion</div>
+        <div class="bracket-champ-name">${champ.name}</div>
+        <div class="bracket-champ-school">${champ.school}</div>
+      </div>`;
+  } else {
+    champHtml = `
+      <div class="bracket-champ" style="opacity:0.5;">
+        <div class="bracket-champ-label">Champion</div>
+        <div class="bracket-champ-name">TBD</div>
+        <div class="bracket-champ-school">In progress</div>
+      </div>`;
+  }
+
+  return `
+    <div class="bracket">
+      <div class="bracket-round">
+        <div class="bracket-round-label">Quarterfinals</div>
+        ${qfHtml}
+      </div>
+      <div class="bracket-round">
+        <div class="bracket-round-label">Semifinals</div>
+        ${sfHtml}
+      </div>
+      <div class="bracket-round">
+        <div class="bracket-round-label">Finals</div>
+        ${finalsHtml}
+      </div>
+      <div class="bracket-round">
+        <div class="bracket-round-label">Champion</div>
+        ${champHtml}
+      </div>
+    </div>
+  `;
+}
+
+function buildSeededBracket(w) {
+  const qf = [[w[0], w[7]], [w[3], w[4]], [w[2], w[5]], [w[1], w[6]]];
+  const sfW = [qf[0][0], qf[1][0], qf[2][0], qf[3][0]];
+  const finW = [sfW[0], sfW[3]];
+  const champ = finW[0];
+
+  return `
+    <div class="bracket">
+      <div class="bracket-round">
+        <div class="bracket-round-label">Quarterfinals (Projected)</div>
+        ${qf.map(m => `
+          <div class="bracket-matchup">
+            <div class="bracket-seed"><span class="seed-num">${m[0].seed}</span><span class="seed-name">${m[0].name}</span><span class="seed-school">${m[0].school}</span></div>
+            <div class="bracket-seed"><span class="seed-num">${m[1].seed}</span><span class="seed-name">${m[1].name}</span><span class="seed-school">${m[1].school}</span></div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="bracket-round">
+        <div class="bracket-round-label">Semifinals</div>
+        <div class="bracket-matchup bracket-sf">
+          <div class="bracket-seed"><span class="seed-num">${sfW[0].seed}</span><span class="seed-name">${sfW[0].name}</span></div>
+          <div class="bracket-seed"><span class="seed-num">${sfW[1].seed}</span><span class="seed-name">${sfW[1].name}</span></div>
+        </div>
+        <div class="bracket-matchup bracket-sf">
+          <div class="bracket-seed"><span class="seed-num">${sfW[2].seed}</span><span class="seed-name">${sfW[2].name}</span></div>
+          <div class="bracket-seed"><span class="seed-num">${sfW[3].seed}</span><span class="seed-name">${sfW[3].name}</span></div>
+        </div>
+      </div>
+      <div class="bracket-round">
+        <div class="bracket-round-label">Finals</div>
+        <div class="bracket-matchup bracket-final">
+          <div class="bracket-seed"><span class="seed-num">${finW[0].seed}</span><span class="seed-name">${finW[0].name}</span></div>
+          <div class="bracket-seed"><span class="seed-num">${finW[1].seed}</span><span class="seed-name">${finW[1].name}</span></div>
+        </div>
+      </div>
+      <div class="bracket-round">
+        <div class="bracket-round-label">Projected Champion</div>
+        <div class="bracket-champ" style="opacity:0.6;">
+          <div class="bracket-champ-label">Projected Champion</div>
+          <div class="bracket-champ-name">${champ.name}</div>
+          <div class="bracket-champ-school">${champ.school} &bull; ${champ.record}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function findLiveRecord(name, live) {
+  // Check all rounds for updated records
+  for (const round of ['qf', 'sf', 'finals', 'r16']) {
+    if (!live[round]) continue;
+    for (const m of live[round]) {
+      if (m.winner.name === name && m.winner.record) return m.winner.record;
+      if (m.loser.name === name && m.loser.record) return m.loser.record;
+    }
+  }
+  return null;
+}
+
+function getWrestlerResults(name, live) {
+  const results = [];
+  for (const round of ['r16', 'qf', 'sf', 'finals']) {
+    if (!live[round]) continue;
+    for (const m of live[round]) {
+      if (m.winner.name === name) results.push({ won: true, method: m.method, opponent: m.loser.name });
+      if (m.loser.name === name) results.push({ won: false, method: m.method, opponent: m.winner.name });
+    }
+  }
+  return results;
+}
+
+function renderTeams() {
+  const el = document.getElementById('teamsGrid');
+  el.innerHTML = TEAMS.map(t => `
+    <div class="team-card animate-in" onclick="this.classList.toggle('expanded')">
+      <div class="team-header">
+        <div class="team-initial" style="background:${t.color}">${t.initial}</div>
+        <div class="team-info">
+          <div class="team-name">${t.name}</div>
+          <div class="team-location">${t.location}</div>
+        </div>
+        <div class="team-expand-icon">&#9660;</div>
+      </div>
+      <div class="team-body">
+        <div class="team-detail">
+          ${t.wrestlers ? `<div class="team-wrestlers"><strong>Key Wrestlers:</strong> ${t.wrestlers}</div>` : ''}
+          <a class="team-ig-link" href="${t.igUrl}" target="_blank" rel="noopener noreferrer">${t.ig}</a>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderStorylines() {
+  const el = document.getElementById('storylineCards');
+  el.innerHTML = STORYLINES.map((s, i) => `
+    <div class="storyline-card animate-in">
+      <div class="storyline-number">Story ${i + 1}</div>
+      <div class="storyline-title">${s.title}</div>
+      <div class="storyline-body">${s.body}</div>
+    </div>
+  `).join('');
+}
+
+// ============ SCROLL ANIMATIONS ============
+
+function observeAnimations() {
+  const items = document.querySelectorAll('.animate-in:not(.visible)');
+  if (!items.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  items.forEach(item => obs.observe(item));
+}
+
+// ============ INIT ============
+
+renderStandings();
+renderSchedule();
+renderWeightPills();
+showWeight(125);
+renderTeams();
+renderStorylines();
+observeAnimations();
+
+// Fetch live results on load
+fetchLiveResults();
+
+// Auto-refresh every 3 minutes
+setInterval(fetchLiveResults, 180000);
+</script>
+</body>
+</html>
