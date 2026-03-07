@@ -1,0 +1,16 @@
+export const TEAMS = [
+  { name: "Penn State", abbr: "PSU", location: "State College, PA", color: "#002E5C", initial: "PS", ig: "@pennstatewrest", igUrl: "https://instagram.com/pennstatewrest", wrestlers: "Lilledahl, Blaze, Van Ness, Duke, Mesenbrink, Haines, Welsh, Barr, Mirasola" },
+  { name: "Ohio State", abbr: "OSU", location: "Columbus, OH", color: "#BB0000", initial: "OS", ig: "@wrestlingbucks", igUrl: "https://instagram.com/wrestlingbucks", wrestlers: "Bouzakis, Davino, Mendez, Stiles, Kharchla, Feldman" },
+  { name: "Nebraska", abbr: "NEB", location: "Lincoln, NE", color: "#E41C38", initial: "NE", ig: "@huskerwrestling", igUrl: "https://instagram.com/huskerwrestling", wrestlers: "Hardy, Allred, McDanel, Taylor, Minto, Ferrari" },
+  { name: "Iowa", abbr: "IOWA", location: "Iowa City, IA", color: "#FFCD00", initial: "IA", ig: "@iowahawkeyewrestling", igUrl: "https://instagram.com/iowahawkeyewrestling", wrestlers: "Ayala, Bailey, Kueter, Caliendo, Kennedy" },
+  { name: "Michigan", abbr: "MICH", location: "Ann Arbor, MI", color: "#00274C", initial: "MI", ig: "@umichwrestling", igUrl: "https://instagram.com/umichwrestling", wrestlers: "McNeil, Catrabone, Ghadiali, Mantanona" },
+  { name: "Minnesota", abbr: "MINN", location: "Minneapolis, MN", color: "#7A0019", initial: "MN", ig: "@gopherwrestling", igUrl: "https://instagram.com/gopherwrestling", wrestlers: "McEnelly, Volk, Vombaur, Sparks" },
+  { name: "Illinois", abbr: "ILL", location: "Champaign, IL", color: "#E84A27", initial: "IL", ig: "@illiniwrestling", igUrl: "https://instagram.com/illiniwrestling", wrestlers: "Byrd, Webster" },
+  { name: "Rutgers", abbr: "RUT", location: "Piscataway, NJ", color: "#CC0033", initial: "RU", ig: "@ruwrestling", igUrl: "https://instagram.com/ruwrestling", wrestlers: "Barbosa, Shawver, Olivieri" },
+  { name: "Purdue", abbr: "PUR", location: "West Lafayette, IN", color: "#CEB888", initial: "PU", ig: "@purduewrestling", igUrl: "https://instagram.com/purduewrestling", wrestlers: "Boarman, Blaze" },
+  { name: "Wisconsin", abbr: "WIS", location: "Madison, WI", color: "#C5050C", initial: "WI", ig: "@badgerwrestling", igUrl: "https://instagram.com/badgerwrestling", wrestlers: "Zargo, Ingham" },
+  { name: "Northwestern", abbr: "NW", location: "Evanston, IL", color: "#4E2A84", initial: "NW", ig: "@nuwrestle", igUrl: "https://instagram.com/nuwrestle", wrestlers: "" },
+  { name: "Maryland", abbr: "MD", location: "College Park, MD", color: "#E03A3E", initial: "MD", ig: "@terpswrestling", igUrl: "https://instagram.com/terpswrestling", wrestlers: "John" },
+  { name: "Indiana", abbr: "IND", location: "Bloomington, IN", color: "#990000", initial: "IN", ig: "@indianawr", igUrl: "https://instagram.com/indianawr", wrestlers: "Moran" },
+  { name: "Michigan State", abbr: "MSU", location: "East Lansing, MI", color: "#18453B", initial: "MS", ig: "@msu_wrestling", igUrl: "https://instagram.com/msu_wrestling", wrestlers: "Wisler" },
+];

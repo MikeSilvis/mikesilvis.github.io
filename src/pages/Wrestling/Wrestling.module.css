@@ -1,0 +1,905 @@
+/* Page shell overrides */
+.page {
+  --accent: #c4a44a;
+  --bg: #001a33;
+  --bg2: #002244;
+  --bg3: #002E5C;
+  --card: #003366;
+  --border: #1a4a7a;
+  --gold: #c4a44a;
+  --gold2: #d4b85a;
+  --gold-glow: rgba(196,164,74,0.15);
+  --white: #ffffff;
+  --text: #e8ecf2;
+  --text2: #8da4c0;
+  --text3: #5a7a9e;
+  --green: #22c55e;
+  --red: #ef4444;
+  background: var(--bg);
+}
+
+/* MAIN LAYOUT */
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* SECTIONS */
+.sectionTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+  line-height: 1;
+}
+
+.sectionTitle span {
+  color: var(--gold);
+}
+
+.sectionIntro {
+  color: var(--text2);
+  max-width: 660px;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* LIVE BANNER */
+.liveBanner {
+  background: linear-gradient(90deg, rgba(239,68,68,0.15), rgba(196,164,74,0.15));
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.liveDot {
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  animation: pulse 1.5s ease infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.liveText a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.liveText a:hover {
+  text-decoration: underline;
+}
+
+.liveStatus {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text3);
+}
+
+/* HASHTAGS */
+.hashtagBar {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.hashtag {
+  display: inline-block;
+  background: var(--gold-glow);
+  border: 1px solid rgba(196,164,74,0.25);
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.hashtag:hover {
+  background: rgba(196,164,74,0.25);
+}
+
+/* STANDINGS */
+.standingsSection {
+  margin-top: 2rem;
+}
+
+.standings {
+  margin-top: 1.5rem;
+}
+
+.standingRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(26,74,122,0.4);
+}
+
+.standingRank {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  color: var(--gold);
+  width: 2rem;
+  text-align: center;
+}
+
+.standingTeam {
+  flex: 1;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.standingScore {
+  font-family: 'DM Mono', monospace;
+  color: var(--gold);
+  font-size: 0.9rem;
+  width: 3.5rem;
+  text-align: right;
+}
+
+.standingBar {
+  width: 120px;
+  height: 6px;
+  background: var(--bg);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.standingBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+/* SCHEDULE ACCORDION */
+.sessionCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+
+.sessionCard:hover {
+  border-color: rgba(196,164,74,0.3);
+}
+
+.sessionHeader {
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  user-select: none;
+}
+
+.sessionHeader:hover {
+  background: rgba(196,164,74,0.05);
+}
+
+.sessionLabel {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+}
+
+.sessionTime {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text2);
+}
+
+.sessionChevron {
+  color: var(--text3);
+  transition: transform 0.3s;
+  font-size: 0.8rem;
+}
+
+.sessionCardExpanded .sessionChevron {
+  transform: rotate(180deg);
+}
+
+.sessionBody {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.sessionCardExpanded .sessionBody {
+  max-height: 400px;
+}
+
+.sessionContent {
+  padding: 0 1.5rem 1.2rem;
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+.sessionBroadcast {
+  display: inline-block;
+  background: var(--gold-glow);
+  border: 1px solid rgba(196,164,74,0.3);
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  margin-top: 0.5rem;
+}
+
+/* WEIGHT CLASS PILLS */
+.weightPills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.weightPill {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.weightPill:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+
+.weightPillActive {
+  background: var(--gold);
+  color: #001a33;
+  border-color: var(--gold);
+  font-weight: 600;
+}
+
+/* BRACKET */
+.bracket {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  min-height: 280px;
+  align-items: start;
+}
+
+.bracketRound {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.bracketRoundLabel {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+
+.bracketMatchup {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: 0.8rem;
+}
+
+.bracketSeed {
+  padding: 0.5rem 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(26,74,122,0.3);
+  transition: background 0.2s;
+}
+
+.bracketSeed:last-child {
+  border-bottom: none;
+}
+
+.bracketSeed:hover {
+  background: rgba(196,164,74,0.08);
+}
+
+.seedNum {
+  font-family: 'DM Mono', monospace;
+  color: var(--text3);
+  font-size: 0.7rem;
+  margin-right: 0.4rem;
+}
+
+.seedName {
+  flex: 1;
+  font-weight: 500;
+  color: var(--text);
+  font-size: 0.78rem;
+}
+
+.seedSchool {
+  font-size: 0.7rem;
+  color: var(--text2);
+  margin-left: 0.3rem;
+}
+
+.seedScore {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text3);
+  margin-left: 0.4rem;
+}
+
+.bracketWinner {
+  background: rgba(196,164,74,0.08);
+}
+
+.bracketWinner .seedName {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.bracketLoser {
+  opacity: 0.6;
+}
+
+.bracketLoser .seedName {
+  text-decoration: line-through;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 2px;
+}
+
+.bracketPending .seedName {
+  color: var(--text3);
+  font-style: italic;
+}
+
+.bracketSf {
+  margin-top: 1.5rem;
+}
+
+.bracketFinal {
+  margin-top: 3rem;
+}
+
+.bracketChamp {
+  margin-top: 4.5rem;
+  text-align: center;
+  background: var(--gold-glow);
+  border: 1px solid rgba(196,164,74,0.4);
+  border-radius: 8px;
+  padding: 1.2rem;
+}
+
+.bracketChampLabel {
+  font-family: 'Bebas Neue', sans-serif;
+  color: var(--gold);
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3rem;
+}
+
+.bracketChampName {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.bracketChampSchool {
+  color: var(--text2);
+  font-size: 0.85rem;
+}
+
+/* LIVE BADGE */
+.liveBadge {
+  display: inline-block;
+  background: rgba(239,68,68,0.15);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: var(--red);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+/* DATA SOURCE */
+.dataSource {
+  font-size: 0.75rem;
+  color: var(--text3);
+  text-align: right;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.dataSource a {
+  color: var(--text3);
+  text-decoration: none;
+}
+
+.dataSource a:hover {
+  color: var(--text2);
+}
+
+/* LOADING */
+.loadingIndicator {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text3);
+  font-size: 0.9rem;
+}
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* WRESTLER CARDS */
+.wrestlerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.wrestlerCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+
+.wrestlerCard:hover {
+  border-color: rgba(196,164,74,0.3);
+}
+
+.wrestlerHeader {
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.wrestlerPhotoWrap {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg3);
+  border: 2px solid rgba(196,164,74,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.wrestlerPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wrestlerPhotoFallback {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  color: var(--gold);
+}
+
+.wrestlerSeedBadge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.6rem;
+  color: #001a33;
+  flex-shrink: 0;
+  border: 1px solid var(--card);
+}
+
+.wrestlerInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.wrestlerName {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wrestlerSchool {
+  font-size: 0.78rem;
+  color: var(--text2);
+}
+
+.wrestlerRecord {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--gold);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.wrestlerExpandIcon {
+  color: var(--text3);
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.wrestlerCardExpanded .wrestlerExpandIcon {
+  transform: rotate(180deg);
+}
+
+.wrestlerBody {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.wrestlerCardExpanded .wrestlerBody {
+  max-height: 300px;
+}
+
+.wrestlerBio {
+  padding: 0 1.2rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text2);
+  line-height: 1.6;
+  border-top: 1px solid var(--border);
+  padding-top: 0.8rem;
+  margin: 0 1.2rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.wrestlerRankBadge {
+  display: inline-block;
+  background: rgba(196,164,74,0.1);
+  border: 1px solid rgba(196,164,74,0.25);
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 2px;
+  margin-bottom: 0.4rem;
+}
+
+.wrestlerIgLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  transition: opacity 0.2s;
+}
+
+.wrestlerIgLink:hover {
+  opacity: 0.8;
+}
+
+.wrestlerResultBadge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 2px;
+  margin-left: 0.3rem;
+}
+
+.wrestlerResultWin {
+  background: rgba(34,197,94,0.15);
+  border: 1px solid rgba(34,197,94,0.3);
+  color: var(--green);
+}
+
+.wrestlerResultLoss {
+  background: rgba(239,68,68,0.15);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: var(--red);
+}
+
+/* TEAMS GRID */
+.teamsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.teamCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.teamCard:hover {
+  border-color: rgba(196,164,74,0.3);
+}
+
+.teamHeader {
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.teamInitial {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.teamInfo {
+  flex: 1;
+}
+
+.teamName {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.teamLocation {
+  font-size: 0.78rem;
+  color: var(--text2);
+}
+
+.teamExpandIcon {
+  color: var(--text3);
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+
+.teamCardExpanded .teamExpandIcon {
+  transform: rotate(180deg);
+}
+
+.teamBody {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.teamCardExpanded .teamBody {
+  max-height: 1200px;
+}
+
+.teamDetail {
+  padding: 0 1.2rem 1rem;
+  border-top: 1px solid var(--border);
+  margin: 0 1.2rem;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0.8rem;
+  font-size: 0.85rem;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+.teamIgLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  transition: opacity 0.2s;
+}
+
+.teamIgLink:hover {
+  opacity: 0.8;
+}
+
+.teamWrestlers {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.teamWrestlerRow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.02);
+  transition: background 0.2s;
+}
+
+.teamWrestlerRow:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.teamWrestlerPic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+}
+
+.teamWrestlerPic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.teamWrestlerPicPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.75rem;
+  color: var(--text3);
+}
+
+.teamWrestlerInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.teamWrestlerName {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.teamWrestlerMeta {
+  font-size: 0.72rem;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+}
+
+.teamWrestlerIg {
+  display: inline-block;
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.72rem;
+  margin-top: 0.1rem;
+  transition: opacity 0.2s;
+}
+
+.teamWrestlerIg:hover {
+  opacity: 0.8;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--text3);
+  font-size: 0.8rem;
+}
+
+.footer strong {
+  color: var(--text2);
+}
+
+.footerLink {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .bracket {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .bracketSf,
+  .bracketFinal,
+  .bracketChamp {
+    margin-top: 0;
+  }
+
+  .standingBar {
+    width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .weightPills {
+    gap: 0.35rem;
+  }
+
+  .weightPill {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.7rem;
+  }
+
+  .standingBar {
+    display: none;
+  }
+
+  .wrestlerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .teamsGrid {
+    gap: 0.8rem;
+  }
+}

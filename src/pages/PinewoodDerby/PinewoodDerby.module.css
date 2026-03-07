@@ -1,0 +1,1062 @@
+/* ── PinewoodDerby page-specific styles ── */
+
+/* Section titles & intros */
+.sectionTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+  line-height: 1;
+}
+
+.sectionTitle span {
+  color: var(--accent, #f97316);
+}
+
+.sectionIntro {
+  color: var(--text2);
+  max-width: 660px;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Main content area */
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* Card body text */
+.cardBody {
+  color: var(--text2);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.cardBodySpaced {
+  color: var(--text2);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  margin-bottom: 0.8rem;
+}
+
+.cardBodyNoMargin {
+  color: var(--text2);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+/* Inline highlight */
+.inlineHighlight {
+  color: var(--accent, #f97316);
+  font-weight: 600;
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+  cursor: help;
+  border-bottom: 1px dashed var(--text3);
+}
+
+.tooltip:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e2232;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: normal;
+  max-width: 220px;
+  z-index: 50;
+  pointer-events: none;
+}
+
+/* Two-column grid */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Rule list */
+.ruleList {
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--text2);
+  line-height: 2;
+  padding: 0;
+  margin: 0;
+}
+
+.ruleList strong {
+  color: var(--text);
+}
+
+.keysList {
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--text2);
+  line-height: 2.2;
+  padding: 0;
+  margin: 0;
+}
+
+.keysList strong {
+  color: var(--text);
+}
+
+.keysNum {
+  color: var(--accent, #f97316);
+}
+
+/* Specs grid */
+.specsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .specsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.specCard {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.specCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent, #f97316);
+}
+
+.specCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent, #f97316);
+}
+
+.specLabel {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text3);
+  margin-bottom: 0.4rem;
+}
+
+.specValue {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.3rem;
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.specNote {
+  font-size: 0.75rem;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+/* Priority Matrix Table */
+.matrixTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.matrixTable th {
+  text-align: left;
+  padding: 0.6rem 0.5rem;
+  color: var(--text3);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.matrixTable thead tr {
+  border-bottom: 2px solid var(--border);
+}
+
+.matrixTable tbody tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.matrixTable tbody tr:last-child {
+  border-bottom: none;
+}
+
+.matrixTable td {
+  padding: 0.6rem 0.5rem;
+}
+
+.matrixFactor {
+  font-weight: 500;
+}
+
+.matrixGain {
+  color: var(--green, #22c55e);
+  font-family: 'DM Mono', monospace;
+}
+
+.matrixDifficulty {
+  color: var(--text2);
+}
+
+/* Track diagram */
+.trackDiagram {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Slider section */
+.sliderSection {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sliderLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.sliderLabelTitle {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.sliderLabelValue {
+  font-family: 'DM Mono', monospace;
+  color: var(--accent, #f97316);
+  font-size: 1rem;
+}
+
+.rangeInput {
+  width: 100%;
+  height: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.rangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent, #f97316);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.15);
+  transition: transform 0.15s;
+}
+
+.rangeInput::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.rangeInput::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent, #f97316);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.15);
+  cursor: pointer;
+}
+
+.sliderTicks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+
+.resultBarWrap {
+  background: var(--bg2);
+  border-radius: 4px;
+  overflow: hidden;
+  height: 10px;
+  margin-bottom: 0.4rem;
+}
+
+.resultBar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue, #3b82f6), var(--accent, #f97316));
+  border-radius: 4px;
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.advantageDisplay {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--bg2);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.advantageNum {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  color: var(--accent, #f97316);
+  line-height: 1;
+}
+
+.advantageDesc {
+  font-size: 0.85rem;
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+.advantageStatus {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+/* Car viz */
+.carVizWrap {
+  margin-top: 1.5rem;
+  position: relative;
+  padding-top: 0.5rem;
+}
+
+.carVizLabel {
+  font-size: 0.75rem;
+  color: var(--text3);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Number steps */
+.numberSteps {
+  counter-reset: steps;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.numberSteps li {
+  counter-increment: steps;
+  display: flex;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+  font-size: 0.9rem;
+  color: var(--text2);
+}
+
+.numberSteps li:last-child {
+  border-bottom: none;
+}
+
+.numberSteps li::before {
+  content: counter(steps, decimal-leading-zero);
+  font-family: 'DM Mono', monospace;
+  color: var(--accent, #f97316);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+  min-width: 24px;
+}
+
+.numberSteps li strong {
+  color: var(--text);
+}
+
+/* Shapes grid */
+.shapesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .shapesGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.shapeCard {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+  text-align: center;
+  position: relative;
+}
+
+.shapeCard:hover,
+.shapeCardSelected {
+  border-color: var(--accent, #f97316);
+  transform: translateY(-2px);
+}
+
+.shapeCardSelected {
+  background: rgba(249, 115, 22, 0.08);
+}
+
+.shapeCdBadge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 0.6rem;
+  font-family: 'DM Mono', monospace;
+  padding: 1px 5px;
+  border-radius: 2px;
+}
+
+.shapeCdGreen {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--green, #22c55e);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.shapeCdYellow {
+  background: rgba(234, 179, 8, 0.12);
+  color: var(--yellow, #eab308);
+  border: 1px solid rgba(234, 179, 8, 0.25);
+}
+
+.shapeCdRed {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--red, #ef4444);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.shapeSvg {
+  margin: 0.5rem auto 0.8rem;
+  display: block;
+}
+
+.shapeName {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.shapeDrag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+}
+
+.shapeDetail {
+  font-size: 0.78rem;
+  color: var(--text2);
+  margin-top: 0.4rem;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.shapesCaption {
+  font-size: 0.75rem;
+  color: var(--text3);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Race Simulator */
+.raceSim {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.raceSimDesc {
+  font-size: 0.8rem;
+  color: var(--text3);
+  margin-bottom: 1.2rem;
+}
+
+.configPanel {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.configTitle {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  margin-bottom: 0.8rem;
+}
+
+.configGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.8rem;
+}
+
+.configCard {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.7rem;
+}
+
+.configCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.configColorDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.configCarName {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.configCd {
+  font-size: 0.7rem;
+  color: var(--text3);
+  margin-bottom: 0.6rem;
+}
+
+.configSliderRow {
+  font-size: 0.7rem;
+  color: var(--text3);
+  display: flex;
+  justify-content: space-between;
+}
+
+.configSliderValue {
+  font-family: 'DM Mono', monospace;
+}
+
+.configSliderValueOrange {
+  composes: configSliderValue;
+  color: var(--accent, #f97316);
+}
+
+.configSliderValueBlue {
+  composes: configSliderValue;
+  color: var(--blue2, #60a5fa);
+}
+
+.configRangeInput {
+  width: 100%;
+  height: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  margin: 2px 0 6px;
+}
+
+.configRangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent, #f97316);
+  border: 2px solid var(--bg);
+  cursor: pointer;
+}
+
+.configRangeInput::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent, #f97316);
+  border: 2px solid var(--bg);
+  cursor: pointer;
+}
+
+.configRangeInputSmall {
+  composes: configRangeInput;
+  margin: 2px 0 0;
+}
+
+/* Race lanes */
+.raceLane {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.raceLaneLabel {
+  font-size: 0.72rem;
+  color: var(--text2);
+  width: 130px;
+  flex-shrink: 0;
+  font-family: 'DM Mono', monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.raceTrack {
+  flex: 1;
+  background: var(--bg2);
+  border-radius: 4px;
+  height: 28px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.raceCar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 18px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 4px;
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'DM Mono', monospace;
+  min-width: 30px;
+  transition: left 0.05s linear;
+}
+
+.raceTime {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--accent, #f97316);
+  width: 50px;
+  text-align: right;
+}
+
+.raceRank {
+  width: 20px;
+  font-size: 0.75rem;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+  text-align: center;
+}
+
+/* Button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent, #f97316);
+  color: #000;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn:hover {
+  background: #fb923c;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btnGhost {
+  composes: btn;
+  background: transparent;
+  color: var(--accent, #f97316);
+  border: 1px solid var(--accent, #f97316);
+}
+
+.btnGhost:hover {
+  background: rgba(249, 115, 22, 0.1);
+}
+
+.raceButtons {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.raceResult {
+  margin-top: 0.8rem;
+  padding: 0.6rem 0.8rem;
+  background: rgba(249, 115, 22, 0.08);
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  border-radius: 4px;
+  font-size: 0.82rem;
+  color: var(--text2);
+}
+
+/* Mistake item */
+.mistakeItem {
+  display: flex;
+  gap: 0.8rem;
+  padding: 0.8rem;
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 6px;
+  margin-bottom: 0.6rem;
+}
+
+.mistakeIcon {
+  color: var(--red, #ef4444);
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.mistakeTitle {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.mistakeDesc {
+  font-size: 0.8rem;
+  color: var(--text2);
+  margin-top: 0.2rem;
+}
+
+/* Tip item */
+.tipItem {
+  display: flex;
+  gap: 0.8rem;
+  padding: 0.8rem;
+  background: rgba(34, 197, 94, 0.06);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 6px;
+  margin-bottom: 0.6rem;
+}
+
+.tipIcon {
+  color: var(--green, #22c55e);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Tag badges */
+.tag {
+  display: inline-block;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: var(--blue2, #60a5fa);
+  font-size: 0.68rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: 'DM Mono', monospace;
+}
+
+.tagOrange {
+  composes: tag;
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.3);
+  color: var(--accent, #f97316);
+}
+
+.tagGreen {
+  composes: tag;
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.25);
+  color: var(--green, #22c55e);
+}
+
+/* Checklist header */
+.checklistHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.checklistHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.checklistPct {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.1rem;
+  color: var(--accent, #f97316);
+}
+
+.resetBtn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text3);
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.resetBtn:hover {
+  border-color: var(--text2);
+  color: var(--text2);
+}
+
+/* Phase label */
+.phaseLabel {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text3);
+  margin-bottom: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.phaseLabelSpaced {
+  composes: phaseLabel;
+  margin-top: 1rem;
+}
+
+/* Summary bar */
+.summaryBar {
+  margin-top: 1rem;
+  padding: 0.6rem 0.8rem;
+  background: var(--bg2);
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text3);
+}
+
+/* Progress text */
+.progressLabel {
+  font-size: 0.72rem;
+  color: var(--text3);
+  margin-bottom: 0.3rem;
+}
+
+.progressText {
+  font-size: 0.78rem;
+  color: var(--text3);
+}
+
+/* Checklist tab */
+.overallHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.overallPct {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.2rem;
+  color: var(--accent, #f97316);
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1.5rem 0;
+}
+
+/* Wheel tab section titles */
+.sectionSubTitle {
+  margin-bottom: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Card with no bottom margin in its specGrid */
+.specsGridNoMargin {
+  composes: specsGrid;
+  margin-bottom: 0;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--text3);
+  font-size: 0.8rem;
+}
+
+.footerAccent {
+  color: var(--accent, #f97316);
+}
+
+/* Stability table */
+.stabilityTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.stabilityTable th {
+  text-align: left;
+  padding: 0.7rem 0.5rem;
+  color: var(--text3);
+  font-weight: 500;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.stabilityTable thead tr {
+  border-bottom: 2px solid var(--border);
+}
+
+.stabilityTable tbody tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.stabilityTable tbody tr:last-child {
+  border-bottom: none;
+}
+
+.stabilityTable td {
+  padding: 0.7rem 0.5rem;
+}
+
+.stabilityFactor {
+  font-weight: 500;
+}
+
+.stabilityMono {
+  font-family: 'DM Mono', monospace;
+}
+
+/* Red text */
+.textRed {
+  color: var(--red, #ef4444);
+}
+
+.textGreen {
+  color: var(--green, #22c55e);
+}
+
+.textYellow {
+  color: var(--yellow, #eab308);
+}
+
+.textOrange {
+  color: var(--accent, #f97316);
+}
+
+.textBlue {
+  color: var(--blue2, #60a5fa);
+}
+
+.textBold {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Weight section specValue colors */
+.specValueGreen {
+  composes: specValue;
+  color: var(--green, #22c55e);
+}
+
+.specValueYellow {
+  composes: specValue;
+  color: var(--yellow, #eab308);
+}
+
+.specValueRed {
+  composes: specValue;
+  color: var(--red, #ef4444);
+}
+
+/* Overflow wrapper */
+.tableWrap {
+  overflow-x: auto;
+}
+
+/* Small italic */
+.smallText {
+  font-size: 0.85rem;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+.smallTextSpaced {
+  composes: smallText;
+  margin-bottom: 0.8rem;
+}
