@@ -1599,6 +1599,7 @@ function showWeight(wt) {
 
   el.innerHTML = bracketHtml + sourceHtml + wrestlerHtml;
   observeAnimations();
+  loadIgPhotos();
 }
 
 function buildLiveBracket(wt, wrestlers, live) {
@@ -1842,6 +1843,52 @@ function observeAnimations() {
   items.forEach(item => obs.observe(item));
 }
 
+// ============ INSTAGRAM PROFILE PICS ============
+
+const igPicCache = {};
+
+async function fetchIgProfilePic(username) {
+  const clean = username.replace('@', '');
+  if (igPicCache[clean]) return igPicCache[clean];
+  try {
+    const resp = await fetch(CORS_PROXY + encodeURIComponent('https://www.instagram.com/' + clean + '/'));
+    if (!resp.ok) return null;
+    const html = await resp.text();
+    const match = html.match(/content="(https:\/\/scontent\.cdninstagram\.com[^"]+)"/);
+    if (match) {
+      const url = match[1].replace(/&amp;/g, '&');
+      igPicCache[clean] = url;
+      return url;
+    }
+  } catch (e) { console.warn('IG pic fetch failed for', clean, e); }
+  return null;
+}
+
+async function loadIgPhotos() {
+  const photoWraps = document.querySelectorAll('.wrestler-photo-wrap');
+  for (const wrap of photoWraps) {
+    const img = wrap.querySelector('.wrestler-photo');
+    if (img) continue; // already has a photo
+    const fallback = wrap.querySelector('.wrestler-photo-fallback');
+    const card = wrap.closest('.wrestler-card');
+    if (!card) continue;
+    const igLink = card.querySelector('.wrestler-ig-link');
+    if (!igLink) continue;
+    const handle = igLink.textContent.trim().replace('@', '');
+    if (!handle) continue;
+    const url = await fetchIgProfilePic(handle);
+    if (url) {
+      const newImg = document.createElement('img');
+      newImg.className = 'wrestler-photo';
+      newImg.src = url;
+      newImg.alt = '';
+      newImg.onerror = () => { newImg.remove(); };
+      wrap.insertBefore(newImg, fallback);
+      if (fallback) fallback.style.display = 'none';
+    }
+  }
+}
+
 // ============ INIT ============
 
 renderStandings();
@@ -1857,6 +1904,9 @@ fetchLiveResults();
 
 // Auto-refresh every 3 minutes
 setInterval(fetchLiveResults, 180000);
+
+// Load IG profile pics for wrestlers without headshots (delayed to not block page)
+setTimeout(loadIgPhotos, 2000);
 </script>
 </body>
 </html>
