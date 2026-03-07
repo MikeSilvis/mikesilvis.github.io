@@ -811,8 +811,8 @@
 
   /* TEAMS GRID */
   .teams-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
   }
 
@@ -874,7 +874,7 @@
     transition: max-height 0.3s ease;
   }
 
-  .team-card.expanded .team-body { max-height: 600px; }
+  .team-card.expanded .team-body { max-height: 1200px; }
 
   .team-detail {
     padding: 0 1.2rem 1rem;
@@ -903,33 +903,79 @@
 
   .team-wrestlers {
     margin-top: 0.5rem;
-    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
   }
 
-  .team-roster-table {
+  .team-wrestler-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.5rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.02);
+    transition: background 0.2s;
+  }
+
+  .team-wrestler-row:hover {
+    background: rgba(255,255,255,0.05);
+  }
+
+  .team-wrestler-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+  }
+
+  .team-wrestler-pic img {
     width: 100%;
-    border-collapse: collapse;
-    font-size: 0.8rem;
+    height: 100%;
+    object-fit: cover;
   }
 
-  .team-roster-table th {
-    text-align: left;
-    color: var(--gold);
+  .team-wrestler-pic-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: 'Bebas Neue', sans-serif;
     font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    padding: 0.3rem 0.5rem;
-    border-bottom: 1px solid var(--border);
+    color: var(--text3);
   }
 
-  .team-roster-table td {
-    padding: 0.3rem 0.5rem;
-    color: var(--text2);
+  .team-wrestler-info {
+    flex: 1;
+    min-width: 0;
   }
 
-  .team-roster-table tr:nth-child(even) td {
-    background: rgba(255,255,255,0.02);
+  .team-wrestler-name {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text);
   }
+
+  .team-wrestler-meta {
+    font-size: 0.72rem;
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .team-wrestler-ig {
+    display: inline-block;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.72rem;
+    margin-top: 0.1rem;
+    transition: opacity 0.2s;
+  }
+
+  .team-wrestler-ig:hover { opacity: 0.8; }
 
   /* SOCIAL SECTION */
   .social-grid {
@@ -1012,7 +1058,7 @@
     }
 
     .teams-grid {
-      grid-template-columns: 1fr;
+      gap: 0.8rem;
     }
   }
 </style>
@@ -1278,18 +1324,10 @@ const WEIGHT_CLASSES = {
 };
 
 
-// ============ LIVE RESULTS SCRAPER ============
+// ============ LIVE RESULTS FETCHER ============
 
-const CORS_PROXY = 'https://api.codetabs.com/v1/proxy?quest=';
-const TW_BASE = 'https://www.trackwrestling.com/BracketViewer/pt/964607132';
-const RESULTS_URL = TW_BASE;
-
-// TrackWrestling bracket IDs per weight class
-const TW_BRACKET_IDS = {
-  125: '452855140', 133: '452857140', 141: '452859140', 149: '452860140',
-  157: '452862140', 165: '452864140', 174: '452866140', 184: '452868140',
-  197: '452870140', 285: '452872140'
-};
+const TOURNAMENT_ID = '964607132';
+const RESULTS_URL = 'https://www.trackwrestling.com/BracketViewer/pt/' + TOURNAMENT_ID;
 
 // Parsed live results stored here, keyed by weight class
 let liveResults = {};
@@ -1302,23 +1340,31 @@ async function fetchLiveResults() {
   const liveBadge = document.getElementById('weightLiveBadge');
 
   banner.style.display = 'flex';
-  liveText.textContent = 'Fetching live results from TrackWrestling...';
+  liveText.textContent = 'Fetching live results...';
 
   try {
-    const weights = [125, 133, 141, 149, 157, 165, 174, 184, 197, 285];
-    weights.forEach(w => { liveResults[w] = { qf: [], sf: [], finals: [], r16: [], placement: {} }; });
+    const resp = await fetch('/api/results/' + TOURNAMENT_ID);
+    if (!resp.ok) throw new Error('API returned ' + resp.status);
+    const data = await resp.json();
 
-    // Fetch all weight classes in parallel
-    const fetches = weights.map(wt => fetchWeightBracket(wt));
-    await Promise.allSettled(fetches);
+    // Cache for offline fallback
+    localStorage.setItem('wrestling-' + TOURNAMENT_ID, JSON.stringify({
+      data: data.weights, timestamp: Date.now()
+    }));
+
+    // Apply to UI
+    for (const [wt, results] of Object.entries(data.weights)) {
+      liveResults[wt] = results;
+    }
 
     const matchCount = Object.values(liveResults).reduce((sum, wt) => {
-      return sum + (wt.qf || []).length + (wt.sf || []).length + (wt.finals || []).length + (wt.r16 || []).length;
+      return sum + (wt.qf || []).length + (wt.sf || []).length + (wt.finals || []).length;
     }, 0);
 
     if (matchCount > 0) {
       liveDataLoaded = true;
-      liveText.innerHTML = '<strong>Live results loaded</strong> &mdash; ' + matchCount + ' matches from TrackWrestling';
+      liveText.innerHTML = '<strong>Live results loaded</strong> &mdash; ' + matchCount + ' matches';
+      if (data.stale) liveText.innerHTML += ' <em>(cached)</em>';
       liveStatus.textContent = 'Updated ' + new Date().toLocaleTimeString();
       liveBadge.style.display = 'inline-block';
 
@@ -1331,174 +1377,31 @@ async function fetchLiveResults() {
       liveStatus.textContent = 'Brackets not yet posted';
     }
   } catch (err) {
-    console.warn('Live results fetch failed, using seeded brackets:', err);
+    console.warn('API fetch failed, trying localStorage cache:', err);
+
+    // Fallback: localStorage cache
+    const cached = localStorage.getItem('wrestling-' + TOURNAMENT_ID);
+    if (cached) {
+      try {
+        const { data, timestamp } = JSON.parse(cached);
+        for (const [wt, results] of Object.entries(data)) {
+          liveResults[wt] = results;
+        }
+        const ago = Math.round((Date.now() - timestamp) / 60000);
+        liveDataLoaded = true;
+        liveText.innerHTML = '<strong>Cached results</strong> &mdash; from ' + ago + ' min ago';
+        liveStatus.textContent = 'Offline mode';
+        liveBadge.style.display = 'inline-block';
+        renderStandings();
+        const activeWt = document.querySelector('.weight-pill.active');
+        if (activeWt) showWeight(parseInt(activeWt.textContent));
+        return;
+      } catch (e) { /* ignore parse errors */ }
+    }
+
     liveText.textContent = 'Using seeded brackets (live results unavailable)';
     liveStatus.textContent = err.message;
   }
-}
-
-async function fetchWeightBracket(wt) {
-  const bracketId = TW_BRACKET_IDS[wt];
-  if (!bracketId) return;
-
-  const url = CORS_PROXY + encodeURIComponent(TW_BASE + '?bracketId=' + bracketId);
-  const resp = await fetch(url);
-  if (!resp.ok) throw new Error('Fetch failed for ' + wt + ': ' + resp.status);
-  const html = await resp.text();
-  parseBracketHtml(wt, html);
-}
-
-function parseBracketHtml(wt, html) {
-  // Parse TrackWrestling bracket HTML for placements and match results.
-  // TW renders wrestlers multiple times (once per round they advance), so we
-  // focus on reliably extracting placements and wrestler-result pairs.
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-
-  // Extract all nested table cells (each bracket cell is a <center><table>)
-  const cells = doc.querySelectorAll('center > table');
-  const cellData = [];
-  cells.forEach(tbl => {
-    const texts = [];
-    tbl.querySelectorAll('td').forEach(td => {
-      const t = td.textContent.trim();
-      if (t && t !== '\u00a0') texts.push(t);
-    });
-    if (texts.length) cellData.push(texts);
-  });
-
-  const schoolCommaPattern = /^,\s*([A-Z]{2,5})\s*\((\d+)\)$/;
-  const schoolPlainPattern = /^([A-Z]{2,5})\s*\((\d+)\)$/;
-  const resultPattern = /^(Dec|MD|TF|Fall|SV|TB|MF|Inj|FF|DQ|UTB|RTF|Forf)/i;
-  const placementPattern = /^(1ST|2ND|3RD|4TH|5TH|6TH|7TH|8TH)$/;
-
-  const placements = {};
-  const winsByWrestler = {}; // key: "LastName-SCHOOL" -> [{result, seed}]
-
-  for (const texts of cellData) {
-    let name = null, school = null, seed = null, result = null, placement = null;
-
-    for (const t of texts) {
-      if (placementPattern.test(t)) { placement = t; continue; }
-      const cm = t.match(schoolCommaPattern);
-      if (cm) { school = cm[1]; seed = parseInt(cm[2]); continue; }
-      const pm = t.match(schoolPlainPattern);
-      if (pm) { school = pm[1]; seed = parseInt(pm[2]); continue; }
-      if (resultPattern.test(t)) { result = t; continue; }
-      if (/^\d+$/.test(t) || t === '_' || t === 'Bye' || t.startsWith('Loser of') || t.startsWith('Winner of')) continue;
-      if (t.length >= 2 && t.length <= 25 && /^[A-Za-z]/.test(t)) {
-        if (!t.includes('{') && !t.includes('function') && !t.includes('window')) {
-          name = t;
-        }
-      }
-    }
-
-    if (name && school && seed) {
-      const lastName = name.split(' ').pop();
-      const key = lastName + '-' + school;
-      if (placement) {
-        placements[placement] = { name: lastName, school, seed };
-      }
-      if (result) {
-        if (!winsByWrestler[key]) winsByWrestler[key] = [];
-        winsByWrestler[key].push({ result, seed });
-      }
-    }
-  }
-
-  liveResults[wt].placement = placements;
-
-  // Build bracket from placements.
-  // Placements tell us: 1ST (champion), 3RD (SF loser who won 3rd), 5TH, 7TH
-  // The champion beat 2nd place in finals. 3rd/4th lost in SF. 5th-8th lost in QF.
-  // We can reconstruct: Finals = 1ST vs 2ND, SF = {1ST,3RD} and {2ND,4TH} pairings.
-  // For QF we pair SF participants against their QF opponents (5th-8th place finishers).
-
-  const p1 = placements['1ST'];
-  const p2 = placements['2ND'];
-  const p3 = placements['3RD'];
-  const p5 = placements['5TH'];
-  const p7 = placements['7TH'];
-
-  function getKey(p) { return p ? (p.name.split(' ').pop() + '-' + p.school) : null; }
-  function getWins(p) { return p ? (winsByWrestler[getKey(p)] || []) : []; }
-  function bestResult(wins, index) { return wins.length > index ? wins[index].result : ''; }
-
-  // Build Finals
-  if (p1 && p2) {
-    const wins1 = getWins(p1);
-    liveResults[wt].finals = [{
-      winner: { name: p1.name, school: p1.school, seed: p1.seed },
-      loser: { name: p2.name, school: p2.school, seed: p2.seed },
-      method: bestResult(wins1, wins1.length - 1)
-    }];
-  } else if (p1) {
-    liveResults[wt].finals = [{
-      winner: { name: p1.name, school: p1.school, seed: p1.seed },
-      loser: { name: 'TBD', school: '', seed: 0 },
-      method: ''
-    }];
-  }
-
-  // Build Semifinals
-  // In standard brackets: SF1 = eventual 1ST vs eventual 3RD or 4TH
-  // SF2 = eventual 2ND vs eventual 3RD or 4TH (the other one)
-  // We pair 1ST with whichever of 3RD/4TH is on the same side of the bracket
-  // Since we don't know exact sides, we use the results to figure it out.
-  // Simple heuristic: check if p1 has a win result that could be the SF win.
-  if (p1 && p3) {
-    const wins1 = getWins(p1);
-    const wins2 = p2 ? getWins(p2) : [];
-    // SF1: Champion beat someone to reach finals
-    // SF2: Runner-up beat someone to reach finals
-    // The 3rd place finisher lost an SF match. We need to figure out which SF they were in.
-    // Assume standard bracket structure: 1ST beat 3RD OR 4TH in SF, 2ND beat the other.
-    // We'll show: SF1 = p1 vs p3, SF2 = p2 vs p5/p7 (placeholder for the other SF loser)
-    // This isn't always correct, but provides a reasonable display.
-
-    // Try to find 4th place (2ND SF loser)
-    const p4 = placements['4TH'];
-
-    // Figure out which SF each finalist was in by checking bracket halves
-    // In a 16-man bracket: top half = seeds 1,8,4,5 → SF1; bottom half = seeds 3,6,2,7 → SF2
-    // But seedings vary. Use a simpler heuristic: the SF loser with more total wins
-    // likely played the eventual champion (deeper bracket path). Or just use p3 vs p1 and p4 vs p2.
-    const sf1Loser = p3;
-    const sf2Loser = p4 || p5 || { name: 'TBD', school: '', seed: 0 };
-
-    liveResults[wt].sf = [
-      {
-        winner: { name: p1.name, school: p1.school, seed: p1.seed },
-        loser: { name: sf1Loser.name, school: sf1Loser.school, seed: sf1Loser.seed },
-        method: wins1.length > 1 ? wins1[wins1.length - 2].result : (wins1.length > 0 ? wins1[0].result : '')
-      },
-      {
-        winner: p2 ? { name: p2.name, school: p2.school, seed: p2.seed } : { name: 'TBD', school: '', seed: 0 },
-        loser: { name: sf2Loser.name, school: sf2Loser.school, seed: sf2Loser.seed },
-        method: wins2.length > 1 ? wins2[wins2.length - 2].result : (wins2.length > 0 ? wins2[0].result : '')
-      }
-    ];
-  }
-
-  // Build QF - pair SF participants against consolation finishers
-  // QF losers end up in 5th-8th place. QF winners reach SF.
-  // Standard: QF1 winner → SF1, QF2 winner → SF1, QF3 winner → SF2, QF4 winner → SF2
-  // So: 1ST beat QF1 opponent, 3RD beat QF2 opponent, 2ND beat QF3, 4TH/other beat QF4
-  const sfParticipants = [p1, p3, p2, placements['4TH']].filter(Boolean);
-  const qfLosers = [p5, placements['6TH'], p7, placements['8TH']].filter(Boolean);
-
-  // Simple approach: create QF matches for each SF participant paired with a QF loser
-  const qfMatches = [];
-  for (let k = 0; k < sfParticipants.length; k++) {
-    const winner = sfParticipants[k];
-    const loser = qfLosers[k] || { name: 'TBD', school: '', seed: 0 };
-    const wins = getWins(winner);
-    qfMatches.push({
-      winner: { name: winner.name, school: winner.school, seed: winner.seed },
-      loser: { name: loser.name, school: loser.school, seed: loser.seed },
-      method: wins.length > 0 ? wins[0].result : ''
-    });
-  }
-  liveResults[wt].qf = qfMatches;
 }
 
 
@@ -1902,7 +1805,7 @@ function getTeamRoster(teamName) {
   for (const [weight, data] of Object.entries(WEIGHT_CLASSES)) {
     for (const w of data.wrestlers) {
       if (w.school === teamName) {
-        roster.push({ name: w.name, weight: weight + ' lbs', seed: w.seed, record: w.record });
+        roster.push({ name: w.name, weight: weight + ' lbs', seed: w.seed, record: w.record, img: w.img || '', ig: w.ig || '', igUrl: w.ig ? 'https://instagram.com/' + w.ig.replace('@','') : '' });
       }
     }
   }
@@ -1926,10 +1829,14 @@ function renderTeams() {
       <div class="team-body">
         <div class="team-detail">
           ${roster.length ? `<div class="team-wrestlers">
-            <table class="team-roster-table">
-              <thead><tr><th>Weight</th><th>Name</th><th>Seed</th><th>Record</th></tr></thead>
-              <tbody>${roster.map(r => `<tr><td>${r.weight}</td><td>${r.name}</td><td>#${r.seed}</td><td>${r.record}</td></tr>`).join('')}</tbody>
-            </table>
+            ${roster.map(r => `<div class="team-wrestler-row">
+              <div class="team-wrestler-pic">${r.img ? `<img src="${r.img}" alt="${r.name}" loading="lazy">` : `<div class="team-wrestler-pic-placeholder">${r.name.split(' ').map(n=>n[0]).join('')}</div>`}</div>
+              <div class="team-wrestler-info">
+                <div class="team-wrestler-name">${r.name}</div>
+                <div class="team-wrestler-meta">${r.weight} &bull; #${r.seed} seed &bull; ${r.record}</div>
+                ${r.ig ? `<a class="team-wrestler-ig" href="${r.igUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${r.ig}</a>` : ''}
+              </div>
+            </div>`).join('')}
           </div>` : ''}
           <a class="team-ig-link" href="${t.igUrl}" target="_blank" rel="noopener noreferrer">${t.ig}</a>
         </div>
@@ -1957,48 +1864,8 @@ function observeAnimations() {
 
 // ============ INSTAGRAM PROFILE PICS ============
 
-const igPicCache = {};
-
-async function fetchIgProfilePic(username) {
-  const clean = username.replace('@', '');
-  if (igPicCache[clean]) return igPicCache[clean];
-  try {
-    const resp = await fetch(CORS_PROXY + encodeURIComponent('https://www.instagram.com/' + clean + '/'));
-    if (!resp.ok) return null;
-    const html = await resp.text();
-    const match = html.match(/content="(https:\/\/scontent\.cdninstagram\.com[^"]+)"/);
-    if (match) {
-      const url = match[1].replace(/&amp;/g, '&');
-      igPicCache[clean] = url;
-      return url;
-    }
-  } catch (e) { console.warn('IG pic fetch failed for', clean, e); }
-  return null;
-}
-
-async function loadIgPhotos() {
-  const photoWraps = document.querySelectorAll('.wrestler-photo-wrap');
-  for (const wrap of photoWraps) {
-    const img = wrap.querySelector('.wrestler-photo');
-    if (img) continue; // already has a photo
-    const fallback = wrap.querySelector('.wrestler-photo-fallback');
-    const card = wrap.closest('.wrestler-card');
-    if (!card) continue;
-    const igLink = card.querySelector('.wrestler-ig-link');
-    if (!igLink) continue;
-    const handle = igLink.textContent.trim().replace('@', '');
-    if (!handle) continue;
-    const url = await fetchIgProfilePic(handle);
-    if (url) {
-      const newImg = document.createElement('img');
-      newImg.className = 'wrestler-photo';
-      newImg.src = url;
-      newImg.alt = '';
-      newImg.onerror = () => { newImg.remove(); };
-      wrap.insertBefore(newImg, fallback);
-      if (fallback) fallback.style.display = 'none';
-    }
-  }
+function loadIgPhotos() {
+  // Photos are loaded from wrestler data img fields only (no CORS proxy needed)
 }
 
 // ============ INIT ============
@@ -2016,8 +1883,6 @@ fetchLiveResults();
 // Auto-refresh every 3 minutes
 setInterval(fetchLiveResults, 180000);
 
-// Load IG profile pics for wrestlers without headshots (delayed to not block page)
-setTimeout(loadIgPhotos, 2000);
 </script>
 </body>
 </html>

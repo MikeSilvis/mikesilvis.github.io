@@ -1,0 +1,9 @@
+[tools]
+node = "20"
+
+[tasks.install]
+run = "npm install"
+
+[tasks.server]
+depends = ["install"]
+run = "node server.js"
