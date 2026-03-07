@@ -874,7 +874,7 @@
     transition: max-height 0.3s ease;
   }
 
-  .team-card.expanded .team-body { max-height: 400px; }
+  .team-card.expanded .team-body { max-height: 600px; }
 
   .team-detail {
     padding: 0 1.2rem 1rem;
@@ -906,44 +906,29 @@
     font-size: 0.8rem;
   }
 
-  .team-wrestlers strong {
-    color: var(--text);
-    font-weight: 600;
+  .team-roster-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
   }
 
-  /* STORYLINE CARDS */
-  .storyline-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--gold);
-    border-radius: 0 8px 8px 0;
-    padding: 1.5rem;
-    margin-bottom: 1.2rem;
-    transition: border-color 0.2s;
-  }
-
-  .storyline-card:hover { border-color: rgba(196,164,74,0.4); border-left-color: var(--gold); }
-
-  .storyline-number {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.85rem;
-    color: var(--text3);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.3rem;
-  }
-
-  .storyline-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    letter-spacing: 0.06em;
+  .team-roster-table th {
+    text-align: left;
     color: var(--gold);
-    margin-bottom: 0.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.5rem;
+    border-bottom: 1px solid var(--border);
   }
 
-  .storyline-body {
-    font-size: 0.9rem;
+  .team-roster-table td {
+    padding: 0.3rem 0.5rem;
     color: var(--text2);
-    line-height: 1.7;
+  }
+
+  .team-roster-table tr:nth-child(even) td {
+    background: rgba(255,255,255,0.02);
   }
 
   /* SOCIAL SECTION */
@@ -1060,7 +1045,6 @@
   <button class="nav-btn" data-tab="schedule">Schedule</button>
   <button class="nav-btn" data-tab="weights">Weight Classes</button>
   <button class="nav-btn" data-tab="teams">Teams</button>
-  <button class="nav-btn" data-tab="storylines">Storylines</button>
 </nav>
 
 <!-- MAIN -->
@@ -1136,12 +1120,6 @@
     <div class="teams-grid" id="teamsGrid"></div>
   </div>
 
-  <!-- STORYLINES -->
-  <div id="storylines" class="section">
-    <h2 class="section-title">Key <span>Storylines</span></h2>
-    <p class="section-intro">The narratives to follow heading into this weekend's championship.</p>
-    <div id="storylineCards"></div>
-  </div>
 </main>
 
 <footer>
@@ -1299,15 +1277,6 @@ const WEIGHT_CLASSES = {
   ]}
 };
 
-const STORYLINES = [
-  { title: "Penn State's Historic Dominance", body: "The Nittany Lions enter the tournament with a staggering seven #1 seeds across ten weight classes, and nine wrestlers projected for the semifinals. Cael Sanderson's program is positioned for yet another conference title." },
-  { title: "Undefeated Watch: Eight Unbeatens", body: "Eight wrestlers enter without a loss: Lilledahl (125, PSU), Blaze (133, PSU), Byrd (133, ILL), Mendez (141, OSU), Van Ness (149, PSU), Mesenbrink (165, PSU), Haines (174, PSU), Welsh (184, PSU), and Barr (197, PSU). Seven of the eight are Nittany Lions." },
-  { title: "Mendez Hunts a Third NCAA Title", body: "Ohio State's Jesse Mendez at 141 lbs is chasing history. Already a two-time NCAA champion, an undefeated season and Big Ten title would cement his legacy. His 80+ match win streak is the longest active streak in Division I." },
-  { title: "133 lbs: The Deepest Weight in the Country", body: "The 133 lb bracket features three wrestlers ranked in the top 3 nationally: #1 Marcus Blaze (PSU, 19-0), #2 Lucas Byrd (ILL, 17-0), and #3 Ben Davino (OSU, 24-1). Add in Blake Boarman, who already upset Byrd, and you have the most loaded bracket in the tournament." },
-  { title: "Senior Sendoffs: Levi Haines' Final Run", body: "Penn State captain Levi Haines wrestles his final Big Ten tournament at 174 lbs. The senior is undefeated at 18-0 and determined to go out on top in front of the home crowd at the Bryce Jordan Center." },
-  { title: "Byrd Upset: Defending Champ Stunned", body: "In one of the biggest upsets of the regular season, Purdue's Blake Boarman defeated defending NCAA champion Lucas Byrd. The loss shook up the 133 lb bracket. Can Boarman do it again on the big stage?" },
-  { title: "Record-Breaking Attendance Expected", body: "Penn State set a single-dual attendance record of 16,006 fans at the Bryce Jordan Center earlier this season. With the Big Ten Championships on home turf, the Nittany Lion faithful are expected to pack the BJC." }
-];
 
 // ============ LIVE RESULTS SCRAPER ============
 
@@ -1928,9 +1897,23 @@ function getWrestlerResults(name, live) {
   return results;
 }
 
+function getTeamRoster(teamName) {
+  const roster = [];
+  for (const [weight, data] of Object.entries(WEIGHT_CLASSES)) {
+    for (const w of data.wrestlers) {
+      if (w.school === teamName) {
+        roster.push({ name: w.name, weight: weight + ' lbs', seed: w.seed, record: w.record });
+      }
+    }
+  }
+  return roster;
+}
+
 function renderTeams() {
   const el = document.getElementById('teamsGrid');
-  el.innerHTML = TEAMS.map(t => `
+  el.innerHTML = TEAMS.map(t => {
+    const roster = getTeamRoster(t.name);
+    return `
     <div class="team-card animate-in" onclick="this.classList.toggle('expanded')">
       <div class="team-header">
         <div class="team-initial" style="background:${t.color}">${t.initial}</div>
@@ -1942,24 +1925,19 @@ function renderTeams() {
       </div>
       <div class="team-body">
         <div class="team-detail">
-          ${t.wrestlers ? `<div class="team-wrestlers"><strong>Key Wrestlers:</strong> ${t.wrestlers}</div>` : ''}
+          ${roster.length ? `<div class="team-wrestlers">
+            <table class="team-roster-table">
+              <thead><tr><th>Weight</th><th>Name</th><th>Seed</th><th>Record</th></tr></thead>
+              <tbody>${roster.map(r => `<tr><td>${r.weight}</td><td>${r.name}</td><td>#${r.seed}</td><td>${r.record}</td></tr>`).join('')}</tbody>
+            </table>
+          </div>` : ''}
           <a class="team-ig-link" href="${t.igUrl}" target="_blank" rel="noopener noreferrer">${t.ig}</a>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
-function renderStorylines() {
-  const el = document.getElementById('storylineCards');
-  el.innerHTML = STORYLINES.map((s, i) => `
-    <div class="storyline-card animate-in">
-      <div class="storyline-number">Story ${i + 1}</div>
-      <div class="storyline-title">${s.title}</div>
-      <div class="storyline-body">${s.body}</div>
-    </div>
-  `).join('');
-}
 
 // ============ SCROLL ANIMATIONS ============
 
@@ -2030,7 +2008,6 @@ renderSchedule();
 renderWeightPills();
 showWeight(125);
 renderTeams();
-renderStorylines();
 observeAnimations();
 
 // Fetch live results on load
