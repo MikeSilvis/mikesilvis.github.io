@@ -1,0 +1,102 @@
+.header {
+  position: relative;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg3) 50%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 3rem 2rem 2.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.stripes::before {
+  background: repeating-linear-gradient(
+    135deg,
+    transparent,
+    transparent 40px,
+    rgba(255, 255, 255, 0.015) 40px,
+    rgba(255, 255, 255, 0.015) 41px
+  );
+}
+
+.circles::before {
+  background: repeating-radial-gradient(
+    circle at 50% 50%,
+    transparent,
+    transparent 60px,
+    rgba(255, 255, 255, 0.02) 60px,
+    rgba(255, 255, 255, 0.02) 61px
+  );
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(var(--accent-rgb, 59, 130, 246), 0.12);
+  border: 1px solid rgba(var(--accent-rgb, 59, 130, 246), 0.3);
+  color: var(--accent, var(--blue));
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: 2px;
+  margin-bottom: 1.2rem;
+  animation: fadeDown 0.5s ease;
+}
+
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeDown 0.6s ease 0.1s both;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--text2);
+  font-weight: 300;
+  max-width: 540px;
+  margin: 0.8rem auto 0;
+  animation: fadeDown 0.7s ease 0.2s both;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  animation: fadeDown 0.8s ease 0.3s both;
+}
+
+.stat {
+  text-align: center;
+}
+
+.statValue {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--accent, var(--blue));
+  display: block;
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: none; }
+}

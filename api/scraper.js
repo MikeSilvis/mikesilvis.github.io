@@ -4,6 +4,29 @@ const WEIGHTS = [125, 133, 141, 149, 157, 165, 174, 184, 197, 285];
 
 const client = new OpenAI();
 
+// Normalize school abbreviations the LLM might use differently
+const ABBR_FIXES = { IU: 'IND', IND: 'IND', NU: 'NW', WISC: 'WIS', MINN: 'MINN', NEBR: 'NEB', IOAW: 'IOWA' };
+
+function normalizeSchool(abbr) {
+  return ABBR_FIXES[abbr] || abbr;
+}
+
+function normalizeResults(data) {
+  for (const round of ['qf', 'sf', 'finals']) {
+    if (!data[round]) continue;
+    for (const match of data[round]) {
+      if (match.winner) match.winner.school = normalizeSchool(match.winner.school);
+      if (match.loser) match.loser.school = normalizeSchool(match.loser.school);
+    }
+  }
+  if (data.placement) {
+    for (const info of Object.values(data.placement)) {
+      if (info && info.school) info.school = normalizeSchool(info.school);
+    }
+  }
+  return data;
+}
+
 async function fetchAllWeights(tournamentId) {
   try {
     const response = await client.responses.create({
@@ -28,7 +51,7 @@ Return ONLY valid JSON with this exact structure (no markdown fences, no explana
 Placement format (only if final placements are known):
 "placement": { "1ST": { "name": "LastName", "school": "ABBR", "seed": 1 }, "2ND": { ... } }
 
-School abbreviations: PSU=Penn State, IOWA=Iowa, OSU=Ohio State, MICH=Michigan, MINN=Minnesota, NEB=Nebraska, WIS=Wisconsin, ILL=Illinois, RUT=Rutgers, PUR=Purdue, NW=Northwestern, MSU=Michigan State, MD=Maryland, IU=Indiana, OR=Oregon, UCLA=UCLA, USC=USC, WASH=Washington
+School abbreviations (use EXACTLY these): PSU=Penn State, IOWA=Iowa, OSU=Ohio State, MICH=Michigan, MINN=Minnesota, NEB=Nebraska, WIS=Wisconsin, ILL=Illinois, RUT=Rutgers, PUR=Purdue, NW=Northwestern, MSU=Michigan State, MD=Maryland, IND=Indiana, OR=Oregon, UCLA=UCLA, USC=USC, WASH=Washington
 
 Rules:
 - Last names only for wrestler names
@@ -48,16 +71,16 @@ Rules:
 
     const data = JSON.parse(jsonStr);
 
-    // Ensure all weights are present
+    // Ensure all weights are present and normalize abbreviations
     const results = {};
     for (const wt of WEIGHTS) {
       const wtData = data[wt] || data[String(wt)] || {};
-      results[wt] = {
+      results[wt] = normalizeResults({
         placement: wtData.placement || {},
         qf: wtData.qf || [],
         sf: wtData.sf || [],
         finals: wtData.finals || []
-      };
+      });
     }
 
     const totalMatches = Object.values(results).reduce((sum, wt) =>
@@ -94,7 +117,7 @@ Output format:
   "finals": []
 }
 
-School abbreviations: PSU=Penn State, IOWA=Iowa, OSU=Ohio State, MICH=Michigan, MINN=Minnesota, NEB=Nebraska, WIS=Wisconsin, ILL=Illinois, RUT=Rutgers, PUR=Purdue, NW=Northwestern, MSU=Michigan State, MD=Maryland, IU=Indiana, OR=Oregon, UCLA=UCLA, USC=USC, WASH=Washington
+School abbreviations (use EXACTLY these): PSU=Penn State, IOWA=Iowa, OSU=Ohio State, MICH=Michigan, MINN=Minnesota, NEB=Nebraska, WIS=Wisconsin, ILL=Illinois, RUT=Rutgers, PUR=Purdue, NW=Northwestern, MSU=Michigan State, MD=Maryland, IND=Indiana, OR=Oregon, UCLA=UCLA, USC=USC, WASH=Washington
 
 Rules:
 - Last names only
@@ -115,12 +138,12 @@ Rules:
     const data = JSON.parse(jsonStr);
     console.log(`[${wt}lb] Parsed: ${(data.qf || []).length} QF, ${(data.sf || []).length} SF, ${(data.finals || []).length} Finals`);
 
-    return {
+    return normalizeResults({
       placement: data.placement || {},
       qf: data.qf || [],
       sf: data.sf || [],
       finals: data.finals || []
-    };
+    });
   } catch (err) {
     console.error(`[${wt}lb] Error:`, err.message);
     return { placement: {}, qf: [], sf: [], finals: [] };

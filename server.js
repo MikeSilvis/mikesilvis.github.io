@@ -66,10 +66,13 @@ app.get('/api/results/:tournamentId/:weight', async (req, res) => {
   }
 });
 
-// Serve static files from repo root
-app.use(express.static(path.join(__dirname), {
-  extensions: ['html']
-}));
+// Serve static files from Vite build output
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// SPA fallback: non-API, non-asset routes serve index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

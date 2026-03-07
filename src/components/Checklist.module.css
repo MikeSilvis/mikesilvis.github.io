@@ -1,0 +1,68 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.7rem 0.85rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 0.2s;
+  user-select: none;
+}
+
+.row:hover {
+  border-color: var(--text3);
+}
+
+.checkbox {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.checkboxChecked {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.checkmark {
+  width: 10px;
+  height: 10px;
+  color: #fff;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: 0.9rem;
+  color: var(--text);
+  transition: color 0.2s;
+}
+
+.titleChecked {
+  text-decoration: line-through;
+  color: var(--text3);
+}
+
+.note {
+  font-size: 0.75rem;
+  color: var(--text2);
+  margin-top: 0.15rem;
+}
