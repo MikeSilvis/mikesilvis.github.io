@@ -1123,7 +1123,7 @@
   <!-- WEIGHT CLASSES -->
   <div id="weights" class="section">
     <h2 class="section-title">Weight <span>Classes</span> <span class="live-badge" id="weightLiveBadge" style="display:none;">LIVE RESULTS</span></h2>
-    <p class="section-intro">Select a weight class to view the bracket and wrestler profiles. Results update live from FloWrestling.</p>
+    <p class="section-intro">Select a weight class to view the bracket and wrestler profiles. Results update live from TrackWrestling.</p>
     <div class="weight-pills" id="weightPills"></div>
     <div id="weightContent"></div>
   </div>
@@ -1208,7 +1208,7 @@ const WEIGHT_CLASSES = {
   ]},
   133: { wrestlers: [
     { seed: 1, name: "Marcus Blaze", school: "Penn State", record: "19-0", rank: "#1", ig: "@1123marcus", img: "https://pennstatewrestlingclub.org/wp-content/uploads/2025/11/marcus-blaze.webp", bio: "Undefeated transfer who has been dominant since arriving in State College. Quick on his feet with punishing top game." },
-    { seed: 2, name: "Lucas Byrd", school: "Illinois", record: "17-0", rank: "#2", ig: "@lukebyrd12", bio: "Defending NCAA champion. Recently suffered a surprise loss to Boarman. Elite technician seeking another conference title." },
+    { seed: 2, name: "Lucas Byrd", school: "Illinois", record: "17-0", rank: "#2", ig: "@lukebyrd12", img: "https://fightingillini.com/images/2023/10/13/Byrd_Lucas_WEB_20231011_WRES_Headshot_KS_0005.jpg", bio: "Defending NCAA champion. Recently suffered a surprise loss to Boarman. Elite technician seeking another conference title." },
     { seed: 3, name: "Ben Davino", school: "Ohio State", record: "24-1", rank: "#3", ig: "@bdavino22", img: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/ohiostatebuckeyes.com/images/2025/9/24/Davino__Ben_001_ZRQRN.JPG", bio: "Has been on a tear this season with 24 wins. A serious title contender at the deepest weight in the tournament." },
     { seed: 4, name: "Drake Ayala", school: "Iowa", record: "11-7", rank: "#7", ig: "@drake_ayala", img: "https://hawkeyesports.com/imgproxy/h3hpx_gpKjloG1EhcuGWbrKtPR1GEtzFQGwcCwO6JLY/rs:fit:1980:0:0:0/g:ce:0:0/q:90/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2hhd2tleWVzcG9ydHMtcHJvZC8yMDI1LzEwLzA4L3Zpc01CTlpPME5UZnBKMFl1a1lPSDBYdTNJU0VUVlhiMlRhTWQ4NXUuanBn.jpg", bio: "Experienced Hawkeye who brings a scramble-heavy style." },
     { seed: 5, name: "Dylan Shawver", school: "Rutgers", record: "18-10", rank: "#10", ig: "@dshaw20", bio: "Scarlet Knight veteran who has been through wars in the Big Ten." },
@@ -1291,7 +1291,7 @@ const WEIGHT_CLASSES = {
     { seed: 2, name: "Nick Feldman", school: "Ohio State", record: "21-4", rank: "#3", ig: "@nick__feldman", img: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/ohiostatebuckeyes.com/images/2025/9/24/Feldman__Nick_01_ObRNJ.JPG", bio: "Big and powerful Buckeye. Uses his size to control opponents." },
     { seed: 3, name: "Cole Mirasola", school: "Penn State", record: "16-4", rank: "#5", ig: "@colemirasola", img: "https://pennstatewrestlingclub.org/wp-content/uploads/2025/03/cole-mirasola-2025-26-1-240x300.webp", bio: "Nittany Lion who has improved dramatically. Aggressive style unusual for heavyweights." },
     { seed: 4, name: "AJ Ferrari", school: "Nebraska", record: "14-2", rank: "#8", ig: "@mrfasttwitch", bio: "Dynamic heavyweight with incredible athleticism." },
-    { seed: 5, name: "Ben Kueter", school: "Iowa", record: "6-6", rank: "#10", ig: "@ben_kueter32", bio: "Multi-sport athlete (also plays football). Brings unique athleticism to the mat." },
+    { seed: 5, name: "Ben Kueter", school: "Iowa", record: "6-6", rank: "#10", ig: "@ben_kueter32", img: "https://hawkeyesports.com/imgproxy/lFboWq2NvN_AqtKaSkzXFmyvHe5igk3j2VbBxB71uZI/rs:fit:1200:630:0:0/g:ce:0:0/q:70/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2hhd2tleWVzcG9ydHMtcHJvZC8yMDI0LzEyLzE2L2NkaVlOYUN0TEpuZ3ZaSm15d0dNZm9nQjZaRVFvYXBJdVJuOTNhbDQuanBn.jpg", bio: "Multi-sport athlete (also plays football). Brings unique athleticism to the mat." },
     { seed: 6, name: "Hunter Catka", school: "Rutgers", record: "18-8", rank: "#13", ig: "@hunter_catka", bio: "Physical Scarlet Knight heavyweight." },
     { seed: 7, name: "Luke Luffman", school: "Illinois", record: "13-5", rank: "#17", ig: "@luke.luff", bio: "Illini heavyweight with solid technique." },
     { seed: 8, name: "Braxton Amos", school: "Wisconsin", record: "18-5", rank: "#22", ig: "@thebraxtonamos", bio: "Former Greco-Roman standout with unique upper body offense." }
@@ -1377,122 +1377,101 @@ async function fetchWeightBracket(wt) {
 }
 
 function parseBracketHtml(wt, html) {
-  // TrackWrestling renders brackets as absolute-positioned tables with text nodes
+  // TrackWrestling renders brackets as absolute-positioned tables with text nodes:
+  // last name, then ", SCHOOL (seed)", then result like "Dec 8-3", and placements like "1ST"
   const doc = new DOMParser().parseFromString(html, 'text/html');
-  const text = doc.body.innerText || doc.body.textContent;
 
-  // Weight classes to look for
-  const weights = [125, 133, 141, 149, 157, 165, 174, 184, 197, 285];
+  const allText = [];
+  const walk = document.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT, null, false);
+  let node;
+  while (node = walk.nextNode()) {
+    const t = node.textContent.trim();
+    if (t && t !== '&nbsp;' && t !== '\u00a0') allText.push(t);
+  }
 
-  // Initialize results structure
-  weights.forEach(w => { liveResults[w] = { qf: [], sf: [], finals: [], r16: [] }; });
+  const schoolPattern = /^,\s*([A-Z]{2,5})\s*\((\d+)\)$/;
+  const resultPattern = /^(Dec|MD|TF|Fall|SV|TB|MF|Inj|FF|DQ|UTB|RTF|Forf)/i;
+  const placementPattern = /^(1ST|2ND|3RD|4TH|5TH|6TH|7TH|8TH)$/;
+  const skipWords = ['Bye', 'Loser of', 'Winner of', 'Weight Class', 'Big Ten', 'Championships', 'Brackets'];
 
-  // Parse match lines: "Name (School) record def. Name (School) record (Method)"
-  // The article organizes results by round then by weight
-  const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  const entries = [];
 
-  let currentRound = '';
-  let currentWeight = 0;
+  for (let i = 0; i < allText.length; i++) {
+    const t = allText[i];
 
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-
-    // Detect round headers
-    const roundLower = line.toLowerCase();
-    if (roundLower.includes('quarterfinal')) currentRound = 'qf';
-    else if (roundLower.includes('semifinal') && !roundLower.includes('consolation')) currentRound = 'sf';
-    else if (roundLower.includes('final') && !roundLower.includes('semifinal') && !roundLower.includes('consolation') && !roundLower.includes('quarterfinal')) currentRound = 'finals';
-    else if (roundLower.includes('round of 16') || roundLower.includes('first round') || roundLower.includes('championship first')) currentRound = 'r16';
-
-    // Detect weight class headers
-    const wtMatch = line.match(/^(\d{3})\s*(lbs?|pounds?)?$/i) || line.match(/^(\d{3})\s*(lbs?|pounds?)?\s*$/i);
-    if (wtMatch && weights.includes(parseInt(wtMatch[1]))) {
-      currentWeight = parseInt(wtMatch[1]);
-      continue;
-    }
-    // Also check for inline weight mentions like "125 lbs" or just "125"
-    const inlineWt = line.match(/^#?\d*\s*(\d{3})\s*(lbs?)?/);
-    if (inlineWt && weights.includes(parseInt(inlineWt[1])) && line.length < 15) {
-      currentWeight = parseInt(inlineWt[1]);
+    if (placementPattern.test(t)) {
+      if (entries.length > 0) entries[entries.length - 1].placement = t;
       continue;
     }
 
-    // Parse match result lines
-    if (currentWeight && currentRound && line.includes('def.')) {
-      const match = parseMatchLine(line);
-      if (match && liveResults[currentWeight] && liveResults[currentWeight][currentRound]) {
-        liveResults[currentWeight][currentRound].push(match);
+    const schoolMatch = t.match(schoolPattern);
+    if (schoolMatch && entries.length > 0 && !entries[entries.length - 1].school) {
+      entries[entries.length - 1].school = schoolMatch[1];
+      entries[entries.length - 1].seed = parseInt(schoolMatch[2]);
+      continue;
+    }
+
+    if (resultPattern.test(t)) {
+      if (entries.length > 0) entries[entries.length - 1].result = t;
+      continue;
+    }
+
+    if (skipWords.some(w => t.startsWith(w))) continue;
+    if (t.length < 2 || t.length > 30) continue;
+    if (/^\d+$/.test(t)) continue;
+    if (/^[^a-zA-Z]/.test(t)) continue;
+    if (t.includes('{') || t.includes('function') || t.includes('var ') || t.includes('window.') || t.includes('document.')) continue;
+    if (t.includes('.js') || t.includes('osano') || t.includes('comscore') || t.includes('analytics')) continue;
+
+    if (i + 1 < allText.length && schoolPattern.test(allText[i + 1])) {
+      entries.push({ name: t, school: null, seed: null, result: null, placement: null });
+    }
+  }
+
+  // Build matchups: when an entry has a result, it beat the previous entry
+  const matchups = [];
+  for (let i = 1; i < entries.length; i++) {
+    const e = entries[i];
+    if (e.result && e.school) {
+      const opponent = entries[i - 1];
+      if (opponent && opponent.school) {
+        matchups.push({
+          winner: { name: e.name, school: e.school, seed: e.seed },
+          loser: { name: opponent.name, school: opponent.school, seed: opponent.seed },
+          method: e.result
+        });
       }
     }
   }
-}
 
-function parseMatchLine(line) {
-  // Pattern: "Name (School) Record def. Name (School) Record (Method Score)"
-  const defIdx = line.indexOf(' def. ');
-  if (defIdx === -1) return null;
-
-  const winnerPart = line.substring(0, defIdx).trim();
-  const loserPart = line.substring(defIdx + 6).trim();
-
-  const winner = parseWrestlerFromLine(winnerPart);
-  const loserAndMethod = parseLoserAndMethod(loserPart);
-
-  if (!winner || !loserAndMethod) return null;
-
-  return {
-    winner: winner,
-    loser: loserAndMethod.wrestler,
-    method: loserAndMethod.method || ''
-  };
-}
-
-function parseWrestlerFromLine(str) {
-  // Pattern: "Name (School) Record" - e.g. "Luke Lilledahl (Penn State) 18-0"
-  const match = str.match(/^(.+?)\s*\(([^)]+)\)\s*([\d]+-[\d]+)?/);
-  if (!match) return null;
-  return { name: match[1].trim(), school: match[2].trim(), record: match[3] || '' };
-}
-
-function parseLoserAndMethod(str) {
-  // Pattern: "Name (School) Record (Method Score)" or with method at end
-  // First try to find the method in parentheses at the end
-  const methodPatterns = [
-    /\((Dec\s+[\d-]+)\)\s*$/i,
-    /\((MD\s+[\d-]+)\)\s*$/i,
-    /\((TF\s+[\d:.-]+)\)\s*$/i,
-    /\((Fall\s+[\d:.]+)\)\s*$/i,
-    /\((SV[- ]\d+\s+[\d-]+)\)\s*$/i,
-    /\((TB[- ]\d+\s+[\d-]+)\)\s*$/i,
-    /\((MF)\)\s*$/i,
-    /\((Inj\.\s*[\d:.]*)\)\s*$/i
-  ];
-
-  let method = '';
-  let rest = str;
-
-  for (const pat of methodPatterns) {
-    const m = rest.match(pat);
-    if (m) {
-      method = m[1];
-      rest = rest.substring(0, m.index).trim();
-      break;
+  // Extract placements
+  const placements = {};
+  entries.forEach(e => {
+    if (e.placement && e.school) {
+      placements[e.placement] = { name: e.name, school: e.school, seed: e.seed };
     }
-  }
+  });
+  liveResults[wt].placement = placements;
 
-  // If no parenthesized method found, look for method after the record
-  if (!method) {
-    const altMatch = rest.match(/^(.+?)\s*\(([^)]+)\)\s*([\d]+-[\d]+)\s+(.+)$/);
-    if (altMatch) {
-      method = altMatch[4].trim();
-      rest = altMatch[1] + ' (' + altMatch[2] + ') ' + altMatch[3];
+  // Classify matchups into rounds by seed numbers
+  matchups.forEach(m => {
+    const highSeed = Math.min(m.winner.seed || 99, m.loser.seed || 99);
+    const lowSeed = Math.max(m.winner.seed || 0, m.loser.seed || 0);
+
+    if (lowSeed > 8) {
+      liveResults[wt].r16.push(m);
+    } else if (highSeed <= 4 && lowSeed >= 5 && lowSeed <= 8) {
+      liveResults[wt].qf.push(m);
+    } else if (highSeed <= 2 && lowSeed <= 4) {
+      liveResults[wt].sf.push(m);
+    } else if (highSeed <= 2 && lowSeed <= 2) {
+      liveResults[wt].finals.push(m);
+    } else {
+      if (highSeed <= 2) liveResults[wt].sf.push(m);
+      else if (highSeed <= 4) liveResults[wt].qf.push(m);
+      else liveResults[wt].r16.push(m);
     }
-  }
-
-  const wrestler = parseWrestlerFromLine(rest);
-  if (!wrestler) return null;
-
-  return { wrestler, method };
+  });
 }
 
 // ============ RENDERING ============
@@ -1615,7 +1594,7 @@ function showWeight(wt) {
     </div>
   `;
 
-  const sourceHtml = hasLive ? `<div class="data-source">Results via <a href="${RESULTS_URL}" target="_blank" rel="noopener">FloWrestling</a></div>` : '';
+  const sourceHtml = hasLive ? `<div class="data-source">Results via <a href="${RESULTS_URL}" target="_blank" rel="noopener">TrackWrestling</a></div>` : '';
 
   el.innerHTML = bracketHtml + sourceHtml + wrestlerHtml;
   observeAnimations();
