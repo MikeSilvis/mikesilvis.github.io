@@ -859,6 +859,162 @@
   text-decoration: underline;
 }
 
+/* LIVE MATCHUPS TAB */
+.liveSection {
+  margin-bottom: 2.5rem;
+}
+
+.liveSectionLabel {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.liveMatchGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.liveMatchCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.liveMatchCard:hover {
+  border-color: rgba(196,164,74,0.3);
+}
+
+.liveMatchActive {
+  border-color: rgba(239,68,68,0.4);
+  box-shadow: 0 0 12px rgba(239,68,68,0.1);
+}
+
+.liveMatchUpcoming {
+  opacity: 0.85;
+}
+
+.liveMatchHeader {
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+
+.liveMatchWeight {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+}
+
+.liveMatchRound {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text3);
+  flex: 1;
+}
+
+.liveMatchLive {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(239,68,68,0.15);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: var(--red);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+}
+
+.liveMatchLiveDot {
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  animation: pulse 1.5s ease infinite;
+}
+
+.liveMatchBody {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.liveMatchWrestler {
+  flex: 1;
+  min-width: 0;
+}
+
+.liveMatchName {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.liveMatchMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+  flex-wrap: wrap;
+}
+
+.liveMatchSeed {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--gold);
+  background: var(--gold-glow);
+  padding: 0.1rem 0.35rem;
+  border-radius: 2px;
+}
+
+.liveMatchSchool {
+  font-size: 0.78rem;
+  color: var(--text2);
+}
+
+.liveMatchRecord {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text3);
+}
+
+.liveMatchVs {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  color: var(--text3);
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+
+.liveEmpty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text3);
+  font-size: 0.9rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .bracket {
@@ -874,6 +1030,10 @@
 
   .standingBar {
     width: 80px;
+  }
+
+  .liveMatchGrid {
+    grid-template-columns: 1fr;
   }
 }
 
