@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { TEAMS } from '../data/teams';
 import { WEIGHT_CLASSES } from '../data/weightClasses';
+import { PERSISTED_RESULTS } from '../data/results';
 
 const TOURNAMENT_ID = '964607132';
 const REFRESH_INTERVAL = 180000; // 3 minutes
@@ -110,16 +111,42 @@ export function getTeamRoster(teamName) {
   return roster;
 }
 
+// Merge live results on top of persisted results.
+// Live data takes precedence when it has more matches in a round.
+function mergeResults(persisted, live) {
+  const merged = {};
+  const weights = [125, 133, 141, 149, 157, 165, 174, 184, 197, 285];
+  for (const wt of weights) {
+    const p = persisted[wt] || { placement: {}, qf: [], sf: [], finals: [] };
+    const l = live[wt] || {};
+    merged[wt] = {
+      placement: Object.keys(l.placement || {}).length > Object.keys(p.placement || {}).length
+        ? l.placement : (p.placement || {}),
+      qf: (l.qf || []).length >= (p.qf || []).length ? l.qf : p.qf,
+      sf: (l.sf || []).length >= (p.sf || []).length ? l.sf : p.sf,
+      finals: (l.finals || []).length >= (p.finals || []).length ? l.finals : p.finals,
+    };
+  }
+  return merged;
+}
+
 export default function useLiveResults() {
-  const [liveResults, setLiveResults] = useState({});
-  const [liveDataLoaded, setLiveDataLoaded] = useState(false);
-  const [statusText, setStatusText] = useState('Loading live results...');
+  // Initialize with persisted results so data is available immediately
+  const [liveResults, setLiveResults] = useState(() => {
+    const initial = {};
+    for (const [wt, data] of Object.entries(PERSISTED_RESULTS)) {
+      initial[wt] = data;
+    }
+    return initial;
+  });
+  const [liveDataLoaded, setLiveDataLoaded] = useState(true);
+  const [statusText, setStatusText] = useState('Results loaded');
   const [statusTime, setStatusTime] = useState('');
   const [isStale, setIsStale] = useState(false);
   const intervalRef = useRef(null);
 
   const fetchLiveResults = useCallback(async () => {
-    setStatusText('Fetching live results...');
+    setStatusText('Checking for updated results...');
 
     try {
       const resp = await fetch('/api/results/' + TOURNAMENT_ID);
@@ -133,49 +160,52 @@ export default function useLiveResults() {
         }));
       } catch (e) { /* storage full */ }
 
-      const newResults = {};
+      const liveData = {};
       for (const [wt, results] of Object.entries(data.weights)) {
-        newResults[wt] = results;
+        liveData[wt] = results;
       }
 
-      const matchCount = Object.values(newResults).reduce((sum, wt) => {
+      // Merge live data on top of persisted results
+      const merged = mergeResults(PERSISTED_RESULTS, liveData);
+
+      const matchCount = Object.values(merged).reduce((sum, wt) => {
         return sum + (wt.qf || []).length + (wt.sf || []).length + (wt.finals || []).length;
       }, 0);
 
-      if (matchCount > 0) {
-        setLiveResults(newResults);
-        setLiveDataLoaded(true);
-        setIsStale(!!data.stale);
-        setStatusText(`Live results loaded -- ${matchCount} matches${data.stale ? ' (cached)' : ''}`);
-        setStatusTime('Updated ' + new Date().toLocaleTimeString());
-      } else {
-        setStatusText('Using seeded brackets (no results available yet)');
-        setStatusTime('Brackets not yet posted');
-      }
+      setLiveResults(merged);
+      setLiveDataLoaded(true);
+      setIsStale(!!data.stale);
+      setStatusText(`Results loaded -- ${matchCount} matches${data.stale ? ' (cached)' : ''}`);
+      setStatusTime('Updated ' + new Date().toLocaleTimeString());
     } catch (err) {
-      console.warn('API fetch failed, trying localStorage cache:', err);
+      console.warn('API fetch failed, using persisted results:', err);
 
-      // Fallback: localStorage cache
+      // Fallback: try localStorage cache merged with persisted data
       try {
         const cached = localStorage.getItem(CACHE_KEY);
         if (cached) {
           const { data, timestamp } = JSON.parse(cached);
-          const newResults = {};
+          const cachedData = {};
           for (const [wt, results] of Object.entries(data)) {
-            newResults[wt] = results;
+            cachedData[wt] = results;
           }
+          const merged = mergeResults(PERSISTED_RESULTS, cachedData);
           const ago = Math.round((Date.now() - timestamp) / 60000);
-          setLiveResults(newResults);
+          setLiveResults(merged);
           setLiveDataLoaded(true);
           setIsStale(true);
-          setStatusText(`Cached results -- from ${ago} min ago`);
+          setStatusText(`Results loaded -- cached from ${ago} min ago`);
           setStatusTime('Offline mode');
           return;
         }
       } catch (e) { /* ignore parse errors */ }
 
-      setStatusText('Using seeded brackets (live results unavailable)');
-      setStatusTime(err.message);
+      // Persisted results are already set from initial state
+      const matchCount = Object.values(PERSISTED_RESULTS).reduce((sum, wt) => {
+        return sum + (wt.qf || []).length + (wt.sf || []).length + (wt.finals || []).length;
+      }, 0);
+      setStatusText(`Results loaded -- ${matchCount} matches (persisted)`);
+      setStatusTime('Using saved results');
     }
   }, []);
 
