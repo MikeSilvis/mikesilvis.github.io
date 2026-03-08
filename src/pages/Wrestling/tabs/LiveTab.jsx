@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { WEIGHT_CLASSES } from '../data/weightClasses';
+import { TEAMS } from '../data/teams';
 import styles from '../Wrestling.module.css';
 
 const WEIGHTS = Object.keys(WEIGHT_CLASSES).map(Number);
@@ -193,7 +194,15 @@ function MatchCard({ entry, isActive }) {
   );
 }
 
+function matchInvolvesTeam(entry, teamAbbr) {
+  const w1 = entry.seed1 || findWrestlerData(entry.match.winner?.name, entry.weight) || entry.match.winner || {};
+  const w2 = entry.seed2 || findWrestlerData(entry.match.loser?.name, entry.weight) || entry.match.loser || {};
+  return w1.school === teamAbbr || w2.school === teamAbbr;
+}
+
 export default function LiveTab({ liveResults, liveDataLoaded }) {
+  const [teamFilter, setTeamFilter] = useState(null);
+
   const { active } = liveDataLoaded ? buildAllMatches(liveResults) : { active: [] };
   const upcoming = liveDataLoaded
     ? [...buildAllMatches(liveResults).upcoming, ...buildUpcomingFromSeeds(liveResults)]
@@ -208,8 +217,11 @@ export default function LiveTab({ liveResults, liveDataLoaded }) {
     return true;
   });
 
-  const hasActive = active.length > 0;
-  const hasUpcoming = dedupedUpcoming.length > 0;
+  const filteredActive = teamFilter ? active.filter(e => matchInvolvesTeam(e, teamFilter)) : active;
+  const filteredUpcoming = teamFilter ? dedupedUpcoming.filter(e => matchInvolvesTeam(e, teamFilter)) : dedupedUpcoming;
+
+  const hasActive = filteredActive.length > 0;
+  const hasUpcoming = filteredUpcoming.length > 0;
 
   return (
     <>
@@ -220,6 +232,24 @@ export default function LiveTab({ liveResults, liveDataLoaded }) {
         Active and upcoming matches across all weight classes, updated live.
       </p>
 
+      <div className={styles.teamFilter}>
+        <button
+          className={`${styles.teamFilterPill} ${!teamFilter ? styles.teamFilterPillActive : ''}`}
+          onClick={() => setTeamFilter(null)}
+        >
+          All Teams
+        </button>
+        {TEAMS.map(team => (
+          <button
+            key={team.abbr}
+            className={`${styles.teamFilterPill} ${teamFilter === team.abbr ? styles.teamFilterPillActive : ''}`}
+            onClick={() => setTeamFilter(teamFilter === team.abbr ? null : team.abbr)}
+          >
+            {team.abbr}
+          </button>
+        ))}
+      </div>
+
       {hasActive && (
         <div className={styles.liveSection}>
           <h3 className={styles.liveSectionLabel}>
@@ -227,7 +257,7 @@ export default function LiveTab({ liveResults, liveDataLoaded }) {
             Active Now
           </h3>
           <div className={styles.liveMatchGrid}>
-            {active.map((entry, i) => (
+            {filteredActive.map((entry, i) => (
               <MatchCard key={`active-${i}`} entry={entry} isActive />
             ))}
           </div>
@@ -236,7 +266,9 @@ export default function LiveTab({ liveResults, liveDataLoaded }) {
 
       {!hasActive && liveDataLoaded && (
         <div className={styles.liveEmpty}>
-          No matches actively in progress right now. Check back during tournament sessions.
+          {teamFilter
+            ? `No active matches for ${teamFilter} right now.`
+            : 'No matches actively in progress right now. Check back during tournament sessions.'}
         </div>
       )}
 
@@ -246,16 +278,22 @@ export default function LiveTab({ liveResults, liveDataLoaded }) {
             Upcoming Matches
           </h3>
           <div className={styles.liveMatchGrid}>
-            {dedupedUpcoming.map((entry, i) => (
+            {filteredUpcoming.map((entry, i) => (
               <MatchCard key={`upcoming-${i}`} entry={entry} isActive={false} />
             ))}
           </div>
         </div>
       )}
 
-      {!hasActive && !hasUpcoming && (
+      {!hasActive && !hasUpcoming && !teamFilter && (
         <div className={styles.liveEmpty}>
           No match data available yet. Results will appear once the tournament begins.
+        </div>
+      )}
+
+      {teamFilter && !hasUpcoming && !hasActive && !liveDataLoaded && (
+        <div className={styles.liveEmpty}>
+          No upcoming matches found for {teamFilter}.
         </div>
       )}
     </>
