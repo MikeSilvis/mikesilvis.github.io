@@ -48,6 +48,11 @@ Return ONLY valid JSON with this exact structure (no markdown fences, no explana
   "133": { "placement": {}, "qf": [], "sf": [], "finals": [] }
 }
 
+This is an 8-man bracket per weight class with seeds 1-8. The bracket structure is:
+- "qf" (Quarterfinals): 4 matches — #1 vs #8, #4 vs #5, #3 vs #6, #2 vs #7. There should be exactly 4 QF matches per weight if all QF results are available.
+- "sf" (Semifinals): 2 matches — winner of 1/8 vs winner of 4/5, winner of 3/6 vs winner of 2/7
+- "finals": 1 match — the two SF winners
+
 Placement format (only if final placements are known):
 "placement": { "1ST": { "name": "LastName", "school": "ABBR", "seed": 1 }, "2ND": { ... } }
 
@@ -55,8 +60,8 @@ School abbreviations (use EXACTLY these): PSU=Penn State, IOWA=Iowa, OSU=Ohio St
 
 Rules:
 - Last names only for wrestler names
-- Include ALL matches you can find — first round, quarterfinals, semifinals, finals
-- First round matches go in the "qf" array
+- Include ALL matches you can find for every weight class — do not skip any matches
+- Put quarterfinal matches in "qf", semifinal matches in "sf", final matches in "finals"
 - Only include matches that actually happened — never fabricate
 - Method format: "Dec 5-2", "MD 12-3", "TF 18-2", "Fall 3:45", "SV-1 5-3"
 - Every weight class must be present in the output even if empty
@@ -117,12 +122,17 @@ Output format:
   "finals": []
 }
 
+This is an 8-man bracket with seeds 1-8. The bracket structure is:
+- "qf" (Quarterfinals): 4 matches — #1 vs #8, #4 vs #5, #3 vs #6, #2 vs #7
+- "sf" (Semifinals): 2 matches — winner of 1/8 vs winner of 4/5, winner of 3/6 vs winner of 2/7
+- "finals": 1 match — the two SF winners
+
 School abbreviations (use EXACTLY these): PSU=Penn State, IOWA=Iowa, OSU=Ohio State, MICH=Michigan, MINN=Minnesota, NEB=Nebraska, WIS=Wisconsin, ILL=Illinois, RUT=Rutgers, PUR=Purdue, NW=Northwestern, MSU=Michigan State, MD=Maryland, IND=Indiana, OR=Oregon, UCLA=UCLA, USC=USC, WASH=Washington
 
 Rules:
 - Last names only
-- Include all rounds: first round, quarterfinals, semifinals, finals
-- First round and quarterfinal matches go in "qf"
+- Include ALL matches — do not skip any. There should be 4 QF matches if quarterfinals are complete.
+- Put quarterfinal matches in "qf", semifinal matches in "sf", final matches in "finals"
 - Only real results, never fabricate
 - Method: "Dec 5-2", "MD 12-3", "TF 18-2", "Fall 3:45", "SV-1 5-3"
 - If seeds unknown, use 0
