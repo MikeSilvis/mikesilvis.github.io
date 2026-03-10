@@ -12,7 +12,7 @@ import TeamsTab from './tabs/TeamsTab';
 import styles from './Wrestling.module.css';
 
 const TABS = [
-  { id: 'live', label: 'Live' },
+  { id: 'results', label: 'Results' },
   { id: 'overview', label: 'Overview' },
   { id: 'schedule', label: 'Schedule' },
   { id: 'weights', label: 'Weight Classes' },
@@ -27,7 +27,7 @@ const HERO_STATS = [
 ];
 
 export default function Wrestling() {
-  const [activeTab, setActiveTab] = useState('live');
+  const [activeTab, setActiveTab] = useState('results');
   const {
     liveResults,
     liveDataLoaded,
@@ -47,7 +47,6 @@ export default function Wrestling() {
       />
 
       <div className={styles.liveBanner}>
-        <span className={styles.liveDot} />
         <span
           className={styles.liveText}
           dangerouslySetInnerHTML={{ __html: statusText }}
@@ -65,7 +64,7 @@ export default function Wrestling() {
       />
 
       <main className={styles.main}>
-        <TabSection id="live" active={activeTab === 'live'}>
+        <TabSection id="results" active={activeTab === 'results'}>
           <LiveTab liveResults={liveResults} liveDataLoaded={liveDataLoaded} />
         </TabSection>
 

@@ -58,10 +58,10 @@ export default function OverviewTab({ liveResults, liveDataLoaded }) {
       {liveDataLoaded && standings.length > 0 && (
         <div className={styles.standingsSection}>
           <h3 className={styles.sectionTitle} style={{ fontSize: '2rem' }}>
-            Live <span>Standings</span>
+            Final <span>Standings</span>
           </h3>
           <p className={styles.sectionIntro}>
-            Team scores computed from live tournament results.
+            Team scores computed from tournament results.
           </p>
           <div className={styles.standings}>
             {standings.map((s, i) => (

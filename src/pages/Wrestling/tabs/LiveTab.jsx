@@ -226,10 +226,10 @@ export default function LiveTab({ liveResults, liveDataLoaded }) {
   return (
     <>
       <h2 className={styles.sectionTitle}>
-        Live <span>Matchups</span>
+        Tournament <span>Results</span>
       </h2>
       <p className={styles.sectionIntro}>
-        Active and upcoming matches across all weight classes, updated live.
+        Complete results from all weight classes across the tournament.
       </p>
 
       <div className={styles.teamFilter}>
